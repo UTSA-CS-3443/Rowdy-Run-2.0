@@ -1,5 +1,5 @@
 package game;
 
-public class Controller {
+public class GameController {
 
 }
