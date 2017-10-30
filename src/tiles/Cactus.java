@@ -1,10 +1,23 @@
 package tiles;
 
-public class Cactus extends Obstacle{
+import java.awt.Rectangle;
 
-	protected Cactus(int x, int y) {
+import javafx.scene.image.Image;
+
+public class Cactus extends Obstacle{
+	
+	//constants
+	
+	//variables
+	private Image cactusImage; // = *cactus file name here*;
+	
+	// constructor
+	public Cactus(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+		//super.setImg(cactusImage);
 	}
 
+	// methods
+	
+	
 }
