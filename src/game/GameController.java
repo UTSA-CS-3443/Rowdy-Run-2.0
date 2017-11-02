@@ -6,12 +6,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import tiles.Cactus;
+import tiles.Flame;
+import tiles.Ground;
 import tiles.Tile;
+import tiles.Water;
 
 public class GameController {
-
+	
 	public static ArrayList<Tile[]> readLevel(File lvlFile) throws IOException {
 		ArrayList<Tile[]> Level = new ArrayList<Tile[]>();
+		int x = 0;
 		Scanner in = null;
 		try {
 			in = new Scanner(lvlFile);
@@ -22,33 +27,33 @@ public class GameController {
 		while (in.hasNextLine()) {
 			Tile[] levelColumn = null;
 			String line = in.nextLine();
-			levelColumn = processLevelColumn(line.toCharArray(), line.length());
+			levelColumn = processLevelColumn(line.toCharArray(), x);
 			Level.add(levelColumn);
 		}
 		return Level;
 	}
 
-	private static Tile[] processLevelColumn(char[] tileList, int length) {
+	private static Tile[] processLevelColumn(char[] tileList, int column) {
 		// TODO add tile objects as you create them
 		Tile[] levelColumn = new Tile[5]; // Once air tile is created will just be initialized as five of those
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < tileList.length; i++) {
 			Tile currTile = null;
 			switch (tileList[i]) {
 			case 'F':
-				currTile = new Flame();
+				currTile = new Flame(column,i);
 				break;
 			case 'W':
-				currTile = new Water();
+				currTile = new Water(column,i);
 				break;
 			case 'C':
-				currTile = new Cactus();
+				currTile = new Cactus(column,i);
 				break;
 			case 'G':
-				currTile = new Ground();
+				currTile = new Ground(column,i);
 				break;
 			case ' ':
 			default:
-				currTile = new Air();
+				currTile = new Air(column,i);
 				break;
 			}
 			levelColumn[i] = currTile;
