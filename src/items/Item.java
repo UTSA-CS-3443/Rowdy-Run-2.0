@@ -1,6 +1,8 @@
-package tiles;
+package items;
 
 import java.awt.Rectangle;
+
+import tiles.Tile;
 
 public class Item extends Tile {
 	

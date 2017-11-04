@@ -1,4 +1,4 @@
-package tiles;
+package items;
 
 import java.awt.Rectangle;
 

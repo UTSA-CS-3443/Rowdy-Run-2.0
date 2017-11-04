@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,14 @@ import tiles.Ground;
 import tiles.Tile;
 import tiles.Water;
 
-public class GameController {
+/**
+ * Reads in data from a level file (lvlFile) to generate a level consisting of 
+ * Tile objects stored in an ArrayList.
+ * 
+ * @author Jared???
+ *
+ */
+public class Model {
 	
 	public static ArrayList<Tile[]> readLevel(File lvlFile) throws IOException {
 		ArrayList<Tile[]> Level = new ArrayList<Tile[]>();
@@ -33,6 +40,12 @@ public class GameController {
 		return Level;
 	}
 
+	/**
+	 * 
+	 * @param tileList
+	 * @param column
+	 * @return
+	 */
 	private static Tile[] processLevelColumn(char[] tileList, int column) {
 		// TODO add tile objects as you create them
 		Tile[] levelColumn = new Tile[5]; // Once air tile is created will just be initialized as five of those
