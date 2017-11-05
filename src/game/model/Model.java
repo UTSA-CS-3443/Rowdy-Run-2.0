@@ -6,11 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import tiles.Cactus;
-import tiles.Flame;
-import tiles.Ground;
-import tiles.Tile;
-import tiles.Water;
+import tiles.*;
 
 /**
  * Reads in data from a level file (lvlFile) to generate a level consisting of 
