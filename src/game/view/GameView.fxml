@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.text.*?>
@@ -12,27 +13,37 @@
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="500.0">
          <children>
-            <Canvas height="500.0" width="500.0" />
-            <SubScene height="200.0" layoutX="150.0" layoutY="150.0" visible="false" width="200.0">
-              <root>
-                <Region />
-              </root>
-            </SubScene>
-            <Button layoutX="185.0" layoutY="212.0" mnemonicParsing="false" prefWidth="130.0" text="Continue">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-            <Button layoutX="185.0" layoutY="278.0" mnemonicParsing="false" prefWidth="130.0" text="Quit">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-            <Label layoutX="204.0" layoutY="159.0" text="Pause">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
+            <Canvas height="500.0" visible="true" width="500.0" />
+            <GridPane alignment="CENTER" layoutX="185.0" layoutY="145.0" prefWidth="130.0" vgap="40.0" visible="false">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" prefWidth="130.0" text="Continue" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefWidth="130.0" text="Quit" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Label alignment="CENTER" prefHeight="56.0" prefWidth="130.0" text="Pause" textAlignment="CENTER">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+            </GridPane>
          </children>
       </AnchorPane>
    </children>

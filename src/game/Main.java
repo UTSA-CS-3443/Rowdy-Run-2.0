@@ -51,7 +51,15 @@ public class Main extends Application {
 	public static Stage getStage() {
 		return stage;
 	}
+	
+	public static void setStage(Stage stage) {
+		Main.stage = stage;
+	}
 
+	public static void changeScene(Scene scene) {
+		Main.stage.setScene(scene);
+	}
+	
 	public static Scene getMainMenu() {
 		return mainMenu;
 	}

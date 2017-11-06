@@ -13,10 +13,10 @@ import javafx.stage.Stage;
  * @author Michael Diep
  *
  */
-public class MenuController implements EventHandler<ActionEvent> {
+public class MainMenuController implements EventHandler<ActionEvent> {
 	Stage stage = null;
 	
-	public MenuController() {
+	public MainMenuController() {
 		super();
 		stage = Main.getStage();
 	}
@@ -24,12 +24,15 @@ public class MenuController implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent buttonPress) {
 		Button b = (Button)buttonPress.getSource();
-		if (b.getText().equals("Run")) {
-			stage.setScene(Main.getLevelSelection());
-		} 
-		else {
-			//exit game
+		switch (b.getText()) {
+			case "Run":
+				Main.changeScene(Main.getLevelSelection());
+				break;
+			case "Main Menu":
+				Main.changeScene(Main.getMainMenu());
+				break;
+			case "Quit":
+				System.exit(0);//exit game
 		}
-		
 	}
 }
