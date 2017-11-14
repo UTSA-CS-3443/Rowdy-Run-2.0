@@ -25,6 +25,7 @@ public abstract class Tile {
 	protected int x, y;
 	protected Rectangle hitBox;
 	protected Image img;
+	protected String nameOfTile;
 	
 	/**
 	 * Class constructor initializes its position (x,y) and graphical size 
