@@ -25,9 +25,9 @@ public class Coin extends Item {
 	
 	private BufferedImage[] image;
 	
-
-    public Coin(int start, int start_vel_x, int start_vel_y, int start_height, int WIDTH, int HEIGHT, Direction dir) {
-        super(start, start_vel_x, start_vel_y, start_height, WIDTH, HEIGHT, dir);
+	//TODO giving me errors
+    public Coin() {
+        super();
         
 		try {
 			image = new BufferedImage[imgFile.length];
