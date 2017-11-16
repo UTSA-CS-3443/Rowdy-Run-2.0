@@ -1,5 +1,6 @@
 package items;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import com.sun.javafx.scene.traversal.Direction;
 
@@ -91,5 +92,9 @@ public abstract class Item {
 	public boolean collisionBottom(Item coin) {
 		return (coin.y_pos == y_pos + height && coin.x_pos + coin.width >= x_pos
 				&& coin.x_pos <= x_pos + width);
+	}
+	
+	public void draw(Graphics g) {
+		g.drawImage(img, x_pos, y_pos, width, height, null);
 	}
 }
