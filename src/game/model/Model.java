@@ -9,14 +9,32 @@ import java.util.Scanner;
 import tiles.*;
 
 /**
- * Reads in data from a level file (lvlFile) to generate a level consisting of 
+ * Reads in data from a level file (lvlFile) to generate a level consisting of
  * Tile objects stored in an ArrayList.
  * 
- * @author Jared???
+ * @author Jared Polwort
  *
  */
 public class Model {
+
+	protected ArrayList<Tile[]> currentLevel;
+	protected Rowdy player;
 	
+	public void gameTick() {
+		int playerState = 1;
+		player.moveRowdy();
+		playerState = player.hitBoxChecker(currentLevel); 
+		if(playerState == 1) {
+			//TODO handle rowdy dying
+			//wait, so rowdy starts the game dead?
+		}
+		else if (playerState == 2){
+			//TODO handle rowdy winning
+		}
+		player.fall();
+		
+	}
+
 	public static ArrayList<Tile[]> readLevel(File lvlFile) throws IOException {
 		ArrayList<Tile[]> Level = new ArrayList<Tile[]>();
 		int x = 0;
@@ -32,6 +50,7 @@ public class Model {
 			String line = in.nextLine();
 			levelColumn = processLevelColumn(line.toCharArray(), x);
 			Level.add(levelColumn);
+			x++;
 		}
 		return Level;
 	}
@@ -44,25 +63,26 @@ public class Model {
 	 */
 	private static Tile[] processLevelColumn(char[] tileList, int column) {
 		// TODO add tile objects as you create them
-		Tile[] levelColumn = new Tile[5]; // Once air tile is created will just be initialized as five of those
+		Tile[] levelColumn = { new Air(column, 1), new Air(column, 2), new Air(column, 3), new Air(column, 4),
+				new Air(column, 5) }; // Once air tile is created will just be initialized as five of those
 		for (int i = 0; i < tileList.length; i++) {
 			Tile currTile = null;
 			switch (tileList[i]) {
 			case 'F':
-				currTile = new Flame(column,i);
+				currTile = new Flame(column*100, i*100);
 				break;
 			case 'W':
-				currTile = new Water(column,i);
+				currTile = new Water(column*100, i*100);
 				break;
 			case 'C':
-				currTile = new Cactus(column,i);
+				currTile = new Cactus(column*100, i*100);
 				break;
 			case 'G':
-				currTile = new Ground(column,i);
+				currTile = new Ground(column*100, i*100);
 				break;
 			case ' ':
 			default:
-				currTile = new Air(column,i);
+				currTile = new Air(column*100, i*100);
 				break;
 			}
 			levelColumn[i] = currTile;

@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -63,7 +63,7 @@ public class Rowdy {
 	}
 
 	public void fall() {
-		if(!onGround)
+		if(!this.onGround)
 			this.yVelocity -= -10;
 	}
 
