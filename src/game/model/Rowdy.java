@@ -92,6 +92,8 @@ public class Rowdy {
 						canMoveLeft = false;
 						this.adjustRowdy(curr.getX()+100,this.position.y);
 					}
+					else
+						canMoveLeft = true;
 					break;
 				case 'c':
 				case '?':
@@ -110,6 +112,8 @@ public class Rowdy {
 						canMoveRight = false;
 						this.adjustRowdy(curr.getX(),this.position.y);
 					}
+					else
+						canMoveRight = true;
 					break;
 				case 'c':
 				case '?':
@@ -128,6 +132,8 @@ public class Rowdy {
 					this.land();
 					this.adjustRowdy(this.position.x,curr.getY()+100);
 				}
+				else
+					onGround = false;
 				break;
 			case 'c':
 			case '?':
@@ -145,6 +151,8 @@ public class Rowdy {
 					this.land();
 					this.adjustRowdy(this.position.x,curr.getY()+100);
 				}
+				else
+					onGround = false;
 				break;
 			case 'c':
 			case '?':
