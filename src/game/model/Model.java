@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.Timer;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import tiles.*;
 
@@ -15,10 +19,12 @@ import tiles.*;
  * @author Jared Polwort
  *
  */
-public class Model {
+public class Model implements Runnable{
 
 	protected ArrayList<Tile[]> currentLevel;
 	protected Rowdy player;
+	private Timer timer;
+	private TimerListener timerListener;
 	
 	public void gameTick() {
 		int playerState = 1;
@@ -88,5 +94,19 @@ public class Model {
 			levelColumn[i] = currTile;
 		}
 		return levelColumn;
+	}
+
+	private class TimerListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			gameTick();
+		}
+	}
+	@Override
+	public void run() {
+		timer = new Timer(100, timerListener);
+		timer.start();
+		
 	}
 }
