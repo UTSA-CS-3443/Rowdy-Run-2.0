@@ -6,14 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.Timer;
+import javafx.fxml.FXML;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javafx.event.ActionEvent;
 
 import tiles.*;
 
@@ -28,12 +26,12 @@ public class Model implements Runnable{
 
 	protected ArrayList<Tile[]> currentLevel;
 	protected Rowdy player;
-	private Timer timer;
-	private TimerListener timerListener;
+	//private Timer timer;
+	//private TimerListener timerListener;
 	
 	private Timeline indefiniteTimeline;
 	private KeyFrame kf;
-	private EventHandler<ActionEvent> eventHandler; //import actionevent from javafx
+	private EventHandler<ActionEvent> timelineHandler; 
 	
 	public void gameTick() {
 		int playerState = 1;
@@ -104,27 +102,23 @@ public class Model implements Runnable{
 		}
 		return levelColumn;
 	}
-
-	private class TimerListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			gameTick();
-		}
-	}
-	
 	
 	@Override
 	public void run() {
-		timer = new Timer(100, timerListener);
-		timer.start();
-		
 		indefiniteTimeline = new Timeline();
 		indefiniteTimeline.setCycleCount( Timeline.INDEFINITE);
 		
-		kf = new KeyFrame(Duration.seconds(.0017), null, null);
+		timelineHandler = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				gameTick();
+			}
+		};
 		
+		kf = new KeyFrame(Duration.seconds(.0017), timelineHandler);
 		
+		indefiniteTimeline.getKeyFrames().add( kf );
+		indefiniteTimeline.play();
 		
 	}
 }
