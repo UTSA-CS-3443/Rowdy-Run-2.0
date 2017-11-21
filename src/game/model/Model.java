@@ -5,7 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.swing.Timer;
+import javafx.animation.Timeline;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
+import javafx.animation.KeyFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +30,10 @@ public class Model implements Runnable{
 	protected Rowdy player;
 	private Timer timer;
 	private TimerListener timerListener;
+	
+	private Timeline indefiniteTimeline;
+	private KeyFrame kf;
+	private EventHandler<ActionEvent> eventHandler; //import actionevent from javafx
 	
 	public void gameTick() {
 		int playerState = 1;
@@ -103,10 +112,19 @@ public class Model implements Runnable{
 			gameTick();
 		}
 	}
+	
+	
 	@Override
 	public void run() {
 		timer = new Timer(100, timerListener);
 		timer.start();
+		
+		indefiniteTimeline = new Timeline();
+		indefiniteTimeline.setCycleCount( Timeline.INDEFINITE);
+		
+		kf = new KeyFrame(Duration.seconds(.0017), null, null);
+		
+		
 		
 	}
 }
