@@ -12,23 +12,21 @@ public class Coin extends Item {
 	
 	public static String[] imgFile = {"Coin1.gif", "Coin2.gif", "Coin3.gif"};
 	
-	public int start;
-	public static int start_vel_x = 0;
-	public static int start_vel_y = 0;
-	
-	public static int x_vel;
-	
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
 	
-	public static final int start_height = 100;
-	
 	private BufferedImage[] image;
 	
-	//TODO giving me errors
-    public Coin() {
-        super();
-        
+	private Rectangle hitBox;
+	private Point position;
+
+    public Coin(Direction dir, int x_pos, int y_pos, int x_max,
+			int y_max, int width, int height, int boxWidth, int boxHeight) {
+        super(dir, x_pos, y_pos, x_max, y_max, width, height, boxHeight, boxHeight);
+        hitBox = new Rectangle(x_pos, y_pos, WIDTH, HEIGHT);
+		this.position.x = x_pos;
+		this.position.y = y_pos;
+
 		try {
 			image = new BufferedImage[imgFile.length];
 			for (int i = 0; i < imgFile.length; i++) {
@@ -36,18 +34,26 @@ public class Coin extends Item {
 			}
 			if (img == null) img = image[0];
 		}	catch(IOException e) {
-				System.out.println("Error");
+			System.out.println("Error");
 		}
 	}
-	
-	public void move() {
-		if (x_vel > 0) dir = Direction.RIGHT;
-		if (x_vel < 0) dir = Direction.LEFT;
-		x_pos += x_vel;
-			
-		offScreen();
-	}
-	
+
+    public Rectangle getHitBox() {
+    	return hitBox;
+    }
+    
+    public void setX(int x_pos) {
+    	this.x_pos = x_pos;
+    }
+    
+    public void setY(int y_pos) {
+    	this.y_pos = y_pos;
+    	hitBox.setLocation(new Point(x_pos, y_pos));
+    }
+    
+	/**
+	 * Loops Images Files and will Spin Coin
+	 */
 	public void spinCoin() {
 		for (int i = 0; i < image.length; i++) {
 			if (i == image.length - 1 && img.equals(image[i])) {
@@ -58,10 +64,5 @@ public class Coin extends Item {
 			}
 		}
 		
-	}
-	
-	public void offScreen() {
-		if (y_pos < 0) y_pos = 0;
-		else if (y_pos > y_max) y_pos= y_max;
 	}
 }
