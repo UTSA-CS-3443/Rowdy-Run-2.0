@@ -23,6 +23,8 @@ public class Rowdy {
 	protected int jumpTime;
 	protected boolean onGround,canMoveLeft,canMoveRight;
 	
+	//TODO add coin counter
+	//TODO add foot + headbox for platform to check against and to help with last tile
 	public Rowdy(){
 		this.position = new Point(200,400);
 		this.xVelocity = 0;
@@ -67,6 +69,7 @@ public class Rowdy {
 			this.yVelocity -= -10;
 	}
 
+	//TODO check last box and add platform management
 	public int hitBoxChecker(ArrayList<Tile[]> Level) {
 		Tile curr = null;
 		int  rowdyX = (int) Math.floor((double)this.position.x/100.0);

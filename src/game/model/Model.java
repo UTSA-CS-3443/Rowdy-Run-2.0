@@ -42,6 +42,7 @@ public class Model implements Runnable{
 	}
 	
 	public void gameTick() {
+		
 		int playerState = 1;
 		player.moveRowdy();
 		playerState = player.hitBoxChecker(currentLevel); 
