@@ -14,12 +14,14 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 
 import tiles.*;
+import game.controller.PlayerController;
 
 /**
  * Reads in data from a level file (lvlFile) to generate a level consisting of
  * Tile objects stored in an ArrayList.
  * 
  * @author Jared Polwort
+ * @author Michael Diep
  *
  */
 public class Model implements Runnable{
@@ -33,6 +35,12 @@ public class Model implements Runnable{
 	private KeyFrame kf;
 	private EventHandler<ActionEvent> timelineHandler; 
 	
+	private PlayerController pController;
+	
+	public Model() {
+		
+	}
+	
 	public void gameTick() {
 		int playerState = 1;
 		player.moveRowdy();
@@ -45,6 +53,27 @@ public class Model implements Runnable{
 			//TODO handle rowdy winning
 		}
 		player.fall();
+		
+	}
+	
+	@Override
+	public void run() {
+		pController = new PlayerController(player);
+		
+		indefiniteTimeline = new Timeline();
+		indefiniteTimeline.setCycleCount( Timeline.INDEFINITE);
+		
+		timelineHandler = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				gameTick();
+			}
+		};
+		
+		kf = new KeyFrame(Duration.seconds(.0017), timelineHandler);
+		
+		indefiniteTimeline.getKeyFrames().add( kf );
+		indefiniteTimeline.play();
 		
 	}
 
@@ -103,22 +132,5 @@ public class Model implements Runnable{
 		return levelColumn;
 	}
 	
-	@Override
-	public void run() {
-		indefiniteTimeline = new Timeline();
-		indefiniteTimeline.setCycleCount( Timeline.INDEFINITE);
-		
-		timelineHandler = new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				gameTick();
-			}
-		};
-		
-		kf = new KeyFrame(Duration.seconds(.0017), timelineHandler);
-		
-		indefiniteTimeline.getKeyFrames().add( kf );
-		indefiniteTimeline.play();
-		
-	}
+	
 }

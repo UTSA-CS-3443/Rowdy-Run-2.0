@@ -1,5 +1,9 @@
 package game;
 	
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import game.model.Model;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -10,10 +14,12 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 	
-	private static Stage stage;
-	private static Scene mainMenu;
-	private static Scene levelSelection;
-	private static Scene game;
+	private static Stage stage = null;
+	private static Scene mainMenu = null;
+	private static Scene levelSelection = null;
+	private static Scene game = null;
+	private static Model model = null;
+	private static ExecutorService application = null;
 	private static final int x = 500, y = 500;
 	
 	@Override
@@ -31,6 +37,8 @@ public class Main extends Application {
 			root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
 			game = new Scene(root,x,y);
 			
+			model = new Model();
+			
 			primaryStage.setScene(mainMenu);
 			primaryStage.setTitle("RowdyRun-2.0");
 			primaryStage.show();
@@ -39,8 +47,10 @@ public class Main extends Application {
 		}
 		this.stage = primaryStage;
 	}
-	
+
 	public static void main(String[] args) {
+		application = Executors.newCachedThreadPool();
+		
 		launch(args);
 	}
 	
@@ -56,6 +66,18 @@ public class Main extends Application {
 		Main.stage = stage;
 	}
 
+	public static Model getModel() {
+		return model;
+	}
+
+	public static void setModel(Model model) {
+		Main.model = model;
+	}
+	
+	public static ExecutorService getExecutorService() {
+		return application;
+	}
+	
 	public static void changeScene(Scene scene) {
 		Main.stage.setScene(scene);
 	}
