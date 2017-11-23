@@ -69,7 +69,7 @@ public class Rowdy {
 			this.yVelocity -= -10;
 	}
 
-	//TODO check last box and add platform management
+	//TODO check last box and add platform management + coin management
 	public int hitBoxChecker(ArrayList<Tile[]> Level) {
 		Tile curr = null;
 		int  rowdyX = (int) Math.floor((double)this.position.x/100.0);
@@ -98,7 +98,7 @@ public class Rowdy {
 					else
 						canMoveLeft = true;
 					break;
-				case 'c':
+				case 'x':
 				case '?':
 				default:
 					return 1;
@@ -118,7 +118,7 @@ public class Rowdy {
 					else
 						canMoveRight = true;
 					break;
-				case 'c':
+				case 'x':
 				case '?':
 				default:
 					return 1;
@@ -138,7 +138,7 @@ public class Rowdy {
 				else
 					onGround = false;
 				break;
-			case 'c':
+			case 'x':
 			case '?':
 			default:
 				return 1;
@@ -157,7 +157,7 @@ public class Rowdy {
 				else
 					onGround = false;
 				break;
-			case 'c':
+			case 'x':
 			case '?':
 			default:
 				return 1;
@@ -174,7 +174,7 @@ public class Rowdy {
 					this.adjustRowdy(this.position.x,curr.getY()-100);
 				}
 				break;
-			case 'c':
+			case 'x':
 			case '?':
 			default:
 				return 1;
@@ -191,7 +191,7 @@ public class Rowdy {
 					this.adjustRowdy(this.position.x,curr.getY()-100);
 				}
 				break;
-			case 'c':
+			case 'x':
 			case '?':
 			default:
 				return 1;

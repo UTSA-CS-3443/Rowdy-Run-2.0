@@ -3,7 +3,7 @@ package tiles;
 
 public class Obstacle extends Tile{
 	
-	protected char tileType = 'c';
+	protected char tileType = 'x';
 	
 	protected Obstacle(int x, int y) {
 		super(x, y);

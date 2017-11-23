@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 
 import tiles.*;
 import game.controller.PlayerController;
+import items.Coin;
 
 /**
  * Reads in data from a level file (lvlFile) to generate a level consisting of
@@ -106,8 +107,32 @@ public class Model implements Runnable{
 	 */
 	private static Tile[] processLevelColumn(char[] tileList, int column) {
 		// TODO add tile objects as you create them
-		Tile[] levelColumn = { new Air(column, 1), new Air(column, 2), new Air(column, 3), new Air(column, 4),
-				new Air(column, 5) }; // Once air tile is created will just be initialized as five of those
+		Tile[] levelColumn = { 
+				new Air(column, 1), 
+				new Air(column, 2), 
+				new Air(column, 3), 
+				new Air(column, 4),
+				new Air(column, 5),
+				new Air(column, 6), 
+				new Air(column, 7), 
+				new Air(column, 8), 
+				new Air(column, 9),
+				new Air(column, 10),
+				new Air(column, 11), 
+				new Air(column, 12), 
+				new Air(column, 13), 
+				new Air(column, 14),
+				new Air(column, 15),
+				new Air(column, 16), 
+				new Air(column, 17), 
+				new Air(column, 18), 
+				new Air(column, 19),
+				new Air(column, 20),
+				new Air(column, 21), 
+				new Air(column, 22), 
+				new Air(column, 23), 
+				new Air(column, 24),
+				new Air(column, 25) }; // Once air tile is created will just be initialized as twenty-five of those
 		for (int i = 0; i < tileList.length; i++) {
 			Tile currTile = null;
 			switch (tileList[i]) {
@@ -117,11 +142,14 @@ public class Model implements Runnable{
 			case 'W':
 				currTile = new Water(column*100, i*100);
 				break;
-			case 'C':
+			case 'X':
 				currTile = new Cactus(column*100, i*100);
 				break;
 			case 'G':
 				currTile = new Ground(column*100, i*100);
+				break;
+			case 'C':
+				currTile = new Coin(column*100, i*100);
 				break;
 			case ' ':
 			default:

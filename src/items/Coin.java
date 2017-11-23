@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import com.sun.javafx.scene.traversal.Direction;
 
 
 public class Coin extends Item {
@@ -17,16 +16,10 @@ public class Coin extends Item {
 	
 	private BufferedImage[] image;
 	
-	private Rectangle hitBox;
-	private Point position;
 
-    public Coin(Direction dir, int x_pos, int y_pos, int x_max,
-			int y_max, int width, int height, int boxWidth, int boxHeight) {
-        super(dir, x_pos, y_pos, x_max, y_max, width, height, boxHeight, boxHeight);
-        hitBox = new Rectangle(x_pos, y_pos, WIDTH, HEIGHT);
-		this.position.x = x_pos;
-		this.position.y = y_pos;
-
+    public Coin(int x,int y) {
+        super(x,y);
+        hitBox = new Rectangle(x + 30, y + 30, WIDTH, HEIGHT);
 		try {
 			image = new BufferedImage[imgFile.length];
 			for (int i = 0; i < imgFile.length; i++) {
@@ -42,15 +35,7 @@ public class Coin extends Item {
     	return hitBox;
     }
     
-    public void setX(int x_pos) {
-    	this.x_pos = x_pos;
-    }
-    
-    public void setY(int y_pos) {
-    	this.y_pos = y_pos;
-    	hitBox.setLocation(new Point(x_pos, y_pos));
-    }
-    
+
 	/**
 	 * Loops Images Files and will Spin Coin
 	 */
