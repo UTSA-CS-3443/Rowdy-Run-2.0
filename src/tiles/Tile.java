@@ -21,6 +21,7 @@ import javafx.scene.image.Image;
  * @author Michael Diep
  *
  */
+
 public abstract class Tile {
 	protected final int WIDTH = 100, HEIGHT = 100;
 	protected Point position;

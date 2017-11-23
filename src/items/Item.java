@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import com.sun.javafx.scene.traversal.Direction;
 
+//TODO make Item extend tile
 public abstract class Item {
 	
 	protected BufferedImage img;
