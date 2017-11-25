@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
@@ -37,6 +42,7 @@ public class Model implements Runnable {
 	private EventHandler<ActionEvent> timelineHandler;
 
 	private PlayerController pController;
+	private BorderPane root;
 
 	public Model() {
 
@@ -56,7 +62,7 @@ public class Model implements Runnable {
 			// TODO handle rowdy winning
 		}
 		player.fall();
-
+		drawCanvas();
 	}
 
 	@Override
@@ -140,6 +146,31 @@ public class Model implements Runnable {
 			levelColumn[i] = currTile;
 		}
 		return levelColumn;
+	}
+	
+	
+	public void start(Stage primaryStage)
+	{
+		Canvas canvas = new Canvas();
+		GraphicsContext gc = img.getGraphicsContext2D();
+		
+		Scene scene = new Scene(root,500,500);
+		
+		root.setCenter(canvas);
+		primaryStage.setResizable(false);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+	@FXML
+	public void drawCanvas()
+	{
+		for(int y; y<25; y++)
+		{
+			for(int x; x<length.size();x++)
+			{
+				gc.drawImage(img, x, y);
+			}
+		}
 	}
 
 }
