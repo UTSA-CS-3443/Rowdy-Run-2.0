@@ -25,7 +25,6 @@ public class Rowdy {
 	protected boolean onGround,canMoveLeft,canMoveRight;
 	private int coinCount;
 	
-	//TODO add coin counter
 	//TODO add foot + headbox for platform to check against and to help with last tile
 	public Rowdy(){
 		this.position = new Point(200,400);
@@ -96,7 +95,7 @@ public class Rowdy {
 			curr = Level.get(list[a].x)[list[a].y];
 			switch(curr.getTileType()) {
 				case 'c':
-					Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+					Level.get(list[a].x)[list[a].y] = new Air(list[a].x * 100, list[a].y * 100);
 					this.coinCount++;
 					break;
 				case 'a': 
@@ -120,7 +119,7 @@ public class Rowdy {
 			curr = Level.get(list[b].x)[list[b].y];
 			switch(curr.getTileType()) {
 				case 'c':
-					Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+					Level.get(list[b].x)[list[b].y] = new Air(list[b].x * 100, list[b].y * 100);
 					this.coinCount++;
 					break;
 				case 'a': 
@@ -143,7 +142,7 @@ public class Rowdy {
 		curr = Level.get(list[2].x)[list[2].y];
 		switch(curr.getTileType()) {
 			case 'c':
-				Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+				Level.get(list[2].x)[list[2].y] = new Air(list[2].x * 100, list[2].y * 100);
 				this.coinCount++;
 				break;
 			case 'a': 
@@ -166,7 +165,7 @@ public class Rowdy {
 		curr = Level.get(list[3].x)[list[3].y];
 		switch(curr.getTileType()) {
 			case 'c':
-				Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+				Level.get(list[3].x)[list[3].y] = new Air(list[3].x * 100, list[3].y * 100);
 				this.coinCount++;
 				break;
 			case 'a': 
@@ -189,7 +188,7 @@ public class Rowdy {
 		curr = Level.get(list[5].x)[list[5].y];
 		switch(curr.getTileType()) {
 			case 'c':
-				Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+				Level.get(list[5].x)[list[5].y] = new Air(list[5].x * 100, list[5].y * 100);
 				this.coinCount++;
 				break;
 			case 'a': 
