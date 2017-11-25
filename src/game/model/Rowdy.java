@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
+import tiles.Air;
 import tiles.Tile;
 
 /**
@@ -22,6 +23,7 @@ public class Rowdy {
 	protected Image rowdySprite;
 	protected int jumpTime;
 	protected boolean onGround,canMoveLeft,canMoveRight;
+	private int coinCount;
 	
 	//TODO add coin counter
 	//TODO add foot + headbox for platform to check against and to help with last tile
@@ -34,6 +36,7 @@ public class Rowdy {
 		this.canMoveLeft = true;
 		this.canMoveRight = true;
 		this.hitBox = new Rectangle(position.x,position.y,75,150);
+		this.coinCount = 0;
 	}
 
 	public void adjustRowdy(int x,int y) {
@@ -68,6 +71,10 @@ public class Rowdy {
 		if(!this.onGround)
 			this.yVelocity -= -10;
 	}
+	
+	public int getCoinCount() {
+		return this.coinCount;
+	}
 
 	//TODO check last box and add platform management + coin management
 	public int hitBoxChecker(ArrayList<Tile[]> Level) {
@@ -88,6 +95,10 @@ public class Rowdy {
 		for(int a = 0; a <2;a++) {
 			curr = Level.get(list[a].x)[list[a].y];
 			switch(curr.getTileType()) {
+				case 'c':
+					Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+					this.coinCount++;
+					break;
 				case 'a': 
 					break;
 				case 'g':
@@ -108,6 +119,10 @@ public class Rowdy {
 		for(int b = 6; b <list.length;b++) {
 			curr = Level.get(list[b].x)[list[b].y];
 			switch(curr.getTileType()) {
+				case 'c':
+					Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+					this.coinCount++;
+					break;
 				case 'a': 
 					break;
 				case 'g':
@@ -127,6 +142,10 @@ public class Rowdy {
 		
 		curr = Level.get(list[2].x)[list[2].y];
 		switch(curr.getTileType()) {
+			case 'c':
+				Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+				this.coinCount++;
+				break;
 			case 'a': 
 				break;
 			case 'g':
@@ -146,6 +165,10 @@ public class Rowdy {
 		
 		curr = Level.get(list[3].x)[list[3].y];
 		switch(curr.getTileType()) {
+			case 'c':
+				Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+				this.coinCount++;
+				break;
 			case 'a': 
 				break;
 			case 'g':
@@ -165,6 +188,10 @@ public class Rowdy {
 		
 		curr = Level.get(list[5].x)[list[5].y];
 		switch(curr.getTileType()) {
+			case 'c':
+				Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+				this.coinCount++;
+				break;
 			case 'a': 
 				break;
 			case 'g':
@@ -182,6 +209,10 @@ public class Rowdy {
 		
 		curr = Level.get(list[4].x)[list[4].y];
 		switch(curr.getTileType()) {
+			case 'c':
+				Level.get(list[4].x)[list[4].y] = new Air(list[4].x * 100, list[4].y * 100);
+				this.coinCount++;
+				break;
 			case 'a': 
 				break;
 			case 'g':
