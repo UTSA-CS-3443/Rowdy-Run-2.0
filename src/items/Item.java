@@ -1,10 +1,14 @@
 package items;
 
-
 import java.awt.image.BufferedImage;
 import com.sun.javafx.scene.traversal.Direction;
-
 import tiles.Tile;
+
+/**
+ * 
+ * @author Lynn Miguel
+ *
+ */
 
 public abstract class Item extends Tile{
 	
