@@ -6,17 +6,24 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-
+/**
+ * 
+ * @author Lynn Miguel
+ *
+ */
 public class Coin extends Item {
 	
-	public static String[] imgFile = {"Coin1.gif", "Coin2.gif", "Coin3.gif"};
+	/**
+	 * Hold Image Files
+	 */
+	public static String[] imgFile = {"Coin1.gif", "Coin2.gif", "Coin3.gif", 
+			"Coin1.gif", "Coin2.gif", "Coin3.gif", "Coin1.gif", "Coin2.gif", "Coin3.gif"};
 	
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
 	
 	private BufferedImage[] image;
 	
-
     public Coin(int x,int y) {
         super(x,y);
         hitBox = new Rectangle(x + 30, y + 30, WIDTH, HEIGHT);
@@ -30,12 +37,11 @@ public class Coin extends Item {
 			System.out.println("Error");
 		}
 	}
-
+    
     public Rectangle getHitBox() {
     	return hitBox;
     }
     
-
 	/**
 	 * Loops Images Files and will Spin Coin
 	 */
