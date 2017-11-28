@@ -147,27 +147,23 @@ public class Model implements Runnable {
 		}
 		return levelColumn;
 	}
-	
-	
-	public void start(Stage primaryStage)
-	{
+
+	public void start(Stage primaryStage) {
 		Canvas canvas = new Canvas();
 		GraphicsContext gc = img.getGraphicsContext2D();
-		
-		Scene scene = new Scene(root,500,500);
-		
+
+		Scene scene = new Scene(root, 500, 500);
+
 		root.setCenter(canvas);
 		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+
 	@FXML
-	public void drawCanvas()
-	{
-		for(int y; y<25; y++)
-		{
-			for(int x; x<length.size();x++)
-			{
+	public void drawCanvas() {
+		for (int y; y < 25; y++) {
+			for (int x; x < length.size(); x++) {
 				gc.drawImage(img, x, y);
 			}
 		}
