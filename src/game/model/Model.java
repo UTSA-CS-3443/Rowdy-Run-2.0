@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -44,6 +45,11 @@ public class Model implements Runnable {
 	private PlayerController pController;
 	private BorderPane root;
 
+	@FXML
+	private Canvas canvas = null;
+	
+	private GraphicsContext gc = null;
+	
 	public Model() {
 
 	}
@@ -62,7 +68,7 @@ public class Model implements Runnable {
 			// TODO handle rowdy winning
 		}
 		player.fall();
-		drawCanvas();
+		drawCanvas(gc);
 	}
 
 	@Override
@@ -71,6 +77,9 @@ public class Model implements Runnable {
 
 		indefiniteTimeline = new Timeline();
 		indefiniteTimeline.setCycleCount(Timeline.INDEFINITE);
+		
+		canvas = new Canvas();
+		gc = canvas.getGraphicsContext2D();
 
 		timelineHandler = new EventHandler<ActionEvent>() {
 			@Override
@@ -147,28 +156,17 @@ public class Model implements Runnable {
 		}
 		return levelColumn;
 	}
-	
-	
-	public void start(Stage primaryStage)
-	{
-		Canvas canvas = new Canvas();
-		GraphicsContext gc = img.getGraphicsContext2D();
-		
-		Scene scene = new Scene(root,500,500);
-		
-		root.setCenter(canvas);
-		primaryStage.setResizable(false);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
+
 	@FXML
-	public void drawCanvas()
+	public void drawCanvas(GraphicsContext gc)
 	{
-		for(int y; y<25; y++)
+		Tile[] temp = null;
+		for(int x = 0; x < currentLevel.size();x++)
 		{
-			for(int x; x<length.size();x++)
+			temp = this.currentLevel.get(x);
+			for(int y = 0; y < 25; y++)
 			{
-				gc.drawImage(img, x, y);
+				gc.drawImage(temp[y].getImg(), x, y);
 			}
 		}
 	}
