@@ -8,6 +8,7 @@ import game.model.Rowdy;
 
 public class PlayerController implements EventHandler<KeyEvent> {
 	Rowdy player;
+	//TODO add canvas from the model for markup by FXML
 	
 	public PlayerController(Rowdy player) {
 		super();
