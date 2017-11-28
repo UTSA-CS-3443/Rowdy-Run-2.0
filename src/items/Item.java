@@ -12,7 +12,7 @@ import tiles.Tile;
 
 public abstract class Item extends Tile{
 	
-	protected char tileType = 'c';
+	protected char tileType = 'C';
 	protected BufferedImage img;
 	public Direction dir;
 	
