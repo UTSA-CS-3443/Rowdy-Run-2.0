@@ -9,7 +9,6 @@ import tiles.Tile;
  * @author Lynn Miguel
  *
  */
-
 public abstract class Item extends Tile{
 	
 	protected char tileType = 'C';
