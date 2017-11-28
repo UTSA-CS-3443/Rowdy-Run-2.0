@@ -90,20 +90,20 @@ public class Rowdy {
 		for (int a = 0; a < 2; a++) {
 			curr = Level.get(list[a].x)[list[a].y];
 			switch (curr.getTileType()) {
-			case 'c':
+			case 'C':
 				Level.get(list[a].x)[list[a].y] = new Air(list[a].x * 100, list[a].y * 100);
 				this.coinCount++;
 				break;
-			case 'a':
+			case 'A':
 				break;
-			case 'g':
+			case 'G':
 				if (this.hitBox.intersects(curr.getHitBox())) {
 					canMoveLeft = false;
 					this.adjustRowdy(curr.getX() + 100, this.position.y);
 				} else
 					canMoveLeft = true;
 				break;
-			case 'x':
+			case 'X':
 			case '?':
 			default:
 				return 1;
