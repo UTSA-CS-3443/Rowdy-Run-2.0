@@ -21,14 +21,10 @@ import javafx.stage.Stage;
  *
  */
 public class MainMenuController implements EventHandler<ActionEvent> {
-	// Stage stage = null;
-	// Model model = null;
 	private File lvlFile = null;
 
 	public MainMenuController() {
 		super();
-		// stage = Main.getStage();
-		// model = Main.getModel();
 	}
 
 	@Override
