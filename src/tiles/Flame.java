@@ -4,7 +4,11 @@ import javafx.scene.image.Image;
 
 public class Flame extends Obstacle {
 	
-	private Image flameImage; // = *cactus file name here*;
+	/**
+	 * Set Flame Image
+	 * 
+	 */
+	Image flame = new Image("/src/images/Flame1.gif");
 
 	public Flame(int x, int y) {
 		super(x, y);
