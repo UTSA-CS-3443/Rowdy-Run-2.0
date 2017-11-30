@@ -9,15 +9,14 @@ public class Cactus extends Obstacle{
 	/**
 	 * Set Cactus Image
 	 */
-	Image cactus = new Image("cactus.png");
+	Image cactus = new Image("/src/images/cactus.png");
 	
-	// constructor
+	// Constructor
 	public Cactus(int x, int y) {
 		super(x, y);
-		//super.setImg(cactusImage);
 	}
-
-	// methods
 	
-	
+    public Rectangle getHitBox() {
+    	return hitBox;
+    }	
 }
