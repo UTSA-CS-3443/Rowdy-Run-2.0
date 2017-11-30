@@ -3,6 +3,7 @@ package game;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import game.controller.MainMenuController;
 import game.model.Model;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,13 +19,16 @@ public class Main extends Application {
 	private static Scene mainMenu = null;
 	private static Scene levelSelection = null;
 	private static Scene game = null;
-	private static Model model = null;
 	private static ExecutorService application = null;
 	private static final int x = 500, y = 500;
+	//private MainMenuController mc = null;
+	private static Model model = null;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			model = new Model();
+			//mc = new MainMenuController();
 			Parent root = FXMLLoader.load(getClass().getResource("view/MainMenuView.fxml"));
 			//BorderPane root = new BorderPane(); //not needed when loading from fxml since the fxml already has the main pane
 			mainMenu = new Scene(root,x,y);
@@ -37,8 +41,6 @@ public class Main extends Application {
 			root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
 			game = new Scene(root,x,y);
 			
-			model = new Model();
-			
 			primaryStage.setScene(mainMenu);
 			primaryStage.setTitle("RowdyRun-2.0");
 			primaryStage.show();
@@ -47,6 +49,22 @@ public class Main extends Application {
 		}
 		this.stage = primaryStage;
 	}
+
+	public static Model getModel() {
+		return model;
+	}
+
+	public static void setModel(Model model) {
+		model = model;
+	}
+
+	/**public MainMenuController getMc() {
+		return mc;
+	}
+
+	public void setMc(MainMenuController mc) {
+		this.mc = mc;
+	}**/
 
 	public static void main(String[] args) {
 		application = Executors.newCachedThreadPool();
@@ -66,14 +84,6 @@ public class Main extends Application {
 		Main.stage = stage;
 	}
 
-	public static Model getModel() {
-		return model;
-	}
-
-	public static void setModel(Model model) {
-		Main.model = model;
-	}
-	
 	public static ExecutorService getExecutorService() {
 		return application;
 	}

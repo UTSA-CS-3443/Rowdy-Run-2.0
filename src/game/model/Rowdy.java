@@ -77,6 +77,22 @@ public class Rowdy {
 		return this.coinCount;
 	}
 
+	public Point getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+
+	public Image getImg() {
+		return rowdySprite;
+	}
+
+	public void setImg(Image rowdySprite) {
+		this.rowdySprite = rowdySprite;
+	}
+
 	// TODO check last box and add platform management + coin management
 	public int hitBoxChecker(ArrayList<Tile[]> Level) {
 		Tile curr = null;
@@ -99,7 +115,7 @@ public class Rowdy {
 			case 'G':
 				if (this.hitBox.intersects(curr.getHitBox())) {
 					canMoveLeft = false;
-					this.adjustRowdy(curr.getX() + 100, this.position.y);
+					this.adjustRowdy((int)curr.getPosition().getX() + 100, this.position.y);
 				} else
 					canMoveLeft = true;
 				break;
@@ -122,7 +138,7 @@ public class Rowdy {
 			case 'G':
 				if (this.hitBox.intersects(curr.getHitBox())) {
 					canMoveRight = false;
-					this.adjustRowdy(curr.getX(), this.position.y);
+					this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
 				} else
 					canMoveRight = true;
 				break;
@@ -145,7 +161,7 @@ public class Rowdy {
 			if (this.hitBox.intersects(curr.getHitBox())) {
 				onGround = true;
 				this.land();
-				this.adjustRowdy(this.position.x, curr.getY() + 100);
+				this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
 			} else
 				onGround = false;
 			break;
@@ -167,7 +183,7 @@ public class Rowdy {
 			if (this.hitBox.intersects(curr.getHitBox())) {
 				onGround = true;
 				this.land();
-				this.adjustRowdy(this.position.x, curr.getY() + 100);
+				this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
 			} else
 				onGround = false;
 			break;
@@ -189,7 +205,7 @@ public class Rowdy {
 			if (this.hitBox.intersects(curr.getHitBox())) {
 				this.land();
 				this.fall();
-				this.adjustRowdy(this.position.x, curr.getY() - 100);
+				this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
 			}
 			break;
 		case 'X':
@@ -210,7 +226,7 @@ public class Rowdy {
 			if (this.hitBox.intersects(curr.getHitBox())) {
 				this.land();
 				this.fall();
-				this.adjustRowdy(this.position.x, curr.getY() - 100);
+				this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
 			}
 			break;
 		case 'X':

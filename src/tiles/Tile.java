@@ -24,7 +24,7 @@ import javafx.scene.image.Image;
 
 public abstract class Tile {
 	protected final int WIDTH = 100, HEIGHT = 100;
-	protected Point position;
+	protected Point position = null;
 	protected Rectangle hitBox;
 	protected Image img;
 	protected char tileType = '?';
@@ -38,28 +38,20 @@ public abstract class Tile {
 	 * @param y
 	 */
 	protected Tile(int x, int y) {
+		this.position = new Point(x, y);
 		hitBox = new Rectangle(x, y, WIDTH, HEIGHT);
-		this.position.x = x;
-		this.position.y = y;
 	}
 
-	public int getX() {
-		return this.position.x;
-	}
-
-	public void setX(int x) {
-		this.position.x = x;
-	}
 	public char getTileType() {
 		return this.tileType;
 	}
 
-	public int getY() {
-		return this.position.y;
+	public Point getPosition() {
+		return position;
 	}
 
-	public void setY(int y) {
-		this.position.y = y;
+	public void setPosition(Point position) {
+		this.position = position;
 	}
 
 	public Rectangle getHitBox() {

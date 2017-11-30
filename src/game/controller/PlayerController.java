@@ -1,58 +1,79 @@
 package game.controller;
 
-//import javafx.event.ActionEvent;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import game.Main;
+import game.model.Model;
 import game.model.Rowdy;
-//import javafx.scene.input.KeyCode;
 
+/**
+ * 
+ * @author Michael Diep
+ *
+ */
 public class PlayerController implements EventHandler<KeyEvent> {
-	Rowdy player;
-	//TODO add canvas from the model for markup by FXML
 	
-	public PlayerController(Rowdy player) {
+	@FXML
+	private Canvas canvas = null;
+	@FXML
+	private GridPane pauseMenu = null;
+	private Model model = null;
+	private Rowdy player = null;
+	private boolean isPaused = false;
+	private Timeline timeline = null;
+	
+	public PlayerController() {
 		super();
-		this.player = player;
+		this.model = Main.getModel();
+		this.player = this.model.getPlayer();
+		this.canvas = this.model.getCanvas();
+		this.timeline = this.model.getIndefiniteTimeline();
 	}
 	
-	boolean isPaused = false;
 	@Override
 	public void handle(KeyEvent event) {
+		System.out.println("KeyEvent!");
+		this.timeline.pause();
 		if (isPaused == false) {
+			
 			switch (event.getCode()) {
 				case UP: // KeyCode.UP
 					player.jump();
 					break;
+					
 				case LEFT:
 					player.moveLeft();
 					break;
+					
 				case RIGHT:
 					player.moveRight();
 					break;
+					
 				case P:
-					// Model.pause();
-					// Rowdy.pause(); or something
-					// display pause menu
+					System.out.println("Paused game");
+					this.timeline.pause();
 					isPaused = true;
+					pauseMenu.setVisible(true);
 					break;
+					
 				default:
 					break;
 			}
 		}
 		else {
 			switch (event.getCode()) {
-				case UP:
-					// navigate up in menu
-					break;
-				case DOWN:
-					// navigate down in menu
-					break;
+					
 				case P:
-					// Model.resume();
-					// Rowdy.resume() or something
-					// hide pause menu
+					System.out.println("Resumed Game");
+					this.timeline.play();
 					isPaused = false;
+					pauseMenu.setVisible(false);
 					break;
+					
 				default:
 					break;
 			}

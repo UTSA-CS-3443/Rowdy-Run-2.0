@@ -22,7 +22,7 @@
             <Image url="@../../images/bg.png" />
           </image>
         </ImageView>
-        <GridPane layoutX="180.0" layoutY="125.0" prefHeight="250.0" prefWidth="197.0" vgap="40.0">
+        <GridPane layoutX="180.0" layoutY="125.0" prefHeight="250.0" prefWidth="140.0" vgap="40.0">
           <children>
             <Button mnemonicParsing="false" onAction="#handle" prefWidth="140.0" text="Level 1" textAlignment="LEFT">
               <font>
@@ -31,7 +31,7 @@
             </Button>
             <Button font="$x1" mnemonicParsing="false" onAction="#handle" prefWidth="140.0" text="Level 2" GridPane.rowIndex="1" />
             <Button font="$x1" mnemonicParsing="false" onAction="#handle" prefWidth="140.0" text="Level 3" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#handle" prefHeight="37.0" prefWidth="157.0" text="Main Menu" GridPane.rowIndex="3">
+            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#handle" prefHeight="45.0" prefWidth="140.0" text="Main Menu" GridPane.rowIndex="3">
               <font>
                 <Font size="21.0" />
               </font>

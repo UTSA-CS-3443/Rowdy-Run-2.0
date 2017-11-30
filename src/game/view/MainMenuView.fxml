@@ -40,6 +40,5 @@
         </GridPane>
       </children>
     </AnchorPane>
-    <AnchorPane id="Content" layoutX="72.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
   </children>
 </AnchorPane>
