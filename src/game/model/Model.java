@@ -165,7 +165,7 @@ public class Model implements Runnable {
 	 */
 	private Tile[] processLevelColumn(char[] tileList, int column) {
 		// TODO add tile objects as you create them
-		System.out.println("generating air in column " + column);
+		//System.out.println("generating air in column " + column);
 		Tile[] levelColumn = new Tile[tileList.length];// Once air tile is created will just be initialized as twenty-five of those
 		/**for (int i = 0; i < tileList.length; i++)
 			levelColumn[i] = new Air(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);**/
@@ -175,22 +175,22 @@ public class Model implements Runnable {
 			Tile currTile = null;
 			switch (tileList[i]) {
 			case 'F':
-				currTile = new Flame(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
+				currTile = new Flame(column * Tile.WIDTH, Main.HEIGHT - (i + 1) * Tile.HEIGHT);
 				break;
 			case 'W':
-				currTile = new Water(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
+				currTile = new Water(column * Tile.WIDTH, Main.HEIGHT - (i + 1) * Tile.HEIGHT);
 				break;
 			case 'X':
-				currTile = new Cactus(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
+				currTile = new Cactus(column * Tile.WIDTH, Main.HEIGHT - (i + 1) * Tile.HEIGHT);
 				break;
 			case 'G':
-				currTile = new Ground(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
+				currTile = new Ground(column * Tile.WIDTH, Main.HEIGHT - (i + 1) * Tile.HEIGHT);
 				break;
 			case 'C':
-				currTile = new Coin(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
+				currTile = new Coin(column * Tile.WIDTH, Main.HEIGHT - (i + 1) * Tile.HEIGHT);
 				break;
 			case ' ':
-				currTile = new Air(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
+				currTile = new Air(column * Tile.WIDTH, Main.HEIGHT - (i + 1) * Tile.HEIGHT);
 				break;
 			default:
 				break;
