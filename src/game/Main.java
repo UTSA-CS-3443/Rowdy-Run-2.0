@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import game.controller.MainMenuController;
 import game.model.Model;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -27,10 +28,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
 			model = new Model();
-			//mc = new MainMenuController();
 			Parent root = FXMLLoader.load(getClass().getResource("view/MainMenuView.fxml"));
-			//BorderPane root = new BorderPane(); //not needed when loading from fxml since the fxml already has the main pane
 			mainMenu = new Scene(root,x,y);
 			mainMenu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
@@ -44,10 +44,11 @@ public class Main extends Application {
 			primaryStage.setScene(mainMenu);
 			primaryStage.setTitle("RowdyRun-2.0");
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		this.stage = primaryStage;
+		Main.stage = primaryStage;
 	}
 
 	public static Model getModel() {
@@ -55,16 +56,8 @@ public class Main extends Application {
 	}
 
 	public static void setModel(Model model) {
-		model = model;
+		Main.model = model;
 	}
-
-	/**public MainMenuController getMc() {
-		return mc;
-	}
-
-	public void setMc(MainMenuController mc) {
-		this.mc = mc;
-	}**/
 
 	public static void main(String[] args) {
 		application = Executors.newCachedThreadPool();

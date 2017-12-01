@@ -3,9 +3,14 @@ package game.controller;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import game.Main;
 import game.model.Model;
 import game.model.Rowdy;
@@ -15,23 +20,21 @@ import game.model.Rowdy;
  * @author Michael Diep
  *
  */
-public class PlayerController implements EventHandler<KeyEvent> {
+public class GameController implements EventHandler<KeyEvent>, Initializable{
 	
-	@FXML
-	private Canvas canvas = null;
-	@FXML
-	private GridPane pauseMenu = null;
+	@FXML private Canvas canvas;
+	@FXML private GridPane pauseMenu;
 	private Model model = null;
 	private Rowdy player = null;
 	private boolean isPaused = false;
 	private Timeline timeline = null;
 	
-	public PlayerController() {
+	public GameController() {
 		super();
 		this.model = Main.getModel();
 		this.player = this.model.getPlayer();
-		this.canvas = this.model.getCanvas();
 		this.timeline = this.model.getIndefiniteTimeline();
+
 	}
 	
 	@Override
@@ -83,4 +86,20 @@ public class PlayerController implements EventHandler<KeyEvent> {
 	public void setControllable(Rowdy player) {
 		this.player = player;
 	}
+
+	public Canvas getCanvas() {
+		return canvas;
+	}
+
+	public void setCanvas(Canvas canvas) {
+		this.canvas = canvas;
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.model.setCanvas(canvas);
+		this.model.setGraphicsContext(this.canvas.getGraphicsContext2D());
+		
+	}
+	
 }

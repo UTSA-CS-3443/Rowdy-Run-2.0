@@ -89,8 +89,8 @@ public class MainMenuController implements EventHandler<ActionEvent> {
 		
 		if (run == true) {
 			System.out.println("Starting game");
-			Main.getExecutorService().execute(this.model);
 			Main.changeScene(Main.getGame());
+			Main.getExecutorService().execute(this.model);
 			
 		}
 	}

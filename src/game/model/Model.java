@@ -20,7 +20,7 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 
 import tiles.*;
-import game.controller.PlayerController;
+import game.controller.GameController;
 import items.Coin;
 
 /**
@@ -42,15 +42,14 @@ public class Model implements Runnable {
 	private KeyFrame kf;
 	private EventHandler<ActionEvent> timelineHandler;
 
+	//Canvas is initialized by the GameView.FXML
 	private Canvas canvas = null;
 	private GraphicsContext gc = null;
 	
 	public Model() {
+
 		indefiniteTimeline = new Timeline();
 		indefiniteTimeline.setCycleCount(Timeline.INDEFINITE);
-		
-		canvas = new Canvas();
-		gc = canvas.getGraphicsContext2D();
 
 		timelineHandler = new EventHandler<ActionEvent>() {
 			@Override
@@ -58,22 +57,27 @@ public class Model implements Runnable {
 				gameTick();
 			}
 		};
-
-		kf = new KeyFrame(Duration.seconds(.0017), timelineHandler);
-
+		
+		//kf = new KeyFrame(Duration.seconds(.0017), timelineHandler); //60 fps
+		kf = new KeyFrame(Duration.seconds(.0033), timelineHandler); //30 fps
 		indefiniteTimeline.getKeyFrames().add(kf);
+
 	}
 	
 	@Override
 	public void run() {
-		indefiniteTimeline.play();
+		if (gc != null)
+			indefiniteTimeline.play();
+		else
+			System.out.println(" ");
+	
 	}
 
 	public void gameTick() {
 		//TODO Fix this stuff, it ai'nt workin'
-		/**int playerState = 1;
-		player.moveRowdy();
-		playerState = player.hitBoxChecker(currentLevel);
+		//int playerState = 1;
+		/**player.moveRowdy();
+		//playerState = player.hitBoxChecker(currentLevel);
 		if (playerState == 1) {
 			// TODO handle rowdy dying
 			// wait, so rowdy starts the game dead?
@@ -83,7 +87,11 @@ public class Model implements Runnable {
 			// TODO handle rowdy winning
 		}
 		player.fall();**/
-		drawCanvas(gc);
+		try {
+			drawCanvas(gc);
+		} catch (NullPointerException e) {
+			System.out.println("No GraphicsContext present");
+		}
 	}
 	
 	public ArrayList<Tile[]> getCurrentLevel() {
@@ -118,6 +126,14 @@ public class Model implements Runnable {
 		this.canvas = canvas;
 	}
 
+	public GraphicsContext getGraphicsContext() {
+		return gc;
+	}
+
+	public void setGraphicsContext(GraphicsContext gc) {
+		this.gc = gc;
+	}
+
 	public ArrayList<Tile[]> readLevel(File lvlFile) throws IOException {
 		
 		ArrayList<Tile[]> Level = new ArrayList<Tile[]>();
@@ -149,34 +165,32 @@ public class Model implements Runnable {
 	private Tile[] processLevelColumn(char[] tileList, int column) {
 		// TODO add tile objects as you create them
 		System.out.println("generating air in column " + column);
-		Tile[] levelColumn = { new Air(column, 1), new Air(column, 2), new Air(column, 3), new Air(column, 4),
-				new Air(column, 5), new Air(column, 6), new Air(column, 7), new Air(column, 8), new Air(column, 9),
-				new Air(column, 10), new Air(column, 11), new Air(column, 12), new Air(column, 13), new Air(column, 14),
-				new Air(column, 15), new Air(column, 16), new Air(column, 17), new Air(column, 18), new Air(column, 19),
-				new Air(column, 20), new Air(column, 21), new Air(column, 22), new Air(column, 23), new Air(column, 24),
-				new Air(column, 25) }; // Once air tile is created will just be initialized as twenty-five of those
+		Tile[] levelColumn = new Tile[tileList.length];// Once air tile is created will just be initialized as twenty-five of those
+		for (int i = 0; i < tileList.length; i++)
+			levelColumn[i] = new Air(column * Tile.WIDTH, i * Tile.HEIGHT);
+		
 		System.out.println("generating level from tileList[" + column + "]");
 		for (int i = 0; i < tileList.length; i++) {
 			Tile currTile = null;
 			switch (tileList[i]) {
 			case 'F':
-				currTile = new Flame(column * 100, i * 100);
+				currTile = new Flame(column * Tile.WIDTH, i * Tile.HEIGHT);
 				break;
 			case 'W':
-				currTile = new Water(column * 100, i * 100);
+				currTile = new Water(column * Tile.WIDTH, i * Tile.HEIGHT);
 				break;
 			case 'X':
-				currTile = new Cactus(column * 100, i * 100);
+				currTile = new Cactus(column * Tile.WIDTH, i * Tile.HEIGHT);
 				break;
 			case 'G':
-				currTile = new Ground(column * 100, i * 100);
+				currTile = new Ground(column * Tile.WIDTH, i * Tile.HEIGHT);
 				break;
 			case 'C':
-				currTile = new Coin(column * 100, i * 100);
+				currTile = new Coin(column * Tile.WIDTH, i * Tile.HEIGHT);
 				break;
 			case ' ':
 			default:
-				currTile = new Air(column * 100, i * 100);
+				currTile = new Air(column * Tile.WIDTH, i * Tile.HEIGHT);
 				break;
 			}
 			levelColumn[i] = currTile;
@@ -186,15 +200,18 @@ public class Model implements Runnable {
 
 	public void drawCanvas(GraphicsContext gc)
 	{
-		System.out.println("drawing on canvas");
+		//gc.fillRect(100, 100, 100, 100);
+		gc.clearRect(0, 0, 500, 500);
+		gc.translate(1, 0);
 		Tile[] temp = null;
 		for(int x = 0; x < currentLevel.size();x++)
 		{
 			temp = this.currentLevel.get(x);
-			for(int y = 0; y < 25; y++)
+			for(int y = 0; y < temp.length; y++)
 			{
-				gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(), temp[y].getPosition().getY());
-				//gc.fillRect(arg0, arg1, arg2, arg3);
+				//System.out.println("drawing on canvas at " + temp[y].getPosition().getX() + ", " + temp[y].getPosition().getY());
+				//gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(), temp[y].getPosition().getY());
+				gc.fillRect(temp[y].getPosition().getX(), temp[y].getPosition().getY(), 100, 100); // run this if you want severe lag
 			}
 		}
 		//gc.drawImage(this.player.getImg(), this.player.getPosition().getX(), this.player.getPosition().getY());
