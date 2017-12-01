@@ -20,6 +20,7 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 
 import tiles.*;
+import game.Main;
 import game.controller.GameController;
 import items.Coin;
 
@@ -166,31 +167,32 @@ public class Model implements Runnable {
 		// TODO add tile objects as you create them
 		System.out.println("generating air in column " + column);
 		Tile[] levelColumn = new Tile[tileList.length];// Once air tile is created will just be initialized as twenty-five of those
-		for (int i = 0; i < tileList.length; i++)
-			levelColumn[i] = new Air(column * Tile.WIDTH, i * Tile.HEIGHT);
+		/**for (int i = 0; i < tileList.length; i++)
+			levelColumn[i] = new Air(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);**/
 		
 		System.out.println("generating level from tileList[" + column + "]");
 		for (int i = 0; i < tileList.length; i++) {
 			Tile currTile = null;
 			switch (tileList[i]) {
 			case 'F':
-				currTile = new Flame(column * Tile.WIDTH, i * Tile.HEIGHT);
+				currTile = new Flame(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
 				break;
 			case 'W':
-				currTile = new Water(column * Tile.WIDTH, i * Tile.HEIGHT);
+				currTile = new Water(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
 				break;
 			case 'X':
-				currTile = new Cactus(column * Tile.WIDTH, i * Tile.HEIGHT);
+				currTile = new Cactus(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
 				break;
 			case 'G':
-				currTile = new Ground(column * Tile.WIDTH, i * Tile.HEIGHT);
+				currTile = new Ground(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
 				break;
 			case 'C':
-				currTile = new Coin(column * Tile.WIDTH, i * Tile.HEIGHT);
+				currTile = new Coin(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
 				break;
 			case ' ':
+				currTile = new Air(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
+				break;
 			default:
-				currTile = new Air(column * Tile.WIDTH, i * Tile.HEIGHT);
 				break;
 			}
 			levelColumn[i] = currTile;
@@ -202,7 +204,7 @@ public class Model implements Runnable {
 	{
 		//gc.fillRect(100, 100, 100, 100);
 		gc.clearRect(0, 0, 500, 500);
-		gc.translate(1, 0);
+		//gc.translate(1, 0);
 		Tile[] temp = null;
 		for(int x = 0; x < currentLevel.size();x++)
 		{
@@ -211,7 +213,8 @@ public class Model implements Runnable {
 			{
 				//System.out.println("drawing on canvas at " + temp[y].getPosition().getX() + ", " + temp[y].getPosition().getY());
 				//gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(), temp[y].getPosition().getY());
-				gc.fillRect(temp[y].getPosition().getX(), temp[y].getPosition().getY(), 100, 100); // run this if you want severe lag
+				if (temp[y].getTileType() == 'G')
+					gc.fillRect(temp[y].getPosition().getX(), temp[y].getPosition().getY(), 10, 10); // run this if you want severe lag
 			}
 		}
 		//gc.drawImage(this.player.getImg(), this.player.getPosition().getX(), this.player.getPosition().getY());

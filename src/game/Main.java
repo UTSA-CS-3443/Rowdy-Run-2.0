@@ -21,7 +21,7 @@ public class Main extends Application {
 	private static Scene levelSelection = null;
 	private static Scene game = null;
 	private static ExecutorService application = null;
-	private static final int x = 500, y = 500;
+	public static final int WIDTH = 500, HEIGHT = 500;
 	//private MainMenuController mc = null;
 	private static Model model = null;
 	
@@ -31,15 +31,15 @@ public class Main extends Application {
 			
 			model = new Model();
 			Parent root = FXMLLoader.load(getClass().getResource("view/MainMenuView.fxml"));
-			mainMenu = new Scene(root,x,y);
+			mainMenu = new Scene(root,WIDTH,HEIGHT);
 			mainMenu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			root = FXMLLoader.load(getClass().getResource("view/LevelSelectionView.fxml"));
-			levelSelection = new Scene(root,x,y);
+			levelSelection = new Scene(root,WIDTH,HEIGHT);
 			levelSelection.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
-			game = new Scene(root,x,y);
+			game = new Scene(root,WIDTH,HEIGHT);
 			
 			primaryStage.setScene(mainMenu);
 			primaryStage.setTitle("RowdyRun-2.0");
