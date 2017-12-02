@@ -35,7 +35,7 @@ import items.Coin;
 public class Model implements Runnable {
 
 	protected ArrayList<Tile[]> currentLevel;
-	protected Rowdy player;
+	protected Rowdy player = new Rowdy();
 	// private Timer timer;
 	// private TimerListener timerListener;
 
@@ -76,8 +76,8 @@ public class Model implements Runnable {
 
 	public void gameTick() {
 		//TODO Fix this stuff, it ai'nt workin'
-		//int playerState = 1;
-		/**player.moveRowdy();
+		int playerState = 1;
+		player.moveRowdy();
 		//playerState = player.hitBoxChecker(currentLevel);
 		if (playerState == 1) {
 			// TODO handle rowdy dying
@@ -87,7 +87,7 @@ public class Model implements Runnable {
 		} else if (playerState == 2) {
 			// TODO handle rowdy winning
 		}
-		player.fall();**/
+		player.fall();
 		try {
 			drawCanvas(gc);
 		} catch (NullPointerException e) {
