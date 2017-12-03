@@ -61,7 +61,7 @@ public class Model implements Runnable {
 		};
 
 		// kf = new KeyFrame(Duration.seconds(.0017), timelineHandler); //60 fps
-		kf = new KeyFrame(Duration.seconds(.0066), timelineHandler); // 15 fps
+		kf = new KeyFrame(Duration.seconds(/*.0066*/.3), timelineHandler); // 15 fps
 		indefiniteTimeline.getKeyFrames().add(kf);
 
 	}
@@ -213,7 +213,7 @@ public class Model implements Runnable {
 				// temp[y].getPosition().getY());
 				if (temp[y].getTileType() == 'G') {
 					gc.setFill(Color.BLACK);
-					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), 10, 10);
+					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 					// run this if you want severe lag
 				}
 				if (temp[y].getTileType() == 'A') {
@@ -225,7 +225,9 @@ public class Model implements Runnable {
 			}
 		}
 		gc.setFill(Color.BLUE);
-		gc.fillRect(this.player.getPosition().getX(), Main.HEIGHT - this.player.getPosition().getY(), 7, 15);
+		gc.fillRect(this.player.getPosition().getX(), Main.HEIGHT - this.player.getPosition().getY(), Rowdy.WIDTH, Rowdy.HEIGHT);
+		gc.setFill(Color.RED);
+		gc.fillRect(this.player.getPosition().getX()+2, Main.HEIGHT - (this.player.getPosition().getY() - Rowdy.HEIGHT), 3, 1);
 		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
 		// this.player.getPosition().getY());
 	}
