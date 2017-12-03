@@ -61,7 +61,7 @@ public class Model implements Runnable {
 		};
 
 		// kf = new KeyFrame(Duration.seconds(.0017), timelineHandler); //60 fps
-		kf = new KeyFrame(Duration.seconds(/*.0066*/.3), timelineHandler); // 15 fps
+		kf = new KeyFrame(Duration.seconds(.0066), timelineHandler); // 15 fps
 		indefiniteTimeline.getKeyFrames().add(kf);
 
 	}
