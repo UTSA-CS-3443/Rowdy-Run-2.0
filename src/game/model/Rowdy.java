@@ -221,7 +221,7 @@ public class Rowdy {
 				case 'G':
 					if (this.hitBox.intersects(curr.getHitBox())) {
 						canMoveRight = false;
-						this.adjustRowdy((int) curr.getPosition().getX() + 10, this.position.y);
+						this.adjustRowdy((int) curr.getPosition().getX() - this.WIDTH, this.position.y);
 					}
 					break;
 				case 'X':
