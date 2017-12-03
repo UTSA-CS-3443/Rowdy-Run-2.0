@@ -35,7 +35,7 @@ public class Rowdy {
 		this.onGround = false;
 		this.canMoveLeft = true;
 		this.canMoveRight = true;
-		this.hitBox = new Rectangle(position.x, position.y, 7, 15);
+		this.hitBox = new Rectangle(position.x, position.y, 7, 17);
 		this.coinCount = 0;
 	}
 
@@ -61,7 +61,7 @@ public class Rowdy {
 
 	public void jump() {
 		if (this.onGround)
-			this.yVelocity = 3;
+			this.yVelocity = 30;
 	}
 
 	protected void land() {
@@ -70,12 +70,12 @@ public class Rowdy {
 
 	public void fall() {
 		if (!this.onGround)
-			this.yVelocity -= 5;
+			this.yVelocity -= 2;
 		else
 			this.yVelocity = 0;
-		if(this.yVelocity < -15)
-			this.yVelocity = -15;
-			
+		if (this.yVelocity < -10)
+			this.yVelocity = -10;
+
 	}
 
 	public int getCoinCount() {
@@ -104,13 +104,14 @@ public class Rowdy {
 		int rowdyX = (int) Math.floor((double) this.position.x / 10.0);
 		int rowdyY = (int) Math.floor((double) this.position.y / 10.0);
 		Point[] list = { new Point(rowdyX - 1, rowdyY), new Point(rowdyX - 1, rowdyY - 1),
-				new Point(rowdyX, rowdyY - 2), new Point(rowdyX, rowdyY - 1), new Point(rowdyX, rowdyY),
+				new Point(rowdyX, rowdyY - 3), new Point(rowdyX, rowdyY - 1), new Point(rowdyX, rowdyY),
 				new Point(rowdyX, rowdyY + 1), new Point(rowdyX + 1, rowdyY), new Point(rowdyX + 1, rowdyY - 1) };
 		this.onGround = false;
 		this.canMoveLeft = true;
 		this.canMoveRight = true;
+		System.out.println("Rowdy C "+ rowdyX +" "+ rowdyY);
 		for (int a = 0; a < 2; a++) {
-			System.err.printf("%d %d\n",list[a].x,list[a].y);
+			
 			curr = Level.get(list[a].x)[list[a].y];
 			switch (curr.getTileType()) {
 			case 'C':
@@ -122,8 +123,8 @@ public class Rowdy {
 			case 'G':
 				if (this.hitBox.intersects(curr.getHitBox())) {
 					canMoveLeft = false;
-					this.adjustRowdy((int)curr.getPosition().getX() + 10, this.position.y);
-				} 
+					this.adjustRowdy((int) curr.getPosition().getX() + 10, this.position.y);
+				}
 				break;
 			case 'X':
 			case '?':
@@ -144,8 +145,8 @@ public class Rowdy {
 			case 'G':
 				if (this.hitBox.intersects(curr.getHitBox())) {
 					this.canMoveRight = false;
-					this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
-				} 
+					this.adjustRowdy((int) curr.getPosition().getX()-7, this.position.y);
+				}
 				break;
 			case 'X':
 			case '?':
@@ -154,49 +155,6 @@ public class Rowdy {
 			}
 		}
 
-		curr = Level.get(list[2].x)[list[2].y];
-		switch (curr.getTileType()) {
-		case 'C':
-			Level.get(list[2].x)[list[2].y] = new Air(list[2].x * 10, list[2].y * 10);
-			this.coinCount++;
-			break;
-		case 'A':
-			break;
-		case 'G':
-			if (this.hitBox.intersects(curr.getHitBox())) {
-				System.err.println("UHHH LIKE STOP DUDE");
-				onGround = true;
-				this.land();
-				this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
-			}
-			break;
-		case 'X':
-		case '?':
-		default:
-			return 1;
-		}
-
-		curr = Level.get(list[3].x)[list[3].y];
-		switch (curr.getTileType()) {
-		case 'C':
-			Level.get(list[3].x)[list[3].y] = new Air(list[3].x * 10, list[3].y * 10);
-			this.coinCount++;
-			break;
-		case 'A':
-			break;
-		case 'G':
-			if (this.hitBox.intersects(curr.getHitBox())) {
-				System.err.println("UHHH LIKE STOP DUDE");
-				onGround = true;
-				this.land();
-				this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
-			}
-			break;
-		case 'X':
-		case '?':
-		default:
-			return 1;
-		}
 
 		curr = Level.get(list[5].x)[list[5].y];
 		switch (curr.getTileType()) {
@@ -209,8 +167,7 @@ public class Rowdy {
 		case 'G':
 			if (this.hitBox.intersects(curr.getHitBox())) {
 				this.land();
-				this.fall();
-				this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
+				this.adjustRowdy(this.position.x, (int) curr.getPosition().getY()-15);
 			}
 			break;
 		case 'X':
@@ -219,8 +176,6 @@ public class Rowdy {
 			return 1;
 		}
 
-		
-		
 		curr = Level.get(list[4].x)[list[4].y];
 		switch (curr.getTileType()) {
 		case 'C':
@@ -232,8 +187,7 @@ public class Rowdy {
 		case 'G':
 			if (this.hitBox.intersects(curr.getHitBox())) {
 				this.land();
-				this.fall();
-				this.adjustRowdy((int)curr.getPosition().getX(), this.position.y);
+				this.adjustRowdy(this.position.x, (int) curr.getPosition().getY()-15);
 			}
 			break;
 		case 'X':
@@ -241,8 +195,53 @@ public class Rowdy {
 		default:
 			return 1;
 		}
-
+		
+		curr = Level.get(list[2].x)[list[2].y];
+		switch (curr.getTileType()) {
+		case 'C':
+			Level.get(list[2].x)[list[2].y] = new Air(list[2].x * 10, list[2].y * 10);
+			this.coinCount++;
+			break;
+		case 'A':
+			break;
+		case 'G':
+			if (this.hitBox.intersects(curr.getHitBox())) {
+				System.out.println(2);
+				this.onGround = true;
+				this.land();
+				this.adjustRowdy(this.position.x, (int) curr.getPosition().getY()+15);
+			}
+			break;
+		case 'X':
+		case '?':
+		default:
+			return 1;
+		}
+		
+		curr = Level.get(list[3].x)[list[3].y];
+		switch (curr.getTileType()) {
+		case 'C':
+			Level.get(list[3].x)[list[3].y] = new Air(list[3].x * 10, list[3].y * 10);
+			this.coinCount++;
+			break;
+		case 'A':
+			break;
+		case 'G':
+			if (this.hitBox.intersects(curr.getHitBox())) {
+				System.out.println(3);
+				this.onGround = true;
+				this.land();
+				//this.adjustRowdy(this.position.x, (int) curr.getPosition().getY()+15);
+			}
+			break;
+		case 'X':
+		case '?':
+		default:
+			return 1;
+		}
+		System.out.println(this.onGround);
 		return 0;
 	}
+	
 
 }
