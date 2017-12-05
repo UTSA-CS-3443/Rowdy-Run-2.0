@@ -19,9 +19,9 @@ public class Rowdy {
 
 	protected Point position;
 	private int xVelocity, yVelocity;
-	protected Rectangle hitBox, footBox, headBox,rightBox,leftBox;
+	private Rectangle hitBox, footBox, headBox,rightBox,leftBox;
 	protected Image rowdySprite;
-	protected int jumpTime;
+	protected int jumpTime,fallTime;
 	protected boolean onGround, canMoveLeft, canMoveRight;
 	private int coinCount;
 	public static final int HEIGHT = 15;
@@ -39,7 +39,7 @@ public class Rowdy {
 		this.canMoveRight = true;
 		this.hitBox = new Rectangle(this.position.x, this.position.y, this.WIDTH, this.HEIGHT);
 		this.headBox = new Rectangle(this.position.x, this.position.y + 2, this.WIDTH, 2);
-		this.footBox = new Rectangle(this.position.x, this.position.y - (this.HEIGHT - 1), this.WIDTH, 1);
+		this.footBox = new Rectangle(this.position.x, this.position.y - (this.HEIGHT - 3), this.WIDTH, 1);
 		this.rightBox = new Rectangle(this.position.x+(this.WIDTH-2), this.position.y, 2, this.HEIGHT);
 		this.leftBox = new Rectangle(this.position.x, this.position.y, 2, this.HEIGHT);
 		this.coinCount = 0;
@@ -63,20 +63,13 @@ public class Rowdy {
 
 	public void moveRowdy() {
 		
-		
-		this.position.translate(this.xVelocity, 0);
-		this.hitBox.translate(this.xVelocity, 0);
-		this.headBox.translate(this.xVelocity, 0);
-		this.footBox.translate(this.xVelocity, 0);
-		this.leftBox.translate(this.xVelocity, 0);
-		this.rightBox.translate(this.xVelocity, 0);
-		
-		this.position.translate(0, this.yVelocity);
-		this.hitBox.translate(0, this.yVelocity);
-		this.headBox.translate(0, this.yVelocity);
-		this.footBox.translate(0, this.yVelocity);
-		this.rightBox.translate(0, this.yVelocity);
-		this.leftBox.translate(0, this.yVelocity);
+		System.out.println(this.yVelocity);
+		this.position.translate(this.xVelocity, yVelocity);
+		this.hitBox.translate(this.xVelocity, yVelocity);
+		this.headBox.translate(this.xVelocity, yVelocity);
+		this.footBox.translate(this.xVelocity, yVelocity);
+		this.leftBox.translate(this.xVelocity, yVelocity);
+		this.rightBox.translate(this.xVelocity, yVelocity);
 	}
 
 	public void moveLeft() {
@@ -94,8 +87,11 @@ public class Rowdy {
 	}
 
 	public void jump() {
-		if (this.onGround)
-			this.yVelocity = 7;
+		if (this.onGround) {
+			this.jumpTime = 20;
+			this.yVelocity = 3;
+			this.onGround = false; 
+		}
 	}
 	public void stop() {
 
@@ -107,16 +103,17 @@ public class Rowdy {
 	}
 
 	public void fall() {
-		if (this.onGround) {
+		if (this.onGround && this.jumpTime == 0) {
 			this.yVelocity = 0;
 			return;
 		}
-
-		//this.yVelocity = 0;
-		this.yVelocity -= 1;
-		if (this.yVelocity < -10)
-			this.yVelocity = -10;
-
+		if(this.jumpTime == 0) {
+			this.yVelocity -= 1;
+			if (this.yVelocity < -5)
+				this.yVelocity = -5;
+		}
+		else 
+			this.jumpTime -= 1;
 	}
 
 	public int getCoinCount() {
@@ -158,16 +155,18 @@ public class Rowdy {
 				curr = Level.get(list[i].x)[list[i].y];
 				switch (curr.getTileType()) {
 				case 'C':
-					// Level.get(list[a].x)[list[a].y] = new Air(list[a].x * 10, list[a].y * 10);
-					// this.coinCount++;
+					if (this.hitBox.intersects(curr.getHitBox())) {
+						Level.get(list[i].x)[list[i].y] = new Air(list[i].x * 10, list[i].y * 10);
+						this.coinCount++;
+					}
 					break;
 				case 'A':
 					break;
 				case 'G':
 					if (this.footBox.intersects(curr.getHitBox())) {
 						this.onGround = true;
-						this.land();
-						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT + 1);
+						if(this.jumpTime == 0)
+							this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT + 1);
 					}
 					break;
 				case 'X':
@@ -181,16 +180,18 @@ public class Rowdy {
 				curr = Level.get(list[i].x)[list[i].y];
 				switch (curr.getTileType()) {
 				case 'C':
-					Level.get(list[i].x)[list[i].y] = new Air(list[i].x * 10, list[i].y * 10);
-					this.coinCount++;
+					if (this.hitBox.intersects(curr.getHitBox())) {
+						Level.get(list[i].x)[list[i].y] = new Air(list[i].x * 10, list[i].y * 10);
+						this.coinCount++;
+					}
 					break;
 				case 'A':
 					break;
 				case 'G':
 					if (this.footBox.intersects(curr.getHitBox())) {
 						this.onGround = true;
-						this.land();
-						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT);
+						if(this.jumpTime == 0)
+							this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT);
 					}
 					break;
 				case 'X':

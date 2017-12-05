@@ -80,6 +80,7 @@ public class Model implements Runnable {
 		int playerState = 1;
 		//player.moveRowdy();
 		playerState = player.hitBoxChecker(currentLevel);
+		player.fall();
 		player.moveRowdy();
 		//player.stop();
 		if (playerState == 1) {
@@ -89,7 +90,7 @@ public class Model implements Runnable {
 		} else if (playerState == 2) {
 			// TODO handle rowdy winning
 		}
-		player.fall();
+		//player.fall();
 		try {
 			drawCanvas(gc);
 		} catch (NullPointerException e) {
@@ -168,8 +169,8 @@ public class Model implements Runnable {
 	private Tile[] processLevelColumn(char[] tileList, int column) {
 		// TODO add tile objects as you create them
 		// System.out.println("generating air in column " + column);
-		Tile[] levelColumn = new Tile[25];// Once air tile is created will just be initialized as twenty-five of those
-		for (int i = 0; i < 25; i++)
+		Tile[] levelColumn = new Tile[100];// Once air tile is created will just be initialized as twenty-five of those
+		for (int i = 0; i < levelColumn.length; i++)
 			levelColumn[i] = new Air(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
 
 		// System.out.println("generating level from tileList[" + column + "]");
@@ -228,9 +229,10 @@ public class Model implements Runnable {
 			}
 		}
 		gc.setFill(Color.BLUE);
+		if(player.onGround)
+			gc.setFill(Color.RED);
 		gc.fillRect(this.player.getPosition().getX(), Main.HEIGHT - this.player.getPosition().getY(), Rowdy.WIDTH, Rowdy.HEIGHT);
-		gc.setFill(Color.RED);
-		gc.fillRect(this.player.getPosition().getX()+2, Main.HEIGHT - (this.player.getPosition().getY() - Rowdy.HEIGHT), 3, 1);
+		//gc.fillRect(this.player.getPosition().getX()+2, Main.HEIGHT - (this.player.getPosition().getY() - Rowdy.HEIGHT), 3, 1);
 		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
 		// this.player.getPosition().getY());
 	}
