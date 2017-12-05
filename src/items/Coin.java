@@ -6,12 +6,14 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import tiles.Tile;
+
 /**
  * 
  * @author Lynn Miguel
  *
  */
-public class Coin extends Item {
+public class Coin extends Tile {
 	
 	/**
 	 * Hold Image Files
@@ -21,13 +23,14 @@ public class Coin extends Item {
 	
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
-	
+	protected char tileType = 'C';
 	private BufferedImage[] image;
 	
     public Coin(int x,int y) {
         super(x,y);
         hitBox = new Rectangle(x + 30, y + 30, WIDTH, HEIGHT);
-		try {
+        this.tileType = 'C';
+		/*try {
 			image = new BufferedImage[imgFile.length];
 			for (int i = 0; i < imgFile.length; i++) {
 				image[i] = ImageIO.read(new File(imgFile[i]));
@@ -35,7 +38,7 @@ public class Coin extends Item {
 			if (img == null) img = image[0];
 		}	catch(IOException e) {
 			System.out.println("Error");
-		}
+		}*/
 	}
     
     public Rectangle getHitBox() {
@@ -45,6 +48,7 @@ public class Coin extends Item {
 	/**
 	 * Loops Images Files and will Spin Coin
 	 */
+    /*
 	public void spinCoin() {
 		for (int i = 0; i < image.length; i++) {
 			if (i == image.length - 1 && img.equals(image[i])) {
@@ -56,4 +60,5 @@ public class Coin extends Item {
 		}
 		
 	}
+*/
 }

@@ -44,7 +44,6 @@ public class GameController implements EventHandler<KeyEvent>, Initializable{
 			
 			switch (event.getCode()) {
 				case UP: // KeyCode.UP
-					System.out.println("JUMP");
 					player.jump();
 					break;
 					

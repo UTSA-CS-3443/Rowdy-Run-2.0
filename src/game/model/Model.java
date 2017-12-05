@@ -143,7 +143,7 @@ public class Model implements Runnable {
 		ArrayList<Tile[]> Level = new ArrayList<Tile[]>();
 		int x = 0;
 		Scanner in = null;
-
+		char[] empty = new char[0];
 		try {
 			in = new Scanner(lvlFile);
 		} catch (FileNotFoundException exception) {
@@ -220,17 +220,21 @@ public class Model implements Runnable {
 					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 					// run this if you want severe lag
 				}
-				if (temp[y].getTileType() == 'A') {
+				else if (temp[y].getTileType() == 'A') {
 					gc.setFill(Color.AQUAMARINE);
 					// gc.fillRect(temp[y].getPosition().getX(), temp[y].getPosition().getY(), 10,
 					// 10);
 
 				}
+				else if (temp[y].getTileType() == 'X') {
+					gc.setFill(Color.AQUAMARINE);
+					System.out.println("WHY THO?");
+					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+					// run this if you want severe lag
+				}
 			}
 		}
 		gc.setFill(Color.BLUE);
-		if(player.onGround)
-			gc.setFill(Color.RED);
 		gc.fillRect(this.player.getPosition().getX(), Main.HEIGHT - this.player.getPosition().getY(), Rowdy.WIDTH, Rowdy.HEIGHT);
 		//gc.fillRect(this.player.getPosition().getX()+2, Main.HEIGHT - (this.player.getPosition().getY() - Rowdy.HEIGHT), 3, 1);
 		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
