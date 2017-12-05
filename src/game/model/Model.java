@@ -226,9 +226,8 @@ public class Model implements Runnable {
 					// 10);
 
 				}
-				else if (temp[y].getTileType() == 'X') {
+				else if (temp[y].getTileType() == 'C') {
 					gc.setFill(Color.AQUAMARINE);
-					System.out.println("WHY THO?");
 					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 					// run this if you want severe lag
 				}

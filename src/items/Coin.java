@@ -23,12 +23,11 @@ public class Coin extends Tile {
 	
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
-	protected char tileType = 'C';
 	private BufferedImage[] image;
 	
     public Coin(int x,int y) {
         super(x,y);
-        hitBox = new Rectangle(x + 30, y + 30, WIDTH, HEIGHT);
+        //hitBox = new Rectangle(x + 30, y + 30, WIDTH, HEIGHT);
         this.tileType = 'C';
 		/*try {
 			image = new BufferedImage[imgFile.length];
