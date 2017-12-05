@@ -77,7 +77,7 @@ public class Rowdy {
 
 	public void jump() {
 		if (this.onGround)
-			this.yVelocity = 20;
+			this.yVelocity = 7;
 	}
 
 	protected void land() {
@@ -143,7 +143,7 @@ public class Rowdy {
 					if (this.footBox.intersects(curr.getHitBox())) {
 						this.onGround = true;
 						this.land();
-						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + this.HEIGHT);
+						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT + 1);
 					}
 					break;
 				case 'X':
@@ -166,7 +166,7 @@ public class Rowdy {
 					if (this.footBox.intersects(curr.getHitBox())) {
 						this.onGround = true;
 						this.land();
-						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + this.HEIGHT);
+						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT);
 					}
 					break;
 				case 'X':
@@ -195,8 +195,9 @@ public class Rowdy {
 					break;
 				case 'G':
 					if (this.hitBox.intersects(curr.getHitBox())) {
+						System.out.println("TouchingRightSide");
 						canMoveLeft = false;
-						this.adjustRowdy((int) curr.getPosition().getX() + 10, this.position.y);
+						this.adjustRowdy((int) curr.getPosition().getX() + Tile.WIDTH, this.position.y);
 					}
 					break;
 				case 'X':
@@ -224,8 +225,9 @@ public class Rowdy {
 					break;
 				case 'G':
 					if (this.hitBox.intersects(curr.getHitBox())) {
+						System.out.println("TouchingLeftSide");
 						canMoveRight = false;
-						this.adjustRowdy((int) curr.getPosition().getX() - this.WIDTH, this.position.y);
+						//this.adjustRowdy((int) curr.getPosition().getX() - Rowdy.WIDTH, this.position.y);
 					}
 					break;
 				case 'X':
