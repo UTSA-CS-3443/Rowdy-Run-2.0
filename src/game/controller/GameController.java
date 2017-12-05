@@ -22,6 +22,9 @@ import game.model.Model;
 import game.model.Rowdy;
 
 /**
+ * The controller for the GameView.fxml
+ * <p>
+ * Handles player movement and actions taken in the pause menu.
  * 
  * @author Michael Diep
  *
@@ -145,8 +148,6 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		System.out.println("Quitting Game");
 		Main.setModel(new Model());
 		Main.changeScene(Main.getMainMenu());
-		//isPaused = false;
-		//pauseMenu.setVisible(false);
 	}
 
 	public void setControllable(Rowdy player) {

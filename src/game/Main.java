@@ -40,6 +40,7 @@ public class Main extends Application {
 			
 			root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
 			game = new Scene(root,WIDTH,HEIGHT);
+			game.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setScene(mainMenu);
 			primaryStage.setTitle("RowdyRun-2.0");
