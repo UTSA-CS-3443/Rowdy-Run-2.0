@@ -17,13 +17,13 @@ GGG
 GGGG
 GGG
 GGG
+GG       GG 
+GG       GG
+GG       GG          C
 GG
 GG
-GG                 C
-GG
-GG
-GG
-GG                     C
+GG              GG
+GG              GG       C
 GG
 GG
 GGG
@@ -32,3 +32,29 @@ GG
 GG
 GG
 GG
+GG
+GG
+G
+G
+GG
+G
+G
+G
+G
+G
+GG
+G
+G
+G
+G
+GG
+G
+G
+G
+G
+G
+G
+G
+G
+G
+G

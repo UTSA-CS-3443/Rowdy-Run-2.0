@@ -9,7 +9,7 @@ public class Cactus extends Obstacle{
 	/**
 	 * Set Cactus Image
 	 */
-	Image cactus = new Image("/src/images/cactus.png");
+	//Image cactus = new Image("/src/images/cactus.png");
 	
 	// Constructor
 	public Cactus(int x, int y) {

@@ -174,6 +174,9 @@ public class Rowdy {
 					}
 					break;
 				case 'X':
+					if (this.hitBox.intersects(curr.getHitBox())) 
+						return 1;
+					break;
 				case '?':
 				default:
 					return 1;
@@ -202,6 +205,9 @@ public class Rowdy {
 					}
 					break;
 				case 'X':
+					if (this.hitBox.intersects(curr.getHitBox())) 
+						return 1;
+					break;
 				case '?':
 				default:
 					return 1;
@@ -233,6 +239,9 @@ public class Rowdy {
 					}
 					break;
 				case 'X':
+					if (this.hitBox.intersects(curr.getHitBox())) 
+						return 1;
+					break;
 				case '?':
 				default:
 					return 1;
@@ -264,7 +273,7 @@ public class Rowdy {
 					}
 					break;
 				case 'X':
-					if (!this.hitBox.intersects(curr.getHitBox()))
+					if (this.hitBox.intersects(curr.getHitBox()))
 						return 1;
 					break;
 				case '?':
