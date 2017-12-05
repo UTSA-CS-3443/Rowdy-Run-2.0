@@ -70,10 +70,14 @@ public class Rowdy {
 		if (this.canMoveRight)
 			this.xVelocity = 2;
 	}
+	
+	public void stopHorizontalMotion() {
+		this.xVelocity = 0;
+	}
 
 	public void jump() {
 		if (this.onGround)
-			this.yVelocity = 30;
+			this.yVelocity = 20;
 	}
 
 	protected void land() {
@@ -86,8 +90,8 @@ public class Rowdy {
 			return;
 		}
 
-		this.yVelocity = 0;
-		this.yVelocity -= 2;
+		//this.yVelocity = 0;
+		this.yVelocity -= 1;
 		if (this.yVelocity < -10)
 			this.yVelocity = -10;
 

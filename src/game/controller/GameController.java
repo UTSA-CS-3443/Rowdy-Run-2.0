@@ -39,8 +39,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable{
 	
 	@Override
 	public void handle(KeyEvent event) {
-		System.out.println("KeyEvent!");
-		this.timeline.pause();
+		
 		if (isPaused == false) {
 			
 			switch (event.getCode()) {
@@ -83,6 +82,15 @@ public class GameController implements EventHandler<KeyEvent>, Initializable{
 		}		
 	}
 	
+	public void handleKeyReleased(KeyEvent event) {
+		switch (event.getCode()) {
+			case LEFT:
+			case RIGHT:
+				player.stopHorizontalMotion();
+				break;
+		}
+	}
+	
 	public void setControllable(Rowdy player) {
 		this.player = player;
 	}
@@ -99,7 +107,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.model.setCanvas(canvas);
 		this.model.setGraphicsContext(this.canvas.getGraphicsContext2D());
-		
+		//this.pauseMenu.setVisible(true);
 	}
 	
 }
