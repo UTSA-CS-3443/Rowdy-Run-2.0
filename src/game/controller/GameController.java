@@ -4,10 +4,14 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -118,6 +122,26 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 			break;
 		}
 	}
+	
+	public void handleMouseClicked(ActionEvent event) {
+		System.out.println("mouse clicked");
+		Button b = (Button) event.getSource();
+		switch (b.getText()) {
+		case "Continue":
+			System.out.println("Resumed Game");
+			this.timeline.play();
+			isPaused = false;
+			pauseMenu.setVisible(false);
+			break;
+		case "Quit":
+			System.out.println("Quitting Game");
+			Main.setModel(new Model());
+			Main.changeScene(Main.getMainMenu());
+			break;
+		default:
+			break;
+		}
+	}
 
 	public void setControllable(Rowdy player) {
 		this.player = player;
@@ -135,7 +159,6 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.model.setCanvas(canvas);
 		this.model.setGraphicsContext(this.canvas.getGraphicsContext2D());
-		// this.pauseMenu.setVisible(true);
 	}
 
 }
