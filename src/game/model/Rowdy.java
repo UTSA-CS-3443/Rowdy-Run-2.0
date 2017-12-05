@@ -150,7 +150,7 @@ public class Rowdy {
 		Point[] list = { new Point(rowdyX - 1, rowdyY - 1), new Point(rowdyX, rowdyY - 1),
 				new Point(rowdyX - 1, rowdyY - 2), new Point(rowdyX, rowdyY - 2) };
 
-		if (rowdyX == 0) {
+		if (rowdyX <= 0) {
 			canMoveLeft = false;
 			for (int i = 1; i < list.length; i += 2) {
 				if(list[i].y < 0 ||list[i].y>25)
@@ -208,11 +208,11 @@ public class Rowdy {
 				}
 			}
 		}
-		Point[] leftlist = { new Point(rowdyX - 1, rowdyY), new Point(rowdyX - 1, rowdyY - 1),
-				new Point(rowdyX - 1, rowdyY - 2), new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
+		Point[] leftlist = {new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
 
-		if (rowdyX == 0) {
+		if (rowdyX <= 0) {
 			canMoveLeft = false;
+			this.adjustRowdy(10,this.position.y);
 		} else {
 			for (int i = 0; i < leftlist.length; i++) {
 				curr = Level.get(leftlist[i].x)[leftlist[i].y];
@@ -241,8 +241,9 @@ public class Rowdy {
 		}
 		Point[] rightlist = { new Point(rowdyX + 1, rowdyY), new Point(rowdyX + 1, rowdyY - 1),
 				new Point(rowdyX + 1, rowdyY - 2), new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
-		if (rowdyX == Level.size() - 2) {
+		if (rowdyX >= Level.size() - 1) {
 			canMoveRight = false;
+			this.adjustRowdy(((Level.size()-2)*Tile.WIDTH)+9,this.position.y);
 		} else {
 			for (int i = 0; i < rightlist.length; i++) {
 				curr = Level.get(rightlist[i].x)[rightlist[i].y];
