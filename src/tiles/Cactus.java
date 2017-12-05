@@ -14,7 +14,7 @@ public class Cactus extends Obstacle {
 	// Constructor
 	public Cactus(int x, int y) {
 		super(x, y);
-		this.tileType = 'T';
+		this.tileType = 'X';
 	}
 
 	public Rectangle getHitBox() {
