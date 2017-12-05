@@ -78,11 +78,14 @@ public class Model implements Runnable {
 	public void gameTick() {
 		// TODO Fix this stuff, it ai'nt workin'
 		int playerState = 1;
-		player.moveRowdy();
+		//player.moveRowdy();
 		playerState = player.hitBoxChecker(currentLevel);
+		player.moveRowdy();
+		//player.stop();
 		if (playerState == 1) {
 			// TODO handle rowdy dying
 			System.err.println("You died");
+			player.adjustRowdy(20, 200);
 		} else if (playerState == 2) {
 			// TODO handle rowdy winning
 		}

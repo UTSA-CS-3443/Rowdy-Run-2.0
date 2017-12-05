@@ -19,7 +19,7 @@ public class Rowdy {
 
 	protected Point position;
 	private int xVelocity, yVelocity;
-	protected Rectangle hitBox, footBox, headBox;
+	protected Rectangle hitBox, footBox, headBox,rightBox,leftBox;
 	protected Image rowdySprite;
 	protected int jumpTime;
 	protected boolean onGround, canMoveLeft, canMoveRight;
@@ -38,8 +38,10 @@ public class Rowdy {
 		this.canMoveLeft = true;
 		this.canMoveRight = true;
 		this.hitBox = new Rectangle(this.position.x, this.position.y, this.WIDTH, this.HEIGHT);
-		this.headBox = new Rectangle(this.position.x + 2, this.position.y + 2, 5, 2);
-		this.footBox = new Rectangle(this.position.x + 2, this.position.y - (this.HEIGHT - 1), 3, 1);
+		this.headBox = new Rectangle(this.position.x, this.position.y + 2, this.WIDTH, 2);
+		this.footBox = new Rectangle(this.position.x, this.position.y - (this.HEIGHT - 1), this.WIDTH, 1);
+		this.rightBox = new Rectangle(this.position.x+(this.WIDTH-2), this.position.y, 2, this.HEIGHT);
+		this.leftBox = new Rectangle(this.position.x, this.position.y, 2, this.HEIGHT);
 		this.coinCount = 0;
 	}
 
@@ -47,28 +49,44 @@ public class Rowdy {
 		this.position.setLocation(x, y);
 		Point foot = new Point(this.position);
 		Point head = new Point(this.position);
-		foot.translate(2, -(this.HEIGHT - 1));
-		head.translate(2, 2);
+		Point right = new Point(this.position);
+		foot.translate(0, -(this.HEIGHT - 1));
+		head.translate(0, -2);
+		right.translate((this.WIDTH-2), 0);
+		
 		this.hitBox.setLocation(this.position);
+		this.leftBox.setLocation(this.position);
 		this.headBox.setLocation(head);
 		this.footBox.setLocation(foot);
+		this.rightBox.setLocation(right);
 	}
 
 	public void moveRowdy() {
-		this.position.translate(this.xVelocity, this.yVelocity);
-		this.hitBox.translate(this.xVelocity, this.yVelocity);
-		this.headBox.translate(this.xVelocity, this.yVelocity);
-		this.footBox.translate(this.xVelocity, this.yVelocity);
+		
+		
+		this.position.translate(this.xVelocity, 0);
+		this.hitBox.translate(this.xVelocity, 0);
+		this.headBox.translate(this.xVelocity, 0);
+		this.footBox.translate(this.xVelocity, 0);
+		this.leftBox.translate(this.xVelocity, 0);
+		this.rightBox.translate(this.xVelocity, 0);
+		
+		this.position.translate(0, this.yVelocity);
+		this.hitBox.translate(0, this.yVelocity);
+		this.headBox.translate(0, this.yVelocity);
+		this.footBox.translate(0, this.yVelocity);
+		this.rightBox.translate(0, this.yVelocity);
+		this.leftBox.translate(0, this.yVelocity);
 	}
 
 	public void moveLeft() {
 		if (this.canMoveLeft)
-			this.xVelocity = -2;
+			this.xVelocity = -1;
 	}
 
 	public void moveRight() {
 		if (this.canMoveRight)
-			this.xVelocity = 2;
+			this.xVelocity = 1;
 	}
 	
 	public void stopHorizontalMotion() {
@@ -78,6 +96,10 @@ public class Rowdy {
 	public void jump() {
 		if (this.onGround)
 			this.yVelocity = 7;
+	}
+	public void stop() {
+
+		this.xVelocity = 0;
 	}
 
 	protected void land() {
@@ -131,6 +153,8 @@ public class Rowdy {
 		if (rowdyX == 0) {
 			canMoveLeft = false;
 			for (int i = 1; i < list.length; i += 2) {
+				if(list[i].y < 0 ||list[i].y>25)
+					return -1;
 				curr = Level.get(list[i].x)[list[i].y];
 				switch (curr.getTileType()) {
 				case 'C':
@@ -177,7 +201,7 @@ public class Rowdy {
 			}
 		}
 		Point[] leftlist = { new Point(rowdyX - 1, rowdyY), new Point(rowdyX - 1, rowdyY - 1),
-				new Point(rowdyX - 1, rowdyY - 2) };
+				new Point(rowdyX - 1, rowdyY - 2), new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
 
 		if (rowdyX == 0) {
 			canMoveLeft = false;
@@ -194,9 +218,8 @@ public class Rowdy {
 				case 'A':
 					break;
 				case 'G':
-					if (this.hitBox.intersects(curr.getHitBox())) {
-						System.out.println("TouchingRightSide");
-						canMoveLeft = false;
+					if (this.leftBox.intersects(curr.getHitBox())) {
+						this.canMoveLeft = false;
 						this.adjustRowdy((int) curr.getPosition().getX() + Tile.WIDTH, this.position.y);
 					}
 					break;
@@ -224,10 +247,9 @@ public class Rowdy {
 				case 'A':
 					break;
 				case 'G':
-					if (this.hitBox.intersects(curr.getHitBox())) {
-						System.out.println("TouchingLeftSide");
-						canMoveRight = false;
-						//this.adjustRowdy((int) curr.getPosition().getX() - Rowdy.WIDTH, this.position.y);
+					if (this.rightBox.intersects(curr.getHitBox())) {
+						this.canMoveRight = false;
+						this.adjustRowdy((int) curr.getPosition().getX() - Rowdy.WIDTH, this.position.y);
 					}
 					break;
 				case 'X':
