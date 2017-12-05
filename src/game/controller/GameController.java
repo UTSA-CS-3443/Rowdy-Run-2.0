@@ -22,16 +22,18 @@ import game.model.Rowdy;
  * @author Michael Diep
  *
  */
-public class GameController implements EventHandler<KeyEvent>, Initializable{
-	
-	@FXML private Canvas canvas;
-	@FXML private GridPane pauseMenu;
+public class GameController implements EventHandler<KeyEvent>, Initializable {
+
+	@FXML
+	private Canvas canvas;
+	@FXML
+	private GridPane pauseMenu;
 	private Model model = null;
 	private Rowdy player = null;
 	private boolean isPaused = false;
 	private Timeline timeline = null;
 	private Boolean selection = false;
-	
+
 	public GameController() {
 		super();
 		this.model = Main.getModel();
@@ -39,86 +41,84 @@ public class GameController implements EventHandler<KeyEvent>, Initializable{
 		this.timeline = this.model.getIndefiniteTimeline();
 
 	}
-	
+
 	@Override
 	public void handle(KeyEvent event) {
-		
+
 		if (isPaused == false) {
-			
+
 			switch (event.getCode()) {
-				case SPACE:
-				case W:
-				case UP: // KeyCode.UP
-					player.jump();
-					break;
-				case A:	
-				case LEFT:
-					player.moveLeft();
-					break;
-				case D:	
-				case RIGHT:
-					player.moveRight();
-					break;
-					
-				case P:
-					System.out.println("Paused game");
-					this.timeline.pause();
-					isPaused = true;
-					pauseMenu.setVisible(true);
-					break;
-					
-				default:
-					break;
+			case SPACE:
+			case W:
+			case UP: // KeyCode.UP
+				player.jump();
+				break;
+			case A:
+			case LEFT:
+				player.moveLeft();
+				break;
+			case D:
+			case RIGHT:
+				player.moveRight();
+				break;
+
+			case P:
+				System.out.println("Paused game");
+				this.timeline.pause();
+				isPaused = true;
+				pauseMenu.setVisible(true);
+				break;
+
+			default:
+				break;
 			}
-		}
-		else {
+		} else {
 			switch (event.getCode()) {
-					
-				case P:
+
+			case P:
+				System.out.println("Resumed Game");
+				this.timeline.play();
+				isPaused = false;
+				pauseMenu.setVisible(false);
+				break;
+			case ESCAPE:
+			case Q:
+				System.exit(0);// exit game
+			case W:
+			case S:
+			case UP: // KeyCode.UP
+			case DOWN:
+				this.selection = !this.selection;
+				break;
+			case SPACE:
+			case ENTER:
+				if (!this.selection) {
 					System.out.println("Resumed Game");
 					this.timeline.play();
 					isPaused = false;
 					pauseMenu.setVisible(false);
-					break;
-				case ESCAPE:
-				case Q:
+					this.selection = false;
+				} else {
 					System.exit(0);// exit game
-				case W:
-				case S:
-				case UP: // KeyCode.UP
-				case DOWN:
-					this.selection = !this.selection;
-					break;
-				case SPACE:
-				case ENTER:
-					if(!this.selection) {
-						System.out.println("Resumed Game");
-						this.timeline.play();
-						isPaused = false;
-						pauseMenu.setVisible(false);
-						this.selection = false;  
-					}
-					else {
-						System.exit(0);// exit game
-					}
-					break;
-				default:
-					break;
-			}
-		}		
-	}
-		
-	public void handleKeyReleased(KeyEvent event) {
-		switch (event.getCode()) {
-			case A:
-			case D:
-			case LEFT:
-			case RIGHT:
-				player.stopHorizontalMotion();
+				}
 				break;
+			default:
+				break;
+			}
 		}
 	}
-	
+
+	public void handleKeyReleased(KeyEvent event) {
+		switch (event.getCode()) {
+		case A:
+		case D:
+		case LEFT:
+		case RIGHT:
+			player.stopHorizontalMotion();
+			break;
+		}
+	}
+
 	public void setControllable(Rowdy player) {
 		this.player = player;
 	}
@@ -135,7 +135,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.model.setCanvas(canvas);
 		this.model.setGraphicsContext(this.canvas.getGraphicsContext2D());
-		//this.pauseMenu.setVisible(true);
+		// this.pauseMenu.setVisible(true);
 	}
-	
+
 }

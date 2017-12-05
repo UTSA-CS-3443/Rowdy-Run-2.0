@@ -9,20 +9,20 @@ import tiles.Tile;
  * @author Lynn Miguel
  *
  */
-public abstract class Item extends Tile{
-	
+public abstract class Item extends Tile {
+
 	protected char tileType = 'C';
 	protected BufferedImage img;
 	public Direction dir;
-	
+
 	/**
 	 * Size of Item, in Pixels
 	 */
 	public int width;
 	public int height;
-	
-	public Item(int x,int y) {
-		super(x,y);
+
+	public Item(int x, int y) {
+		super(x, y);
 	}
-	
+
 }

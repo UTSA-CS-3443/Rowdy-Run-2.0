@@ -78,11 +78,11 @@ public class Model implements Runnable {
 	public void gameTick() {
 		// TODO Fix this stuff, it ai'nt workin'
 		int playerState = 1;
-		//player.moveRowdy();
+		// player.moveRowdy();
 		playerState = player.hitBoxChecker(currentLevel);
 		player.fall();
 		player.moveRowdy();
-		//player.stop();
+		// player.stop();
 		if (playerState == 1) {
 			// TODO handle rowdy dying
 			System.err.println("You died");
@@ -90,7 +90,7 @@ public class Model implements Runnable {
 		} else if (playerState == 2) {
 			// TODO handle rowdy winning
 		}
-		//player.fall();
+		// player.fall();
 		try {
 			drawCanvas(gc);
 		} catch (NullPointerException e) {
@@ -143,7 +143,6 @@ public class Model implements Runnable {
 		ArrayList<Tile[]> Level = new ArrayList<Tile[]>();
 		int x = 0;
 		Scanner in = null;
-		char[] empty = new char[0];
 		try {
 			in = new Scanner(lvlFile);
 		} catch (FileNotFoundException exception) {
@@ -169,7 +168,7 @@ public class Model implements Runnable {
 	private Tile[] processLevelColumn(char[] tileList, int column) {
 		// TODO add tile objects as you create them
 		// System.out.println("generating air in column " + column);
-		Tile[] levelColumn = new Tile[100];// Once air tile is created will just be initialized as twenty-five of those
+		Tile[] levelColumn = new Tile[200];// Once air tile is created will just be initialized as twenty-five of those
 		for (int i = 0; i < levelColumn.length; i++)
 			levelColumn[i] = new Air(column * Tile.WIDTH, Main.HEIGHT - i * Tile.HEIGHT);
 
@@ -217,25 +216,27 @@ public class Model implements Runnable {
 				// temp[y].getPosition().getY());
 				if (temp[y].getTileType() == 'G') {
 					gc.setFill(Color.BLACK);
-					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH,
+							Tile.HEIGHT);
 					// run this if you want severe lag
-				}
-				else if (temp[y].getTileType() == 'A') {
+				} else if (temp[y].getTileType() == 'A') {
 					gc.setFill(Color.AQUAMARINE);
 					// gc.fillRect(temp[y].getPosition().getX(), temp[y].getPosition().getY(), 10,
 					// 10);
 
-				}
-				else if (temp[y].getTileType() == 'C') {
+				} else if (temp[y].getTileType() == 'C') {
 					gc.setFill(Color.AQUAMARINE);
-					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH,
+							Tile.HEIGHT);
 					// run this if you want severe lag
 				}
 			}
 		}
 		gc.setFill(Color.BLUE);
-		gc.fillRect(this.player.getPosition().getX(), Main.HEIGHT - this.player.getPosition().getY(), Rowdy.WIDTH, Rowdy.HEIGHT);
-		//gc.fillRect(this.player.getPosition().getX()+2, Main.HEIGHT - (this.player.getPosition().getY() - Rowdy.HEIGHT), 3, 1);
+		gc.fillRect(this.player.getPosition().getX(), Main.HEIGHT - this.player.getPosition().getY(), Rowdy.WIDTH,
+				Rowdy.HEIGHT);
+		// gc.fillRect(this.player.getPosition().getX()+2, Main.HEIGHT -
+		// (this.player.getPosition().getY() - Rowdy.HEIGHT), 3, 1);
 		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
 		// this.player.getPosition().getY());
 	}

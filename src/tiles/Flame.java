@@ -12,6 +12,7 @@ public class Flame extends Obstacle {
 
 	public Flame(int x, int y) {
 		super(x, y);
+		
 		//super.setImg(cactusImage);
 	}
 
