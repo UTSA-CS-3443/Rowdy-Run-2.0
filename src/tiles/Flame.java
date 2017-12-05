@@ -1,5 +1,7 @@
 package tiles;
 
+import java.awt.Rectangle;
+
 import javafx.scene.image.Image;
 
 public class Flame extends Obstacle {
@@ -8,13 +10,15 @@ public class Flame extends Obstacle {
 	 * Set Flame Image
 	 * 
 	 */
-	Image flame = new Image("/src/images/Flame1.gif");
+	Image flameSprite = new Image("/src/images/Flame1.gif");
 
 	public Flame(int x, int y) {
 		super(x, y);
-		
-		//super.setImg(cactusImage);
+		this.tileType = 'F';
 	}
-
+	
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
 
 }
