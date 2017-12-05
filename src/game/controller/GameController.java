@@ -67,10 +67,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 				break;
 
 			case P:
-				System.out.println("Paused game");
-				this.timeline.pause();
-				isPaused = true;
-				pauseMenu.setVisible(true);
+				pause();
 				break;
 
 			default:
@@ -80,14 +77,8 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 			switch (event.getCode()) {
 
 			case P:
-				System.out.println("Resumed Game");
-				this.timeline.play();
-				isPaused = false;
-				pauseMenu.setVisible(false);
+				resume();
 				break;
-			case ESCAPE:
-			case Q:
-				System.exit(0);// exit game
 			case W:
 			case S:
 			case UP: // KeyCode.UP
@@ -97,13 +88,10 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 			case SPACE:
 			case ENTER:
 				if (!this.selection) {
-					System.out.println("Resumed Game");
-					this.timeline.play();
-					isPaused = false;
-					pauseMenu.setVisible(false);
+					resume();
 					this.selection = false;
 				} else {
-					System.exit(0);// exit game
+					quit();
 				}
 				break;
 			default:
@@ -128,19 +116,37 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		Button b = (Button) event.getSource();
 		switch (b.getText()) {
 		case "Continue":
-			System.out.println("Resumed Game");
-			this.timeline.play();
-			isPaused = false;
-			pauseMenu.setVisible(false);
+			resume();
 			break;
 		case "Quit":
-			System.out.println("Quitting Game");
-			Main.setModel(new Model());
-			Main.changeScene(Main.getMainMenu());
+			quit();
+			resume();
 			break;
 		default:
 			break;
 		}
+	}
+	
+	public void pause() {
+		System.out.println("Paused game");
+		this.timeline.pause();
+		isPaused = true;
+		pauseMenu.setVisible(true);
+	}
+	
+	public void resume() {
+		System.out.println("Resumed Game");
+		this.timeline.play();
+		isPaused = false;
+		pauseMenu.setVisible(false);
+	}
+	
+	public void quit() {
+		System.out.println("Quitting Game");
+		Main.setModel(new Model());
+		Main.changeScene(Main.getMainMenu());
+		//isPaused = false;
+		//pauseMenu.setVisible(false);
 	}
 
 	public void setControllable(Rowdy player) {
