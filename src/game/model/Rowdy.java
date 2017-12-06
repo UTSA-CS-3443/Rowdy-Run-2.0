@@ -43,7 +43,6 @@ public class Rowdy {
 		this.footBox = new Rectangle(this.position.x + 1, this.position.y - (Rowdy.HEIGHT - 3), Rowdy.WIDTH - 2, 3);
 		this.rightBox = new Rectangle(this.position.x + (Rowdy.WIDTH - 2), this.position.y + 2, 2, Rowdy.HEIGHT - 2);
 		this.leftBox = new Rectangle(this.position.x, this.position.y + 2, 2, Rowdy.HEIGHT - 2);
-		this.coinCount = 0;
 	}
 
 	/**
@@ -148,15 +147,6 @@ public class Rowdy {
 	}
 
 	/**
-	 * returns the amount of coins left to be drawn to the view
-	 * 
-	 * @return
-	 */
-	public int getCoinCount() {
-		return this.coinCount;
-	}
-
-	/**
 	 * returns Rowdy's position
 	 * 
 	 * @return Point where Rowdy currently is
@@ -238,6 +228,7 @@ public class Rowdy {
 						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT);
 				}
 				break;
+			case 'W':
 			case 'F':
 			case 'X':
 				if (this.hitBox.intersects(curr.getHitBox()))
@@ -273,6 +264,7 @@ public class Rowdy {
 					this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() - Tile.HEIGHT);
 				}
 				break;
+			case 'W':
 			case 'F':
 			case 'X':
 				if (this.hitBox.intersects(curr.getHitBox()))
@@ -307,6 +299,7 @@ public class Rowdy {
 						this.adjustRowdy(this.position.x + 1, this.position.y);
 					}
 					break;
+				case 'W':
 				case 'F':
 				case 'X':
 					if (this.hitBox.intersects(curr.getHitBox()))
@@ -341,6 +334,7 @@ public class Rowdy {
 						this.adjustRowdy(this.position.x - 1, this.position.y);
 					}
 					break;
+				case 'W':
 				case 'F':
 				case 'X':
 					if (this.hitBox.intersects(curr.getHitBox()))
