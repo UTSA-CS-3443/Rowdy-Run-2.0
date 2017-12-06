@@ -29,12 +29,12 @@
               <Canvas fx:id="canvas" height="500.0" visible="true" width="500.0" />
                   <GridPane fx:id="pauseMenu" alignment="CENTER" layoutX="185.0" layoutY="145.0" prefWidth="130.0" vgap="40.0" visible="false">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="130.0" text="Continue" GridPane.rowIndex="1">
+                        <Button mnemonicParsing="false" onAction="#handleMouseClicked" prefWidth="130.0" text="Continue" GridPane.rowIndex="1">
                            <font>
                               <Font size="24.0" fx:id="x11" />
                            </font>
                         </Button>
-                        <Button font="$x11" mnemonicParsing="false" prefWidth="130.0" text="Quit" GridPane.rowIndex="2" />
+                        <Button font="$x11" mnemonicParsing="false" onAction="#handleMouseClicked" prefWidth="130.0" text="Quit" GridPane.rowIndex="2" />
                         <Label alignment="CENTER" prefHeight="56.0" prefWidth="130.0" text="Pause" textAlignment="CENTER">
                            <font>
                               <Font size="36.0" />

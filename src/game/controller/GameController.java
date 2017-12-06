@@ -4,10 +4,14 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -18,6 +22,9 @@ import game.model.Model;
 import game.model.Rowdy;
 
 /**
+ * The controller for the GameView.fxml
+ * <p>
+ * Handles player movement and actions taken in the pause menu.
  * 
  * @author Michael Diep
  *
@@ -63,10 +70,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 				break;
 
 			case P:
-				System.out.println("Paused game");
-				this.timeline.pause();
-				isPaused = true;
-				pauseMenu.setVisible(true);
+				pause();
 				break;
 
 			default:
@@ -76,14 +80,8 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 			switch (event.getCode()) {
 
 			case P:
-				System.out.println("Resumed Game");
-				this.timeline.play();
-				isPaused = false;
-				pauseMenu.setVisible(false);
+				resume();
 				break;
-			case ESCAPE:
-			case Q:
-				System.exit(0);// exit game
 			case W:
 			case S:
 			case UP: // KeyCode.UP
@@ -93,13 +91,10 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 			case SPACE:
 			case ENTER:
 				if (!this.selection) {
-					System.out.println("Resumed Game");
-					this.timeline.play();
-					isPaused = false;
-					pauseMenu.setVisible(false);
+					resume();
 					this.selection = false;
 				} else {
-					System.exit(0);// exit game
+					quit();
 				}
 				break;
 			default:
@@ -118,6 +113,42 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 			break;
 		}
 	}
+	
+	public void handleMouseClicked(ActionEvent event) {
+		System.out.println("mouse clicked");
+		Button b = (Button) event.getSource();
+		switch (b.getText()) {
+		case "Continue":
+			resume();
+			break;
+		case "Quit":
+			quit();
+			resume();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void pause() {
+		System.out.println("Paused game");
+		this.timeline.pause();
+		isPaused = true;
+		pauseMenu.setVisible(true);
+	}
+	
+	public void resume() {
+		System.out.println("Resumed Game");
+		this.timeline.play();
+		isPaused = false;
+		pauseMenu.setVisible(false);
+	}
+	
+	public void quit() {
+		System.out.println("Quitting Game");
+		Main.setModel(new Model());
+		Main.changeScene(Main.getMainMenu());
+	}
 
 	public void setControllable(Rowdy player) {
 		this.player = player;
@@ -135,7 +166,6 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.model.setCanvas(canvas);
 		this.model.setGraphicsContext(this.canvas.getGraphicsContext2D());
-		// this.pauseMenu.setVisible(true);
 	}
 
 }
