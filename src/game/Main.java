@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 
 
 public class Main extends Application {
@@ -49,6 +50,11 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		/**try {
+		    Font customFont = Font.loadFont("mexcellent rg.ttf", 20);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}**/
 		Main.stage = primaryStage;
 	}
 
