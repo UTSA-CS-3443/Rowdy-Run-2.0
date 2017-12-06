@@ -21,7 +21,7 @@ GG       GG
 GG       GG R
 GG       GG          C
 GG
-GG
+GGX
 GG              GG
 GG              GG       C
 GG
