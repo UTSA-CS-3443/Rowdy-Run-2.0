@@ -255,6 +255,10 @@ public class Model implements Runnable {
 					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
 							Main.HEIGHT - (currentLevel.access(x, y).getPosition().getY() - 4), Tile.WIDTH,
 							Tile.HEIGHT - 8);
+				} else if (currentLevel.accessType(x, y) == 'X') {
+					gc.setFill(Color.GREEN);
+					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
+							Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 				}
 			}
 		}
