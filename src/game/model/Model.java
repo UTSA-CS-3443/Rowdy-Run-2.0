@@ -87,9 +87,10 @@ public class Model implements Runnable {
 		if (playerState == 1) {
 			// TODO handle rowdy dying
 			System.err.println("You died");
-			player.adjustRowdy(20, 200);
+			player.adjustRowdy(currentLevel.playerStart.x,currentLevel.playerStart.y);
 		} else if (playerState == 2) {
 			// TODO handle rowdy winning
+			System.err.println("YOU WIN!");
 		}
 		// player.fall();
 		try {
@@ -192,6 +193,9 @@ public class Model implements Runnable {
 			case 'G':
 				currTile = new Ground(column * Tile.WIDTH, (i + 1) * Tile.HEIGHT);
 				break;
+			case 'P':
+				currTile = new Platform(column * Tile.WIDTH, (i + 1) * Tile.HEIGHT);
+				break;
 			case 'C':
 				currTile = new Coin(column * Tile.WIDTH, (i + 1) * Tile.HEIGHT);
 				break;
@@ -229,7 +233,7 @@ public class Model implements Runnable {
 					// 10);
 
 				} else if (currentLevel.accessType(x,y) == 'C') {
-					gc.setFill(Color.AQUAMARINE);
+					gc.setFill(Color.YELLOW);
 					gc.fillRect(currentLevel.access(x,y).getPosition().getX(), Main.HEIGHT - currentLevel.access(x,y).getPosition().getY(), Tile.WIDTH,
 							Tile.HEIGHT);
 					// run this if you want severe lag

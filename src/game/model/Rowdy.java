@@ -84,7 +84,7 @@ public class Rowdy {
 
 	public void jump() {
 		if (this.onGround) {
-			this.jumpTime = 10;
+			this.jumpTime = 15;
 			this.yVelocity = 3;
 			this.onGround = false;
 		}
@@ -154,6 +154,13 @@ public class Rowdy {
 				break;
 			case 'A':
 				break;
+			case 'P':
+				if (this.footBox.intersects(curr.getHitBox())) {
+					this.onGround = true;
+					if (this.jumpTime == 0)
+						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + (Rowdy.HEIGHT-4));
+				}
+				break;
 			case 'G':
 				if (this.footBox.intersects(curr.getHitBox())) {
 					this.onGround = true;
@@ -183,6 +190,7 @@ public class Rowdy {
 				if (this.hitBox.intersects(curr.getHitBox()))
 					level.access(headlist[i].x,headlist[i].y);
 				break;
+			case 'P':
 			case 'A':
 				break;
 			case 'G':
@@ -215,6 +223,7 @@ public class Rowdy {
 					if (this.hitBox.intersects(curr.getHitBox()))
 						level.access(leftlist[i].x,leftlist[i].y);
 					break;
+				case 'P':
 				case 'A':
 					break;
 				case 'G':
@@ -246,6 +255,7 @@ public class Rowdy {
 					if (this.hitBox.intersects(curr.getHitBox()))
 						level.collectCoin(rightlist[i].x,rightlist[i].y);
 					break;
+				case 'P':
 				case 'A':
 					break;
 				case 'G':
@@ -264,7 +274,8 @@ public class Rowdy {
 				}
 			}
 		}
-
+		if(level.isLevelBeat())
+			return 2;
 		return 0;
 	}
 
