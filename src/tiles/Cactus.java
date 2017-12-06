@@ -28,12 +28,7 @@ public class Cactus extends Obstacle {
 	    catch(Exception e) {
 	        e.printStackTrace();
 	        }
-	    while (true)
-	    {   
-	        Graphics c = img.getGraphics();
-	        c.drawImage(img, this.position.x, this.position.y, null);
-	        }
-	    }
+	}
 
 	public Rectangle getHitBox() {
 		return hitBox;
