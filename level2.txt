@@ -2,7 +2,7 @@ GG
 GG  
 GG
 GG
-GG       C
+GGX     C
 GG
 GG
 GG
@@ -21,9 +21,9 @@ GG       GG
 GG       GG R
 GG       GG          C
 GG
-GGX
-GG              GG
-GG              GG       C
+GG
+GGX             GG
+GG             GG       C
 GG
 GG
 GGG
