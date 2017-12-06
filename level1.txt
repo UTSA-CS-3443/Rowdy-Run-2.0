@@ -3,12 +3,12 @@
    G
     G
      G          G    G
-      G         GGGGGG
+      G         GGGGGG R
      G          G    G
     G 
    G 
    G            GGGGGG
-    G            G 
+    G     C      G 
      G            G
     G            G
    G            GGGGGG
@@ -20,7 +20,7 @@ GGGGGGGGGGG
 GGGGX
 GGGGX
 GGGGX
-GGGGX
+GGGGX C
 GGGGX
 GGGGX
 GGGGX

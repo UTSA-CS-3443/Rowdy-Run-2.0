@@ -1,5 +1,6 @@
 package game.model;
 
+import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,7 +36,7 @@ import items.Coin;
  */
 public class Model implements Runnable {
 
-	protected ArrayList<Tile[]> currentLevel;
+	protected Level currentLevel;
 	protected Rowdy player = new Rowdy();
 	// private Timer timer;
 	// private TimerListener timerListener;
@@ -86,9 +87,10 @@ public class Model implements Runnable {
 		if (playerState == 1) {
 			// TODO handle rowdy dying
 			System.err.println("You died");
-			player.adjustRowdy(20, 200);
+			player.adjustRowdy(currentLevel.playerStart.x,currentLevel.playerStart.y);
 		} else if (playerState == 2) {
 			// TODO handle rowdy winning
+			System.err.println("YOU WIN!");
 		}
 		// player.fall();
 		try {
@@ -98,12 +100,13 @@ public class Model implements Runnable {
 		}
 	}
 
-	public ArrayList<Tile[]> getCurrentLevel() {
+	public Level getCurrentLevel() {
 		return currentLevel;
 	}
 
-	public void setCurrentLevel(ArrayList<Tile[]> currentLevel) {
+	public void setCurrentLevel(Level currentLevel) {
 		this.currentLevel = currentLevel;
+		player.adjustRowdy(currentLevel.playerStart.x, currentLevel.playerStart.y);
 	}
 
 	public Rowdy getPlayer() {
@@ -138,9 +141,10 @@ public class Model implements Runnable {
 		this.gc = gc;
 	}
 
-	public ArrayList<Tile[]> readLevel(File lvlFile) throws IOException {
+	public Level readLevel(File lvlFile) throws IOException {
 
 		ArrayList<Tile[]> Level = new ArrayList<Tile[]>();
+		Point rowdyPosition = new Point(20,40);
 		int x = 0;
 		Scanner in = null;
 		try {
@@ -152,11 +156,12 @@ public class Model implements Runnable {
 		while (in.hasNextLine()) {
 			Tile[] levelColumn = null;
 			String line = in.nextLine();
-			levelColumn = processLevelColumn(line.toCharArray(), x);
+			levelColumn = processLevelColumn(line.toCharArray(), x,rowdyPosition);
 			Level.add(levelColumn);
 			x++;
 		}
-		return Level;
+		Level finalLevel = new Level(Level,rowdyPosition);
+		return finalLevel;
 	}
 
 	/**
@@ -165,7 +170,7 @@ public class Model implements Runnable {
 	 * @param column
 	 * @return
 	 */
-	private Tile[] processLevelColumn(char[] tileList, int column) {
+	private Tile[] processLevelColumn(char[] tileList, int column,Point start) {
 		// TODO add tile objects as you create them
 		// System.out.println("generating air in column " + column);
 		Tile[] levelColumn = new Tile[200];// Once air tile is created will just be initialized as twenty-five of those
@@ -188,9 +193,14 @@ public class Model implements Runnable {
 			case 'G':
 				currTile = new Ground(column * Tile.WIDTH, (i + 1) * Tile.HEIGHT);
 				break;
+			case 'P':
+				currTile = new Platform(column * Tile.WIDTH, (i + 1) * Tile.HEIGHT);
+				break;
 			case 'C':
 				currTile = new Coin(column * Tile.WIDTH, (i + 1) * Tile.HEIGHT);
 				break;
+			case 'R':
+					start.setLocation(column * Tile.WIDTH, (i + 1) * Tile.HEIGHT);
 			case ' ':
 				currTile = new Air(column * Tile.WIDTH, (i + 1) * Tile.HEIGHT);
 				break;
@@ -206,27 +216,25 @@ public class Model implements Runnable {
 		// gc.fillRect(100, 100, 100, 100);
 		gc.clearRect(0, 0, 500, 500);
 		// gc.translate(1, 0);
-		Tile[] temp = null;
-		for (int x = 0; x < currentLevel.size(); x++) {
-			temp = this.currentLevel.get(x);
-			for (int y = 0; y < temp.length; y++) {
+		for (int x = 0; x < currentLevel.WIDTH; x++) {
+			for (int y = 0; y < currentLevel.HEIGHT; y++) {
 				// System.out.println("drawing on canvas at " + temp[y].getPosition().getX() +
 				// ", " + temp[y].getPosition().getY());
 				// gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(),
 				// temp[y].getPosition().getY());
-				if (temp[y].getTileType() == 'G') {
+				if (currentLevel.accessType(x,y) == 'G') {
 					gc.setFill(Color.BLACK);
-					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH,
+					gc.fillRect(currentLevel.access(x,y).getPosition().getX(), Main.HEIGHT - currentLevel.access(x,y).getPosition().getY(), Tile.WIDTH,
 							Tile.HEIGHT);
 					// run this if you want severe lag
-				} else if (temp[y].getTileType() == 'A') {
+				} else if (currentLevel.accessType(x,y) == 'A') {
 					gc.setFill(Color.AQUAMARINE);
-					// gc.fillRect(temp[y].getPosition().getX(), temp[y].getPosition().getY(), 10,
+					// gc.fillRect(currentLevel.access.getPosition().getX(), currentLevel.access.getPosition().getY(), 10,
 					// 10);
 
-				} else if (temp[y].getTileType() == 'C') {
+				} else if (currentLevel.accessType(x,y) == 'C') {
 					gc.setFill(Color.YELLOW);
-					gc.fillRect(temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY(), Tile.WIDTH,
+					gc.fillRect(currentLevel.access(x,y).getPosition().getX(), Main.HEIGHT - currentLevel.access(x,y).getPosition().getY(), Tile.WIDTH,
 							Tile.HEIGHT);
 					// run this if you want severe lag
 				}
