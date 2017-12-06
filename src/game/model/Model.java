@@ -38,6 +38,7 @@ public class Model implements Runnable {
 
 	protected Level currentLevel;
 	protected Rowdy player = new Rowdy();
+	private int playerState;
 	// private Timer timer;
 	// private TimerListener timerListener;
 
@@ -78,7 +79,7 @@ public class Model implements Runnable {
 
 	public void gameTick() {
 		// TODO Fix this stuff, it ai'nt workin'
-		int playerState = 1;
+		int playerState;
 		// player.moveRowdy();
 		playerState = player.hitBoxChecker(currentLevel);
 		player.fall();
@@ -91,6 +92,12 @@ public class Model implements Runnable {
 		} else if (playerState == 2) {
 			// TODO handle rowdy winning
 			System.err.println("YOU WIN!");
+			playerState = 0;
+			System.out.println("Ending Game");
+			this.indefiniteTimeline.pause();
+			Main.setModel(new Model());
+			Main.changeScene(Main.getMainMenu());
+			//delete this model somehow
 		}
 		// player.fall();
 		try {
@@ -100,6 +107,10 @@ public class Model implements Runnable {
 		}
 	}
 
+	public int getPlayerState() {
+		return this.playerState;
+	}
+	
 	public Level getCurrentLevel() {
 		return currentLevel;
 	}

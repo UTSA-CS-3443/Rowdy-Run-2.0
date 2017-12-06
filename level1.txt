@@ -1,33 +1,33 @@
- G
-  G
-   G
-    G
-     G          G    G
-      G         GGGGGG R
-     G          G    G
-    G 
-   G 
-   G            GGGGGG
-    G     C      G 
-     G            G
-    G            G
-   G            GGGGGG
-  G
- G              G    G
-  GGGGG         GGGGGG
-     G          G    G
-GGGGGGGGGGG            
-GGGGX
-GGGGX
-GGGGX
-GGGGX C
-GGGGX
-GGGGX
-GGGGX
-GGGGX
-GGGGXX
-GGGGX
-GGGGX
-GGGGX
-GGGGX
-GGGGGGGGGGGGGGGG
+GG
+GG
+GG
+GG  
+GG
+GG
+GG
+GG  R
+GG
+GG
+GG
+GG
+GG  
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG
+GG C
+GG
