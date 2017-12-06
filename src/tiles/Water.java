@@ -1,16 +1,20 @@
 package tiles;
 
+import java.awt.Rectangle;
+
 import javafx.scene.image.Image;
 
 public class Water extends Obstacle {
 
-	private Image flameImage; // = *cactus file name here*;
+	// Image waterSprite = new Image("/src/images/Water.gif");
 	
 	public Water(int x, int y) {
 		super(x, y);
-		//super.setImg(cactusImage);
+		this.tileType = 'W';
 	}
-
 	
+	public Rectangle getHitBox() {
+		return hitBox;
+	}	
 
 }
