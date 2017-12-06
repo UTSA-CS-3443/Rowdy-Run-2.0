@@ -132,7 +132,7 @@ public class Rowdy {
 		this.rowdySprite = rowdySprite;
 	}
 
-	public int hitBoxChecker(ArrayList<Tile[]> Level) {
+	public int hitBoxChecker(Level level) {
 		this.onGround = false;
 		this.canMoveLeft = true;
 		this.canMoveRight = true;
@@ -144,15 +144,13 @@ public class Rowdy {
 				new Point(rowdyX + 1, rowdyY - 2), new Point(rowdyX, rowdyY - 2) };
 
 		for (int i = 0; i < footlist.length; i++) {
-			if (footlist[i].y < 0 || footlist[i].y > Level.get(0).length)
+			if (footlist[i].y < 0 || footlist[i].y > level.HEIGHT)
 				return 1;
-			curr = Level.get(footlist[i].x)[footlist[i].y];
+			curr = level.access(footlist[i].x,footlist[i].y);
 			switch (curr.getTileType()) {
 			case 'C':
-				if (this.hitBox.intersects(curr.getHitBox())) {
-					Level.get(footlist[i].x)[footlist[i].y] = new Air(footlist[i].x * 10, footlist[i].y * 10);
-					this.coinCount++;
-				}
+				if (this.hitBox.intersects(curr.getHitBox()))
+					level.collectCoin(footlist[i].x,footlist[i].y);
 				break;
 			case 'A':
 				break;
@@ -177,15 +175,13 @@ public class Rowdy {
 				new Point(rowdyX + 1, rowdyY + 1), new Point(rowdyX, rowdyY + 1) };
 
 		for (int i = 0; i < headlist.length; i++) {
-			if (headlist[i].y < 0 || headlist[i].y > Level.get(0).length)
+			if (headlist[i].y < 0 || headlist[i].y > level.HEIGHT)
 				return 1;
-			curr = Level.get(headlist[i].x)[headlist[i].y];
+			curr = level.access(headlist[i].x,headlist[i].y);
 			switch (curr.getTileType()) {
 			case 'C':
-				if (this.hitBox.intersects(curr.getHitBox())) {
-					Level.get(headlist[i].x)[headlist[i].y] = new Air(headlist[i].x * 10, headlist[i].y * 10);
-					this.coinCount++;
-				}
+				if (this.hitBox.intersects(curr.getHitBox()))
+					level.access(headlist[i].x,headlist[i].y);
 				break;
 			case 'A':
 				break;
@@ -213,13 +209,11 @@ public class Rowdy {
 			this.adjustRowdy(10, this.position.y);
 		} else {
 			for (int i = 0; i < leftlist.length; i++) {
-				curr = Level.get(leftlist[i].x)[leftlist[i].y];
+				curr = level.access(leftlist[i].x,leftlist[i].y);
 				switch (curr.getTileType()) {
 				case 'C':
-					if (this.hitBox.intersects(curr.getHitBox())) {
-						Level.get(leftlist[i].x)[leftlist[i].y] = new Air(leftlist[i].x * 10, leftlist[i].y * 10);
-						this.coinCount++;
-					}
+					if (this.hitBox.intersects(curr.getHitBox()))
+						level.access(leftlist[i].x,leftlist[i].y);
 					break;
 				case 'A':
 					break;
@@ -241,18 +235,16 @@ public class Rowdy {
 		}
 		Point[] rightlist = { new Point(rowdyX + 1, rowdyY), new Point(rowdyX + 1, rowdyY - 1),
 				new Point(rowdyX + 1, rowdyY - 2), new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
-		if (rowdyX >= Level.size() - 2) {
+		if (rowdyX >= level.WIDTH - 2) {
 			canMoveRight = false;
-			this.adjustRowdy(((Level.size() - 3) * Tile.WIDTH) + 9, this.position.y);
+			this.adjustRowdy(((level.WIDTH - 3) * Tile.WIDTH) + 9, this.position.y);
 		} else {
 			for (int i = 0; i < rightlist.length; i++) {
-				curr = Level.get(rightlist[i].x)[rightlist[i].y];
+				curr = level.access(rightlist[i].x,rightlist[i].y);
 				switch (curr.getTileType()) {
 				case 'C':
-					if (this.hitBox.intersects(curr.getHitBox())) {
-						Level.get(rightlist[i].x)[rightlist[i].y] = new Air(rightlist[i].x * 10, rightlist[i].y * 10);
-						this.coinCount++;
-					}
+					if (this.hitBox.intersects(curr.getHitBox()))
+						level.collectCoin(rightlist[i].x,rightlist[i].y);
 					break;
 				case 'A':
 					break;
