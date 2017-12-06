@@ -20,12 +20,13 @@ public class MainMenuController implements EventHandler<ActionEvent> {
 	private File lvlFile = null;
 	private Boolean run;
 
+	/**
+	 * Initializes the model from Main.
+	 */
 	public MainMenuController() {
-
 		super();
 		this.model = Main.getModel();
 		run = false;
-
 	}
 
 	@Override

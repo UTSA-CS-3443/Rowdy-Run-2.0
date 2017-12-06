@@ -2,19 +2,20 @@ package game;
 	
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import game.controller.MainMenuController;
 import game.model.Model;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Font;
 
 
+/**
+ * Main class for RowdyRun2.0
+ * 
+ * @author Michael Diep
+ *
+ */
 public class Main extends Application {
 	
 	private static Stage stage = null;
@@ -23,8 +24,13 @@ public class Main extends Application {
 	private static Scene game = null;
 	private static ExecutorService application = null;
 	public static final int WIDTH = 500, HEIGHT = 500;
-	//private MainMenuController mc = null;
 	private static Model model = null;
+	
+	public static void main(String[] args) {
+		application = Executors.newCachedThreadPool();
+		
+		launch(args);
+	}
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -50,11 +56,6 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		/**try {
-		    Font customFont = Font.loadFont("mexcellent rg.ttf", 20);
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}**/
 		Main.stage = primaryStage;
 	}
 
@@ -65,17 +66,7 @@ public class Main extends Application {
 	public static void setModel(Model model) {
 		Main.model = model;
 	}
-
-	public static void main(String[] args) {
-		application = Executors.newCachedThreadPool();
-		
-		launch(args);
-	}
 	
-	/**
-	 * 
-	 * @return the application's stage
-	 */
 	public static Stage getStage() {
 		return stage;
 	}

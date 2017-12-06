@@ -31,22 +31,28 @@ import game.model.Rowdy;
  */
 public class GameController implements EventHandler<KeyEvent>, Initializable {
 
-	@FXML
-	private Canvas canvas;
-	@FXML
-	private GridPane pauseMenu;
+	@FXML private Canvas canvas;
+	@FXML private GridPane pauseMenu;
 	private Model model = null;
 	private Rowdy player = null;
 	private boolean isPaused = false;
 	private Timeline timeline = null;
 	private Boolean selection = false;
 
+	/**
+	 * Initializes the model from Main and the player and timeline from model
+	 */
 	public GameController() {
 		super();
 		this.model = Main.getModel();
 		this.player = this.model.getPlayer();
 		this.timeline = this.model.getIndefiniteTimeline();
-
+	}
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.model.setCanvas(canvas);
+		this.model.setGraphicsContext(this.canvas.getGraphicsContext2D());
 	}
 
 	@Override
@@ -130,6 +136,9 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		}
 	}
 	
+	/**
+	 * pauses the timeline of the game and displays the pause menu
+	 */
 	public void pause() {
 		System.out.println("Paused game");
 		this.timeline.pause();
@@ -137,6 +146,9 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		pauseMenu.setVisible(true);
 	}
 	
+	/**
+	 * plays the timeline of the game and hides the pause menu
+	 */
 	public void resume() {
 		System.out.println("Resumed Game");
 		this.timeline.play();
@@ -144,12 +156,19 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		pauseMenu.setVisible(false);
 	}
 	
+	/**
+	 * returns the user to the main menu
+	 */
 	public void quit() {
 		System.out.println("Quitting Game");
 		Main.setModel(new Model());
 		Main.changeScene(Main.getMainMenu());
 	}
 
+	/**
+	 * allows for character swapping
+	 * @param player
+	 */
 	public void setControllable(Rowdy player) {
 		this.player = player;
 	}
@@ -160,12 +179,6 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
 	public void setCanvas(Canvas canvas) {
 		this.canvas = canvas;
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.model.setCanvas(canvas);
-		this.model.setGraphicsContext(this.canvas.getGraphicsContext2D());
 	}
 
 }

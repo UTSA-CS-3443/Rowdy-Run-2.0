@@ -37,7 +37,7 @@ public class Rowdy {
 		this.canMoveRight = true;
 		this.hitBox = new Rectangle(this.position.x, this.position.y, Rowdy.WIDTH, Rowdy.HEIGHT);
 		this.headBox = new Rectangle(this.position.x, this.position.y, Rowdy.WIDTH, 3);
-		this.footBox = new Rectangle(this.position.x, this.position.y - (Rowdy.HEIGHT - 3), Rowdy.WIDTH, 3);
+		this.footBox = new Rectangle(this.position.x + 1, this.position.y - (Rowdy.HEIGHT - 3), Rowdy.WIDTH - 2, 3);
 		this.rightBox = new Rectangle(this.position.x + (Rowdy.WIDTH - 2), this.position.y + 2, 2, Rowdy.HEIGHT - 2);
 		this.leftBox = new Rectangle(this.position.x, this.position.y + 2, 2, Rowdy.HEIGHT - 2);
 		this.coinCount = 0;
