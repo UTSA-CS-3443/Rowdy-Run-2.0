@@ -34,7 +34,7 @@ import items.Coin;
  * 
  * @author Jared Polwort
  * @author Michael Diep
- *
+ * @author Andrew Hernandez
  */
 public class Model implements Runnable {
 
@@ -91,9 +91,10 @@ public class Model implements Runnable {
 			System.out.println(" ");
 
 	}
+	
 	/**
-	 * The function that is repeatedly called by the timeline to handle logic and directly draw to the canvas
-	 * 
+	 * gameTick updates the game logic and calls on render and drawCanvas in order
+	 * to update the images on the screen whenever an event happens.
 	 */
 	public void gameTick() {
 		int playerState;
@@ -287,15 +288,19 @@ public class Model implements Runnable {
 		return levelColumn;
 	}
 
-	public static int xOffset = 0;
-	public static int yOffset = 0;
 
-	// translate world to position
+	
+	public static int xOffset=0;
+	public static int yOffset=0;
+	
+	//translate world to position
 	/**
-	 * render translates canvas across the level to simulate Level scrolling
-	 * @param g
+	 * Render changes the x and y positions to change the tiles in order to scroll the map.
+	 * It updates the images on the screen.
+	 * @param g is used to draw on the canvas using a buffer.
 	 */
-	public void render(GraphicsContext g) {
+	public void render(GraphicsContext g)
+	{
 		while (canvasPosition.x < player.getPosition().x) {
 			canvasPosition.translate(1, 0);
 			g.translate(-1, 0);
@@ -317,9 +322,12 @@ public class Model implements Runnable {
 	 * Draws our the entire Level+Rowdy onto the canvas
 	 * @param gc
 	 */
+	/**
+	 * drawCanvas draws the images onto the canvas when the game runs. 
+	 * @param gc passes graphics context to issue draw calls to the canvas using a buffer.
+	 */
 	public void drawCanvas(GraphicsContext gc) {
 		gc.clearRect(-500, -500, currentLevel.WIDTH * 100, currentLevel.HEIGHT * 100);
-
 		for (int x = 0; x < currentLevel.WIDTH; x++) {
 			for (int y = 0; y < currentLevel.HEIGHT; y++) {
 
