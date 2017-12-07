@@ -47,7 +47,7 @@ public class Rowdy {
 		this.leftBox = new Rectangle(this.position.x, this.position.y + 2, 2, Rowdy.HEIGHT - 2);
 		
 		try {                
-	        img = new Image("images/Rowdy1.gif", this.WIDTH, this.HEIGHT, false, false);
+	        img = new Image("images/Rowdy16.gif", this.WIDTH, this.HEIGHT, false, false);
 	        this.setImg(img);
 	    }
 	    catch(Exception e) {
@@ -239,7 +239,7 @@ public class Rowdy {
 					level.collectCoin(footlist[i].x, footlist[i].y);
 				break;
 			case 'A':
-				break;
+				break;                    
 			case 'P':
 				if (this.footBox.intersects(curr.getHitBox())) {
 					this.onGround = true;

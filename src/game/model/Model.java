@@ -245,14 +245,13 @@ public class Model implements Runnable {
 				// System.out.println("drawing on canvas at " + temp[y].getPosition().getX() +
 				// ", " + temp[y].getPosition().getY());
 				Tile temp[] = currentLevel.getLayout().get(x);
-				gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY());
-				//temp[y].drawTile(gc);
+				//gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY());
+				temp[y].drawTile(gc);
 				
 				// temp[y].getPosition().getY());
 				if (currentLevel.accessType(x, y) == 'G') {
 					gc.setFill(Color.BLACK);
-					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
-							Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+					gc.fillRect(currentLevel.access(x, y).getPosition().getX(), currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 					// run this if you want severe lag
 				} else if (currentLevel.accessType(x, y) == 'A') {
 					gc.setFill(Color.AQUAMARINE);
@@ -262,21 +261,18 @@ public class Model implements Runnable {
 
 				} else if (currentLevel.accessType(x, y) == 'C') {
 					gc.setFill(Color.ORANGE);
-					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
-							Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+					gc.fillRect(currentLevel.access(x, y).getPosition().getX(), currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 					// run this if you want severe lag
 				} else if (currentLevel.accessType(x, y) == 'P') {
 					gc.setFill(Color.BROWN);
-					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
-							Main.HEIGHT - (currentLevel.access(x, y).getPosition().getY() - 4), Tile.WIDTH,
+					gc.fillRect(currentLevel.access(x, y).getPosition().getX(), (currentLevel.access(x, y).getPosition().getY() + 8), Tile.WIDTH,
 							Tile.HEIGHT - 8);
 				}
 			}
 		}
 		gc.setFill(Color.BLUE);
-		gc.drawImage(this.player.getImg(),this.player.getPosition().getX(), Main.HEIGHT - this.player.getPosition().getY());
-		// gc.fillRect(this.player.getPosition().getX()+2, Main.HEIGHT -
-		// (this.player.getPosition().getY() - Rowdy.HEIGHT), 3, 1);
+		gc.drawImage(this.player.getImg(),this.player.getPosition().getX(), this.player.getPosition().getY() - 1);
+		//gc.fillRect(this.player.getPosition().getX(), (this.player.getPosition().getY()), this.player.WIDTH, this.player.HEIGHT);
 		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
 		// this.player.getPosition().getY());
 	}
