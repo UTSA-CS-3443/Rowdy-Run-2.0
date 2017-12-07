@@ -32,8 +32,8 @@ GX
 G
 G
 G
-G R
-G
-G
-G
-G
+G R G
+G   G
+G   G
+G   G
+G   G
