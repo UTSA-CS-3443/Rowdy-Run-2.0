@@ -54,7 +54,11 @@ public class Model implements Runnable {
 	// Camera Variables
 	private Point canvasPosition = null;
 
-	
+	/**
+	 * Initialization of the model handles the creation of the timer/timeline to be
+	 * used to handle the games logic and display
+	 *
+	 */
 	public Model() {
 
 		indefiniteTimeline = new Timeline();
