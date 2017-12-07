@@ -10,10 +10,10 @@ G
                      GG      C
                      
 
-GGGGGGG
-GGGGGGG
+GGGGGGG        P
+GGGGGGG        P
+GGGG           
 GGGG           C
-GGGG
 G
 G
 G C     G
