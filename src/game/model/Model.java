@@ -236,6 +236,10 @@ public class Model implements Runnable {
 		return levelColumn;
 	}
 
+	
+	public static int xOffset=0;
+	public static int yOffset=0;
+	
 	public void drawCanvas(GraphicsContext gc) {
 		// gc.fillRect(100, 100, 100, 100);
 		gc.clearRect(0, 0, 500, 500);
@@ -271,7 +275,9 @@ public class Model implements Runnable {
 			}
 		}
 		gc.setFill(Color.BLUE);
-		gc.drawImage(this.player.getImg(),this.player.getPosition().getX(), this.player.getPosition().getY() - 1 + Rowdy.HEIGHT, Rowdy.WIDTH, -Rowdy.HEIGHT);
+		
+		//added values from offset to coords
+		gc.drawImage(this.player.getImg(),this.player.getPosition().getX()+xOffset, this.player.getPosition().getY()+yOffset - 1 + Rowdy.HEIGHT, Rowdy.WIDTH, -Rowdy.HEIGHT);
 		//gc.fillRect(this.player.getPosition().getX(), (this.player.getPosition().getY()), this.player.WIDTH, this.player.HEIGHT);
 		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
 		// this.player.getPosition().getY());

@@ -60,18 +60,27 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 	public void handle(KeyEvent event) {
 
 		if (isPaused == false) {
+			
+			//Tried adding values to offset value when key is pressed
 
 			switch (event.getCode()) {
 			case SPACE:
 			case W:
+				
+//				Model.yOffset +=2;
+
 			case UP: // KeyCode.UP
 				player.jump();
 				break;
 			case A:
+				//		Model.xOffset -=2;
+
 			case LEFT:
 				player.moveLeft();
 				break;
 			case D:
+				//Model.xOffset +=2;
+
 			case RIGHT:
 				player.moveRight();
 				break;

@@ -2,6 +2,8 @@ package tiles;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+
+import game.model.Model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -80,6 +82,6 @@ public abstract class Tile {
 	 */
 	public void drawTile(GraphicsContext c) {
 		//c.drawImage(img, this.position.getX(), this.position.getY());
-		c.drawImage(img, this.position.getX(), this.position.getY() + Tile.HEIGHT, Tile.WIDTH, -Tile.HEIGHT);
+		c.drawImage(img, this.position.getX()+Model.xOffset, this.position.getY()+Model.yOffset + Tile.HEIGHT, Tile.WIDTH, -Tile.HEIGHT);
 	}
 }
