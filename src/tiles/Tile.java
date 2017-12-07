@@ -81,7 +81,8 @@ public abstract class Tile {
 	 *            - The GraphicsContext used by all draw methods
 	 */
 	public void drawTile(GraphicsContext c) {
-		//c.drawImage(img, this.position.getX(), this.position.getY());
-		c.drawImage(img, this.position.getX()+Model.xOffset, this.position.getY()+Model.yOffset + Tile.HEIGHT, Tile.WIDTH, -Tile.HEIGHT);
+		// c.drawImage(img, this.position.getX(), this.position.getY());
+		c.drawImage(img, this.position.getX() + Model.xOffset, this.position.getY() + Model.yOffset + Tile.HEIGHT,
+				Tile.WIDTH, -Tile.HEIGHT);
 	}
 }

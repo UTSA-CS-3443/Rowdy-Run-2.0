@@ -29,7 +29,8 @@ import items.Coin;
 
 /**
  * Reads in data from a level file (lvlFile) to generate a level consisting of
- * Tile objects stored in an ArrayList.
+ * Tile objects stored in an ArrayList. Also handles the timer and the canvas
+ * drawing to fully create the game
  * 
  * @author Jared Polwort
  * @author Michael Diep
@@ -50,10 +51,15 @@ public class Model implements Runnable {
 	// Canvas is initialized by the GameView.FXML
 	private Canvas canvas = null;
 	private GraphicsContext gc = null;
-	
+
 	// Camera Variables
 	private Point canvasPosition = null;
 
+	/**
+	 * Initialization of the model handles the creation of the timer/timeline to be
+	 * used to handle the games logic and display
+	 *
+	 */
 	public Model() {
 
 		indefiniteTimeline = new Timeline();
@@ -70,10 +76,13 @@ public class Model implements Runnable {
 		kf = new KeyFrame(Duration.seconds(.0066), timelineHandler); // 15 fps
 		indefiniteTimeline.getKeyFrames().add(kf);
 
-		//calculate the starting position of the canvas (values are arbitrary)
-		canvasPosition = new Point (50, 50);
+		// calculate the starting position of the canvas (values are arbitrary)
+		canvasPosition = new Point(50, 50);
 	}
 
+	/**
+	 * Run starts the timeline and thus starts the logic of the game
+	 */
 	@Override
 	public void run() {
 		if (gc != null)
@@ -82,9 +91,11 @@ public class Model implements Runnable {
 			System.out.println(" ");
 
 	}
-
+	/**
+	 * The function that is repeatedly called by the timeline to handle logic and directly draw to the canvas
+	 * 
+	 */
 	public void gameTick() {
-		// TODO Fix this stuff, it ai'nt workin'
 		int playerState;
 		// player.moveRowdy();
 		playerState = player.hitBoxChecker(currentLevel);
@@ -102,7 +113,7 @@ public class Model implements Runnable {
 			player.setVelocity(0, 0);
 			System.out.println("Ending Game");
 			this.indefiniteTimeline.pause();
-			//Main.setModel(new Model());
+			// Main.setModel(new Model());
 			Main.changeScene(Main.getMainMenu());
 		}
 		// player.fall();
@@ -113,48 +124,82 @@ public class Model implements Runnable {
 			System.out.println("No GraphicsContext present");
 		}
 	}
-
+	/**
+	 * Returns a integer that tells you whether the player has won died or otherwise
+	 * @return 1 = player has died 2 = player has won 0 = all other circumstances
+	 */
 	public int getPlayerState() {
 		return this.playerState;
 	}
-	
+	/**
+	 * Returns the Level structure that the game is currently using
+	 * @return
+	 */
 	public Level getCurrentLevel() {
 		return currentLevel;
 	}
-
+	/**
+	 * Sets the Level structure that the game is to use for logic and display
+	 * @param currentLevel
+	 */
 	public void setCurrentLevel(Level currentLevel) {
 		this.currentLevel = currentLevel;
 		player.adjustRowdy(currentLevel.playerStart.x, currentLevel.playerStart.y);
 	}
-
+	/**
+	 * Returns the current player object that holds the players position
+	 * @return the current Rowdy object
+	 */
 	public Rowdy getPlayer() {
 		return player;
 	}
-
+	/**
+	 * Sets the current player object
+	 * @param player
+	 */
 	public void setPlayer(Rowdy player) {
 		this.player = player;
 	}
-
+	/**
+	 * Returns the current TimeLine
+	 * @return the currentTimeline
+	 */
 	public Timeline getIndefiniteTimeline() {
 		return indefiniteTimeline;
 	}
-
+	/**
+	 * Sets the current TimeLine
+	 * @param indefiniteTimeline
+	 */
 	public void setIndefiniteTimeline(Timeline indefiniteTimeline) {
 		this.indefiniteTimeline = indefiniteTimeline;
 	}
-
+	/**
+	 * Returns the current Canvas Object
+	 * @return current Canvas Object
+	 */
 	public Canvas getCanvas() {
 		return canvas;
 	}
-
+	/**
+	 * Sets the current Canvas Object
+	 * @param canvas
+	 */
 	public void setCanvas(Canvas canvas) {
 		this.canvas = canvas;
 	}
-
+	/**
+	 * Returns the current GraphicsContext
+	 * @return Current GraphicsContext
+	 */
 	public GraphicsContext getGraphicsContext() {
 		return gc;
 	}
-
+	
+	/**
+	 * Sets the current GraphicsContext
+	 * @param gc
+	 */
 	public void setGraphicsContext(GraphicsContext gc) {
 		this.gc = gc;
 	}
@@ -242,13 +287,15 @@ public class Model implements Runnable {
 		return levelColumn;
 	}
 
-	
-	public static int xOffset=0;
-	public static int yOffset=0;
-	
-	//translate world to position
-	public void render(GraphicsContext g)
-	{
+	public static int xOffset = 0;
+	public static int yOffset = 0;
+
+	// translate world to position
+	/**
+	 * render translates canvas across the level to simulate Level scrolling
+	 * @param g
+	 */
+	public void render(GraphicsContext g) {
 		while (canvasPosition.x < player.getPosition().x) {
 			canvasPosition.translate(1, 0);
 			g.translate(-1, 0);
@@ -266,40 +313,33 @@ public class Model implements Runnable {
 			g.translate(0, 1);
 		}
 	}
-	
+	/**
+	 * Draws our the entire Level+Rowdy onto the canvas
+	 * @param gc
+	 */
 	public void drawCanvas(GraphicsContext gc) {
 		gc.clearRect(-500, -500, currentLevel.WIDTH * 100, currentLevel.HEIGHT * 100);
+
 		for (int x = 0; x < currentLevel.WIDTH; x++) {
 			for (int y = 0; y < currentLevel.HEIGHT; y++) {
-				// System.out.println("drawing on canvas at " + temp[y].getPosition().getX() +
-				// ", " + temp[y].getPosition().getY());
 
-				currentLevel.access(x,y).drawTile(gc);
-				
+				currentLevel.access(x, y).drawTile(gc);
+
 				if (currentLevel.accessType(x, y) == 'G') {
 
 					gc.setFill(Color.SADDLEBROWN);
 					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
 							currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
-					//gc.setFill(Color.BLACK);
-					//gc.fillRect(currentLevel.access(x, y).getPosition().getX(), currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
-					// run this if you want severe lag
 				} else if (currentLevel.accessType(x, y) == 'P') {
 					gc.setFill(Color.BLACK);
 					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
-							(currentLevel.access(x, y).getPosition().getY() + 4), Tile.WIDTH,
-							Tile.HEIGHT - 8);
+							(currentLevel.access(x, y).getPosition().getY() + 4), Tile.WIDTH, Tile.HEIGHT - 8);
 				}
 			}
 		}
 		gc.setFill(Color.BLUE);
-		
-		//added values from offset to coords
-		gc.drawImage(this.player.getImg(),this.player.getPosition().getX()+xOffset, this.player.getPosition().getY()+yOffset - 1 + Rowdy.HEIGHT, Rowdy.WIDTH, -Rowdy.HEIGHT);
-		//gc.fillRect(this.player.getPosition().getX(), (this.player.getPosition().getY()), this.player.WIDTH, this.player.HEIGHT);
-		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
-		// this.player.getPosition().getY());
-
+		gc.drawImage(this.player.getImg(), this.player.getPosition().getX() + xOffset,
+				this.player.getPosition().getY() + yOffset - 1 + Rowdy.HEIGHT, Rowdy.WIDTH, -Rowdy.HEIGHT);
 	}
 
 }

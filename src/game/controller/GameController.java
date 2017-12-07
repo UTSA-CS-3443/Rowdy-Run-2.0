@@ -51,8 +51,8 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.canvas.setScaleX(2);
-		this.canvas.setScaleY(-2);
+		this.canvas.setScaleX(1.5);
+		this.canvas.setScaleY(-1.5);
 		this.canvas.getGraphicsContext2D().translate(200, 150);
 		this.model.setCanvas(canvas);
 		this.model.setGraphicsContext(this.canvas.getGraphicsContext2D());
