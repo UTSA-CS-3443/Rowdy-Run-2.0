@@ -16,11 +16,11 @@ GG     G C                    P C
 GG     G
 GG C   GX               
 GGGGGGGGGGGGG    GGGGGGG
-GGGGGGGG         GGGGGGGG            P C
+GGGGGGGG         GGGGGGGGF            P C
 GGGGG        G C GGGGGGGG
 GGG          GGGGGGGGGGGG
 GG           G   GGGGGGGGG
-GG           G   GGGGGGGGG
+GG           G   GGGGGGGGGF
 GG           G   GGGGGGGG           P C
 GG    G          GGGGGGG
 GG    G C        GGGGGGG
@@ -28,7 +28,7 @@ GG    G C        GGGGGGG
 GG    G          GGGGGGGG
 GG               GGGGGGGGG
 GG               GGGGGGGGGGG
-GG               GGGGGGGGGGGGGG
+GGF              GGGGGGGGGGGGGG
 GG               GGGGGGGGGGGGGGG
 GG C         G   GGGGGGGGGGGGGGGX  C
 GG           G C GGGGGGGGGGGGGGG
