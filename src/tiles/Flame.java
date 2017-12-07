@@ -1,20 +1,32 @@
 package tiles;
 
 import java.awt.Rectangle;
-
 import javafx.scene.image.Image;
+
+/**
+ * 
+ * @author Lynn Miguel
+ *
+ */
 
 public class Flame extends Obstacle {
 	
 	/**
-	 * Set Flame Image
-	 * 
+	 * Set Location of Flame Sprite
+	 * Draw Image to Canvas
+	 * @param x 
+	 * @param y
 	 */
-	Image flameSprite = new Image("/src/images/Flame1.gif");
-
 	public Flame(int x, int y) {
 		super(x, y);
 		this.tileType = 'F';
+		
+	    try {                
+	        this.img = new Image("images/Flame1.gif", Tile.WIDTH, Tile.HEIGHT, false, false);
+	    }
+	    catch(Exception e) {
+	        e.printStackTrace();
+	        }
 	}
 	
 	public Rectangle getHitBox() {

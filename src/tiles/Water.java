@@ -4,13 +4,29 @@ import java.awt.Rectangle;
 
 import javafx.scene.image.Image;
 
+/**
+ * 
+ * @author Lynn Miguel
+ *
+ */
 public class Water extends Obstacle {
-
-	// Image waterSprite = new Image("/src/images/Water.gif");
 	
+	/**
+	 * Set Location of Water Sprite
+	 * Draw Image to Canvas
+	 * @param x 
+	 * @param y
+	 */
 	public Water(int x, int y) {
 		super(x, y);
 		this.tileType = 'W';
+		
+	    try {                
+	        this.img = new Image("images/Water.png", Tile.WIDTH, Tile.HEIGHT, false, false);
+	    }
+	    catch(Exception e) {
+	        e.printStackTrace();
+	        }
 	}
 	
 	public Rectangle getHitBox() {

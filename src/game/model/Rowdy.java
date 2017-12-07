@@ -24,6 +24,7 @@ public class Rowdy {
 	private int jumpTime, fallTime;
 	private boolean onGround, canMoveLeft, canMoveRight;
 	private int coinCount;
+	private boolean canJump;
 	protected static final int HEIGHT = 15;
 	protected static final int WIDTH = 7;
 
@@ -31,6 +32,7 @@ public class Rowdy {
 	 * Basic initialization method to make sure no field remains unassigned
 	 */
 	public Rowdy() {
+		Image img;
 		this.position = new Point(20, 40);
 		this.xVelocity = 0;
 		this.yVelocity = 0;
@@ -39,10 +41,19 @@ public class Rowdy {
 		this.canMoveLeft = true;
 		this.canMoveRight = true;
 		this.hitBox = new Rectangle(this.position.x, this.position.y, Rowdy.WIDTH, Rowdy.HEIGHT);
-		this.headBox = new Rectangle(this.position.x, this.position.y, Rowdy.WIDTH, 3);
+		this.headBox = new Rectangle(this.position.x, this.position.y+1, Rowdy.WIDTH, 3);
 		this.footBox = new Rectangle(this.position.x + 1, this.position.y - (Rowdy.HEIGHT - 3), Rowdy.WIDTH - 2, 3);
 		this.rightBox = new Rectangle(this.position.x + (Rowdy.WIDTH - 2), this.position.y + 2, 2, Rowdy.HEIGHT - 2);
 		this.leftBox = new Rectangle(this.position.x, this.position.y + 2, 2, Rowdy.HEIGHT - 2);
+		
+		try {                
+	        img = new Image("images/Rowdy1.gif", this.WIDTH, this.HEIGHT, false, false);
+	        this.setImg(img);
+	    }
+	    catch(Exception e) {
+	        e.printStackTrace();
+	        }
+		
 	}
 
 	/**
@@ -58,7 +69,7 @@ public class Rowdy {
 		Point head = new Point(this.position);
 		Point right = new Point(this.position);
 		foot.translate(0, -(Rowdy.HEIGHT - 1));
-		head.translate(0, 2);
+		head.translate(0, 1);
 		right.translate((Rowdy.WIDTH - 2), 0);
 
 		this.hitBox.setLocation(this.position);
@@ -128,6 +139,7 @@ public class Rowdy {
 			this.jumpTime = 15;
 			this.yVelocity = 3;
 			this.onGround = false;
+			this.canJump = false;
 		}
 	}
 
@@ -144,7 +156,7 @@ public class Rowdy {
 	 */
 	public void fall() {
 		if (this.onGround && this.jumpTime == 0) {
-			this.yVelocity = 0;
+			//this.yVelocity = 0;
 			return;
 		}
 		if (this.jumpTime == 0) {
@@ -231,6 +243,7 @@ public class Rowdy {
 			case 'P':
 				if (this.footBox.intersects(curr.getHitBox())) {
 					this.onGround = true;
+					this.canJump = true;
 					if (this.jumpTime == 0)
 						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + (Rowdy.HEIGHT - 4));
 				}
@@ -238,6 +251,7 @@ public class Rowdy {
 			case 'G':
 				if (this.footBox.intersectsLine(curr.getPosition().getX() + 1, curr.getPosition().getY() + 1, curr.getPosition().getX() - 1 + curr.WIDTH, curr.getPosition().getY() + 1)) {
 					this.onGround = true;
+					this.canJump = true;   //might use this makes the jump work more like a double jump
 					if (this.jumpTime == 0)
 						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT);
 				}
@@ -264,18 +278,17 @@ public class Rowdy {
 			switch (curr.getTileType()) {
 			case 'C':
 				if (this.hitBox.intersects(curr.getHitBox()))
-					level.access(headlist[i].x, headlist[i].y);
+					level.collectCoin(headlist[i].x, headlist[i].y);
 				break;
 			case 'P':
 			case 'A':
 				break;
 			case 'G':
-				if (this.headBox.intersectsLine(curr.getPosition().getX(), curr.getPosition().getY() + Tile.HEIGHT, curr.getPosition().getX() + Tile.WIDTH, curr.getPosition().getY() + Tile.HEIGHT)) {
-					System.out.println("touching bottom side");
+				if (this.headBox.intersects(curr.getHitBox())) {
 					this.jumpTime = 0;
 					this.yVelocity = 0;
 					//this.land();
-					this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() - Tile.HEIGHT);
+					this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() - (Tile.HEIGHT+1));
 				}
 				break;
 			case 'W':
@@ -301,7 +314,7 @@ public class Rowdy {
 				switch (curr.getTileType()) {
 				case 'C':
 					if (this.hitBox.intersects(curr.getHitBox()))
-						level.access(leftlist[i].x, leftlist[i].y);
+						level.collectCoin(leftlist[i].x, leftlist[i].y);
 					break;
 				case 'P':
 				case 'A':
