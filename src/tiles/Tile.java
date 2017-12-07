@@ -25,7 +25,7 @@ import javafx.scene.image.Image;
  */
 
 public abstract class Tile {
-	public static final int WIDTH = 12, HEIGHT = 12;
+	public static final int WIDTH = 11, HEIGHT = 11;
 	protected Point position = null;
 	protected Rectangle hitBox;
 	protected Image img;
