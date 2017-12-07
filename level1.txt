@@ -1,33 +1,44 @@
 GG
 GG
+GG    P
+GG R  P                 P C
+GG    P       P C              P C
+GG X
+GG G
+GG G C               P C
+GG G
 GG
-GG  
-GG
-GG
-GG
-GG  R
-GG
-GG
-GG
-GG
-GG  
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG
-GG C
-GG
+GG     G C                    P C
+GG     G
+GG C   G X                 
+GGGGGGGGGGGGG    GGGGGGG
+GGGGGGGG         GGGGGGGG            P C
+GGGGG        G C GGGGGGGG
+GGG          GGGGGGGGGGGG
+GG           G   GGGGGGGGG
+GG           G   GGGGGGGGG
+GG           G   GGGGGGGG           P C
+GG    G          GGGGGGG
+GG    G C        GGGGGGG
+GG    G C        GGGGGGG
+GG    G          GGGGGGGG
+GG               GGGGGGGGG
+GG               GGGGGGGGGGG
+GG               GGGGGGGGGGGGGG
+GG               GGGGGGGGGGGGGGG
+GG C         G   GGGGGGGGGGGGGGG X  C
+GG           G C GGGGGGGGGGGGGGG
+GG           G   GGGGGGGGGGGGGG
+GG               GGGGGGGGGGG
+GG           G   GGGGGGGGG
+GG           G C GGGGGGGGG
+GG           G   GGGGGGGGG
+GG               GGGGGGGGG
+GG               GGGGGGGGG
+GG         GGGGGGGGGGGGGGG
+GG        G C    GGGGGGGGG
+GG       G       GGGGGGGG
+GGG             GGGGGGGG
+GGGG           GGGGGGGGG
+GGGGGGGG   GGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGG

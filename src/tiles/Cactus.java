@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import javafx.scene.image.Image;
+
 
 
 public class Cactus extends Obstacle {
@@ -14,8 +16,6 @@ public class Cactus extends Obstacle {
 	 * Set Cactus Image
 	 */
 	// Image cactusSprite = new Image("/src/images/cactus.png");
-
-	BufferedImage img;
 	
 	// Constructor
 	public Cactus(int x, int y) {
@@ -23,7 +23,7 @@ public class Cactus extends Obstacle {
 		this.tileType = 'X';
 
 	    try {                
-	        img = ImageIO.read(getClass().getResourceAsStream("/src/images/cactus.png"));
+	        this.img = new Image("images/cactus.png", this.WIDTH, this.HEIGHT, false, false);//ImageIO.read(getClass().getResourceAsStream("/src/images/cactus.png"));
 	    }
 	    catch(Exception e) {
 	        e.printStackTrace();

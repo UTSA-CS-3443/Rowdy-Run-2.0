@@ -115,7 +115,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		case D:
 		case LEFT:
 		case RIGHT:
-			player.stopHorizontalMotion();
+			player.setVelocity(0, player.getYVelocity());
 			break;
 		}
 	}

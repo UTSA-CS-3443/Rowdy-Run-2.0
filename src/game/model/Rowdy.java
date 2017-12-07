@@ -99,9 +99,23 @@ public class Rowdy {
 
 	/**
 	 * Used by the controller on key release to stop Rowdy's horizontal momentum
+	 * 
+	 * @param xV - x velocity
+	 * @param yV - y Velocity
 	 */
-	public void stopHorizontalMotion() {
-		this.xVelocity = 0;
+	public void setVelocity(int xV, int yV) {
+		this.xVelocity = xV;
+		this.yVelocity = yV;
+	}
+	
+	
+
+	public int getXVelocity() {
+		return xVelocity;
+	}
+
+	public int getYVelocity() {
+		return yVelocity;
 	}
 
 	/**

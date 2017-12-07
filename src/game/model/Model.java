@@ -93,9 +93,10 @@ public class Model implements Runnable {
 			// TODO handle rowdy winning
 			System.err.println("YOU WIN!");
 			playerState = 0;
+			player.setVelocity(0, 0);
 			System.out.println("Ending Game");
 			this.indefiniteTimeline.pause();
-			Main.setModel(new Model());
+			//Main.setModel(new Model());
 			Main.changeScene(Main.getMainMenu());
 			//delete this model somehow
 		}
@@ -243,7 +244,10 @@ public class Model implements Runnable {
 			for (int y = 0; y < currentLevel.HEIGHT; y++) {
 				// System.out.println("drawing on canvas at " + temp[y].getPosition().getX() +
 				// ", " + temp[y].getPosition().getY());
-				// gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(),
+				Tile temp[] = currentLevel.getLayout().get(x);
+				gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(), temp[y].getPosition().getY());
+				//temp[y].drawTile(gc);
+				
 				// temp[y].getPosition().getY());
 				if (currentLevel.accessType(x, y) == 'G') {
 					gc.setFill(Color.BLACK);
@@ -257,7 +261,7 @@ public class Model implements Runnable {
 					// 10);
 
 				} else if (currentLevel.accessType(x, y) == 'C') {
-					gc.setFill(Color.YELLOW);
+					gc.setFill(Color.ORANGE);
 					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
 							Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 					// run this if you want severe lag

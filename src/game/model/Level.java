@@ -18,6 +18,11 @@ public class Level {
 		this.HEIGHT = layout.get(0).length;
 		this.countCoins();
 	}
+	
+	public ArrayList<Tile[]> getLayout(){
+		return layout;
+	}
+	
 	public Point getPlayerStart() {
 		return this.playerStart;
 	}
