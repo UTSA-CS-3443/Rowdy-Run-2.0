@@ -43,11 +43,11 @@ public class MainMenuController implements EventHandler<ActionEvent> {
 		case "Level 1":
 			lvlFile = new File("level1.txt");
 			try {
-				System.out.println("reading level1.txt");
+				System.out.println("Reading level1.txt");
 				this.model.setCurrentLevel(this.model.readLevel(lvlFile));
-				System.out.println("read-in successfull");
+				System.out.println("Read-In successful");
 			} catch (IOException e) {
-				System.err.println("failed to open level1.txt");
+				System.err.println("Failed to open level1.txt");
 				e.printStackTrace();
 				break;
 			}
@@ -57,10 +57,10 @@ public class MainMenuController implements EventHandler<ActionEvent> {
 		case "Level 2":
 			lvlFile = new File("level2.txt");
 			try {
-				System.out.println("reading level2.txt");
+				System.out.println("Reading level2.txt");
 				this.model.setCurrentLevel(this.model.readLevel(lvlFile));
 			} catch (IOException e) {
-				System.err.println("failed to open level2.txt");
+				System.err.println("Failed to open level2.txt");
 				e.printStackTrace();
 				break;
 			}
@@ -70,10 +70,10 @@ public class MainMenuController implements EventHandler<ActionEvent> {
 		case "Level 3":
 			lvlFile = new File("level3.txt");
 			try {
-				System.out.println("reading level3.txt");
+				System.out.println("Reading level3.txt");
 				this.model.setCurrentLevel(this.model.readLevel(lvlFile));
 			} catch (IOException e) {
-				System.err.println("failed to open level3.txt");
+				System.err.println("Failed to open level3.txt");
 				e.printStackTrace();
 				break;
 			}
@@ -89,7 +89,7 @@ public class MainMenuController implements EventHandler<ActionEvent> {
 		}
 
 		if (run == true) {
-			System.out.println("Starting game");
+			System.out.println("Starting Game");
 			Main.changeScene(Main.getGame());
 			Main.getExecutorService().execute(this.model);
 
