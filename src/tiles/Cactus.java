@@ -30,7 +30,8 @@ public class Cactus extends Obstacle {
 	    }
 	    catch(Exception e) {
 	        e.printStackTrace();
-	        }
+	        
+	    }
 	}
 
 	public Rectangle getHitBox() {

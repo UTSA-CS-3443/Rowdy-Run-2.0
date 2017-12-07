@@ -250,7 +250,7 @@ public class Model implements Runnable {
 				
 				// temp[y].getPosition().getY());
 				if (currentLevel.accessType(x, y) == 'G') {
-					gc.setFill(Color.BLACK);
+					gc.setFill(Color.SADDLEBROWN);
 					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
 							Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 					// run this if you want severe lag
@@ -261,12 +261,12 @@ public class Model implements Runnable {
 					// 10);
 
 				} else if (currentLevel.accessType(x, y) == 'C') {
-					gc.setFill(Color.ORANGE);
-					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
-							Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+					//gc.setFill(Color.ORANGE);
+					//gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
+							//Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
 					// run this if you want severe lag
 				} else if (currentLevel.accessType(x, y) == 'P') {
-					gc.setFill(Color.BROWN);
+					gc.setFill(Color.BLACK);
 					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
 							Main.HEIGHT - (currentLevel.access(x, y).getPosition().getY() - 4), Tile.WIDTH,
 							Tile.HEIGHT - 8);

@@ -41,13 +41,13 @@ public class Rowdy {
 		this.canMoveLeft = true;
 		this.canMoveRight = true;
 		this.hitBox = new Rectangle(this.position.x, this.position.y, Rowdy.WIDTH, Rowdy.HEIGHT);
-		this.headBox = new Rectangle(this.position.x, this.position.y+1, Rowdy.WIDTH, 3);
+		this.headBox = new Rectangle(this.position.x + 2, this.position.y+1, Rowdy.WIDTH-4, 2);
 		this.footBox = new Rectangle(this.position.x + 1, this.position.y - (Rowdy.HEIGHT - 3), Rowdy.WIDTH - 2, 3);
 		this.rightBox = new Rectangle(this.position.x + (Rowdy.WIDTH - 2), this.position.y + 2, 2, Rowdy.HEIGHT - 2);
 		this.leftBox = new Rectangle(this.position.x, this.position.y + 2, 2, Rowdy.HEIGHT - 2);
 		
 		try {                
-	        img = new Image("images/Rowdy1.gif", this.WIDTH, this.HEIGHT, false, false);
+	        img = new Image("images/Rowdy16.gif", this.WIDTH, this.HEIGHT, false, false);
 	        this.setImg(img);
 	    }
 	    catch(Exception e) {
@@ -137,6 +137,7 @@ public class Rowdy {
 	public void jump() {
 		if (this.onGround) {
 			this.jumpTime = 15;
+			this.fallTime = 10;
 			this.yVelocity = 3;
 			this.onGround = false;
 			this.canJump = false;
@@ -239,7 +240,7 @@ public class Rowdy {
 					level.collectCoin(footlist[i].x, footlist[i].y);
 				break;
 			case 'A':
-				break;
+				break;                    
 			case 'P':
 				if (this.footBox.intersects(curr.getHitBox())) {
 					this.onGround = true;
@@ -288,7 +289,7 @@ public class Rowdy {
 					this.jumpTime = 0;
 					this.yVelocity = 0;
 					//this.land();
-					this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() - (Tile.HEIGHT+1));
+					//this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() - (Tile.HEIGHT+1));
 				}
 				break;
 			case 'W':
