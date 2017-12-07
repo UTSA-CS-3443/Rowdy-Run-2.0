@@ -245,7 +245,7 @@ public class Model implements Runnable {
 				// System.out.println("drawing on canvas at " + temp[y].getPosition().getX() +
 				// ", " + temp[y].getPosition().getY());
 				Tile temp[] = currentLevel.getLayout().get(x);
-				gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(), temp[y].getPosition().getY());
+				gc.drawImage(temp[y].getImg(), temp[y].getPosition().getX(), Main.HEIGHT - temp[y].getPosition().getY());
 				//temp[y].drawTile(gc);
 				
 				// temp[y].getPosition().getY());

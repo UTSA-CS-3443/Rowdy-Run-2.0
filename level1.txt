@@ -3,14 +3,14 @@ GG
 GG    P
 GG R  P                 P C
 GG    P       P C              P C
-GG X
+GGX
 GG G
 GG G C               P C
 GG G
 GG
 GG     G C                    P C
 GG     G
-GG C   G X                 
+GG C   GX               
 GGGGGGGGGGGGG    GGGGGGG
 GGGGGGGG         GGGGGGGG            P C
 GGGGG        G C GGGGGGGG
@@ -26,7 +26,7 @@ GG               GGGGGGGGG
 GG               GGGGGGGGGGG
 GG               GGGGGGGGGGGGGG
 GG               GGGGGGGGGGGGGGG
-GG C         G   GGGGGGGGGGGGGGG X  C
+GG C         G   GGGGGGGGGGGGGGGX  C
 GG           G C GGGGGGGGGGGGGGG
 GG           G   GGGGGGGGGGGGGG
 GG               GGGGGGGGGGG

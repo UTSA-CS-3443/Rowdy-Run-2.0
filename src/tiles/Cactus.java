@@ -23,7 +23,7 @@ public class Cactus extends Obstacle {
 		this.tileType = 'X';
 
 	    try {                
-	        this.img = new Image("images/cactus.png", this.WIDTH, this.HEIGHT, false, false);//ImageIO.read(getClass().getResourceAsStream("/src/images/cactus.png"));
+	        this.img = new Image("images/cactus.png", Tile.WIDTH, Tile.HEIGHT, false, false);//ImageIO.read(getClass().getResourceAsStream("/src/images/cactus.png"));
 	    }
 	    catch(Exception e) {
 	        e.printStackTrace();
