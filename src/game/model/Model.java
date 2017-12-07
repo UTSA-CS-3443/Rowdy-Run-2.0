@@ -1,5 +1,6 @@
 package game.model;
 
+import java.awt.Graphics;
 import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,6 +50,9 @@ public class Model implements Runnable {
 	// Canvas is initialized by the GameView.FXML
 	private Canvas canvas = null;
 	private GraphicsContext gc = null;
+	
+	// Camera Variables
+	private Point canvasPosition = null;
 
 	public Model() {
 
@@ -66,6 +70,8 @@ public class Model implements Runnable {
 		kf = new KeyFrame(Duration.seconds(.0066), timelineHandler); // 15 fps
 		indefiniteTimeline.getKeyFrames().add(kf);
 
+		//calculate the starting position of the canvas (values are arbitrary)
+		canvasPosition = new Point (50, 50);
 	}
 
 	@Override
@@ -98,10 +104,10 @@ public class Model implements Runnable {
 			this.indefiniteTimeline.pause();
 			//Main.setModel(new Model());
 			Main.changeScene(Main.getMainMenu());
-			//delete this model somehow
 		}
 		// player.fall();
 		try {
+			render(gc);
 			drawCanvas(gc);
 		} catch (NullPointerException e) {
 			System.out.println("No GraphicsContext present");
@@ -240,10 +246,29 @@ public class Model implements Runnable {
 	public static int xOffset=0;
 	public static int yOffset=0;
 	
+	//translate world to position
+	public void render(GraphicsContext g)
+	{
+		while (canvasPosition.x < player.getPosition().x) {
+			canvasPosition.translate(1, 0);
+			g.translate(-1, 0);
+		}
+		while (canvasPosition.x > player.getPosition().x) {
+			canvasPosition.translate(-1, 0);
+			g.translate(1, 0);
+		}
+		while (canvasPosition.y < player.getPosition().y) {
+			canvasPosition.translate(0, 1);
+			g.translate(0, -1);
+		}
+		while (canvasPosition.y > player.getPosition().y) {
+			canvasPosition.translate(0, -1);
+			g.translate(0, 1);
+		}
+	}
+	
 	public void drawCanvas(GraphicsContext gc) {
-		// gc.fillRect(100, 100, 100, 100);
-		gc.clearRect(0, 0, 500, 500);
-		// gc.translate(1, 0);
+		gc.clearRect(-500, -500, currentLevel.WIDTH * 100, currentLevel.HEIGHT * 100);
 		for (int x = 0; x < currentLevel.WIDTH; x++) {
 			for (int y = 0; y < currentLevel.HEIGHT; y++) {
 				// System.out.println("drawing on canvas at " + temp[y].getPosition().getX() +
@@ -274,6 +299,7 @@ public class Model implements Runnable {
 		//gc.fillRect(this.player.getPosition().getX(), (this.player.getPosition().getY()), this.player.WIDTH, this.player.HEIGHT);
 		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
 		// this.player.getPosition().getY());
+
 	}
 
 }
