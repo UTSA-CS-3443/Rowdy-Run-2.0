@@ -34,7 +34,7 @@ import items.Coin;
  * 
  * @author Jared Polwort
  * @author Michael Diep
- *
+ * @author Andrew Hernandez
  */
 public class Model implements Runnable {
 
@@ -91,9 +91,10 @@ public class Model implements Runnable {
 			System.out.println(" ");
 
 	}
+
 	/**
-	 * The function that is repeatedly called by the timeline to handle logic and directly draw to the canvas
-	 * 
+	 * gameTick updates the game logic and calls on render and drawCanvas in order
+	 * to update the images on the screen whenever an event happens.
 	 */
 	public void gameTick() {
 		int playerState;
@@ -124,80 +125,101 @@ public class Model implements Runnable {
 			System.out.println("No GraphicsContext present");
 		}
 	}
+
 	/**
 	 * Returns a integer that tells you whether the player has won died or otherwise
+	 * 
 	 * @return 1 = player has died 2 = player has won 0 = all other circumstances
 	 */
 	public int getPlayerState() {
 		return this.playerState;
 	}
+
 	/**
 	 * Returns the Level structure that the game is currently using
+	 * 
 	 * @return
 	 */
 	public Level getCurrentLevel() {
 		return currentLevel;
 	}
+
 	/**
 	 * Sets the Level structure that the game is to use for logic and display
+	 * 
 	 * @param currentLevel
 	 */
 	public void setCurrentLevel(Level currentLevel) {
 		this.currentLevel = currentLevel;
 		player.adjustRowdy(currentLevel.playerStart.x, currentLevel.playerStart.y);
 	}
+
 	/**
 	 * Returns the current player object that holds the players position
+	 * 
 	 * @return the current Rowdy object
 	 */
 	public Rowdy getPlayer() {
 		return player;
 	}
+
 	/**
 	 * Sets the current player object
+	 * 
 	 * @param player
 	 */
 	public void setPlayer(Rowdy player) {
 		this.player = player;
 	}
+
 	/**
 	 * Returns the current TimeLine
+	 * 
 	 * @return the currentTimeline
 	 */
 	public Timeline getIndefiniteTimeline() {
 		return indefiniteTimeline;
 	}
+
 	/**
 	 * Sets the current TimeLine
+	 * 
 	 * @param indefiniteTimeline
 	 */
 	public void setIndefiniteTimeline(Timeline indefiniteTimeline) {
 		this.indefiniteTimeline = indefiniteTimeline;
 	}
+
 	/**
 	 * Returns the current Canvas Object
+	 * 
 	 * @return current Canvas Object
 	 */
 	public Canvas getCanvas() {
 		return canvas;
 	}
+
 	/**
 	 * Sets the current Canvas Object
+	 * 
 	 * @param canvas
 	 */
 	public void setCanvas(Canvas canvas) {
 		this.canvas = canvas;
 	}
+
 	/**
 	 * Returns the current GraphicsContext
+	 * 
 	 * @return Current GraphicsContext
 	 */
 	public GraphicsContext getGraphicsContext() {
 		return gc;
 	}
-	
+
 	/**
 	 * Sets the current GraphicsContext
+	 * 
 	 * @param gc
 	 */
 	public void setGraphicsContext(GraphicsContext gc) {
@@ -292,8 +314,11 @@ public class Model implements Runnable {
 
 	// translate world to position
 	/**
-	 * render translates canvas across the level to simulate Level scrolling
+	 * Render changes the x and y positions to change the tiles in order to scroll
+	 * the map. It updates the images on the screen.
+	 * 
 	 * @param g
+	 *            is used to draw on the canvas using a buffer.
 	 */
 	public void render(GraphicsContext g) {
 		while (canvasPosition.x < player.getPosition().x) {
@@ -313,9 +338,14 @@ public class Model implements Runnable {
 			g.translate(0, 1);
 		}
 	}
+
 	/**
 	 * Draws our the entire Level+Rowdy onto the canvas
+	 * 
 	 * @param gc
+	 *            passes graphics context to issue draw calls to the canvas using a
+	 *            buffer.
+	 * 
 	 */
 	public void drawCanvas(GraphicsContext gc) {
 		gc.clearRect(-500, -500, currentLevel.WIDTH * 100, currentLevel.HEIGHT * 100);
