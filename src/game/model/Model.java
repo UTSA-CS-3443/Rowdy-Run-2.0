@@ -271,7 +271,7 @@ public class Model implements Runnable {
 			}
 		}
 		gc.setFill(Color.BLUE);
-		gc.drawImage(this.player.getImg(),this.player.getPosition().getX(), this.player.getPosition().getY() - 1);
+		gc.drawImage(this.player.getImg(),this.player.getPosition().getX(), this.player.getPosition().getY() - 1 + Rowdy.HEIGHT, Rowdy.WIDTH, -Rowdy.HEIGHT);
 		//gc.fillRect(this.player.getPosition().getX(), (this.player.getPosition().getY()), this.player.WIDTH, this.player.HEIGHT);
 		// gc.drawImage(this.player.getImg(), this.player.getPosition().getX(),
 		// this.player.getPosition().getY());
