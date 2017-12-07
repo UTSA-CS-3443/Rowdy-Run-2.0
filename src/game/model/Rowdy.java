@@ -41,7 +41,7 @@ public class Rowdy {
 		this.canMoveLeft = true;
 		this.canMoveRight = true;
 		this.hitBox = new Rectangle(this.position.x, this.position.y, Rowdy.WIDTH, Rowdy.HEIGHT);
-		this.headBox = new Rectangle(this.position.x + 2, this.position.y+1, Rowdy.WIDTH-4, 2);
+		this.headBox = new Rectangle(this.position.x + 2, this.position.y+2, Rowdy.WIDTH-4, 2);
 		this.footBox = new Rectangle(this.position.x + 1, this.position.y - (Rowdy.HEIGHT - 3), Rowdy.WIDTH - 2, 3);
 		this.rightBox = new Rectangle(this.position.x + (Rowdy.WIDTH - 2), this.position.y + 2, 2, Rowdy.HEIGHT - 2);
 		this.leftBox = new Rectangle(this.position.x, this.position.y + 2, 2, Rowdy.HEIGHT - 2);
@@ -68,8 +68,8 @@ public class Rowdy {
 		Point foot = new Point(this.position);
 		Point head = new Point(this.position);
 		Point right = new Point(this.position);
-		foot.translate(0, -(Rowdy.HEIGHT - 1));
-		head.translate(0, 1);
+		foot.translate(1, -(Rowdy.HEIGHT - 1));
+		head.translate(2, 1);
 		right.translate((Rowdy.WIDTH - 2), 0);
 
 		this.hitBox.setLocation(this.position);
@@ -135,8 +135,8 @@ public class Rowdy {
 	 * decelerates his jump
 	 */
 	public void jump() {
-		if (this.onGround) {
-			this.jumpTime = 15;
+		if (this.canJump) {
+			this.jumpTime = 10;
 			this.fallTime = 10;
 			this.yVelocity = 3;
 			this.onGround = false;
@@ -157,7 +157,7 @@ public class Rowdy {
 	 */
 	public void fall() {
 		if (this.onGround && this.jumpTime == 0) {
-			//this.yVelocity = 0;
+			this.yVelocity = 0;
 			return;
 		}
 		if (this.jumpTime == 0) {
@@ -263,7 +263,7 @@ public class Rowdy {
 			}
 		}
 		Point[] rightlist = { new Point(rowdyX + 1, rowdyY), new Point(rowdyX + 1, rowdyY - 1),
-				new Point(rowdyX + 1, rowdyY - 2), new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
+				 new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
 		if (rowdyX >= level.WIDTH - 2) {
 			canMoveRight = false;
 			this.adjustRowdy(((level.WIDTH - 3) * Tile.WIDTH) + 9, this.position.y);
@@ -340,8 +340,8 @@ public class Rowdy {
 			}
 		}
 
-		Point[] headlist = { new Point(rowdyX + 1, rowdyY), new Point(rowdyX, rowdyY),
-				new Point(rowdyX + 1, rowdyY + 1), new Point(rowdyX, rowdyY + 1) };
+		Point[] headlist = { 
+				new Point(rowdyX + 1, rowdyY + 1), new Point(rowdyX, rowdyY + 1),new Point(rowdyX + 1, rowdyY), new Point(rowdyX, rowdyY) };
 
 		for (int i = 0; i < headlist.length; i++) {
 			if (headlist[i].y < 0 || headlist[i].y > level.HEIGHT)
@@ -359,6 +359,7 @@ public class Rowdy {
 				if (this.headBox.intersects(curr.getHitBox())) {
 					this.jumpTime = 0;
 					this.yVelocity = 0;
+					this.canJump = false;
 					//this.land();
 					//this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() - (Tile.HEIGHT+1));
 				}
