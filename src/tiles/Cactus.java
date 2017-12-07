@@ -8,22 +8,25 @@ import javax.imageio.ImageIO;
 
 import javafx.scene.image.Image;
 
-
-
+/**
+ * 
+ * @author Lynn Miguel
+ *
+ */
 public class Cactus extends Obstacle {
 
 	/**
-	 * Set Cactus Image
+	 * Set Location of Cactus Sprite
+	 * Draw Image to Canvas
+	 * @param x 
+	 * @param y
 	 */
-	// Image cactusSprite = new Image("/src/images/cactus.png");
-	
-	// Constructor
 	public Cactus(int x, int y) {
 		super(x, y);
 		this.tileType = 'X';
-
+		
 	    try {                
-	        this.img = new Image("images/cactus.png", Tile.WIDTH, Tile.HEIGHT, false, false);//ImageIO.read(getClass().getResourceAsStream("/src/images/cactus.png"));
+	        this.img = new Image("images/cactus.png", Tile.WIDTH, Tile.HEIGHT, false, false);
 	    }
 	    catch(Exception e) {
 	        e.printStackTrace();
