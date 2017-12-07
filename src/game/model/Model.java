@@ -250,9 +250,14 @@ public class Model implements Runnable {
 				
 				// temp[y].getPosition().getY());
 				if (currentLevel.accessType(x, y) == 'G') {
+<<<<<<< HEAD
 					gc.setFill(Color.SADDLEBROWN);
 					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
 							Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+=======
+					gc.setFill(Color.BLACK);
+					gc.fillRect(currentLevel.access(x, y).getPosition().getX(), currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+>>>>>>> refs/remotes/origin/master
 					// run this if you want severe lag
 				} else if (currentLevel.accessType(x, y) == 'A') {
 					gc.setFill(Color.AQUAMARINE);
@@ -261,14 +266,24 @@ public class Model implements Runnable {
 					// 10);
 
 				} else if (currentLevel.accessType(x, y) == 'C') {
+<<<<<<< HEAD
 					//gc.setFill(Color.ORANGE);
 					//gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
 							//Main.HEIGHT - currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+=======
+					gc.setFill(Color.ORANGE);
+					gc.fillRect(currentLevel.access(x, y).getPosition().getX(), currentLevel.access(x, y).getPosition().getY(), Tile.WIDTH, Tile.HEIGHT);
+>>>>>>> refs/remotes/origin/master
 					// run this if you want severe lag
 				} else if (currentLevel.accessType(x, y) == 'P') {
+<<<<<<< HEAD
 					gc.setFill(Color.BLACK);
 					gc.fillRect(currentLevel.access(x, y).getPosition().getX(),
 							Main.HEIGHT - (currentLevel.access(x, y).getPosition().getY() - 4), Tile.WIDTH,
+=======
+					gc.setFill(Color.BROWN);
+					gc.fillRect(currentLevel.access(x, y).getPosition().getX(), (currentLevel.access(x, y).getPosition().getY() + 8), Tile.WIDTH,
+>>>>>>> refs/remotes/origin/master
 							Tile.HEIGHT - 8);
 				}
 			}

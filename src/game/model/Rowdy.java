@@ -227,6 +227,86 @@ public class Rowdy {
 		int rowdyX = (int) Math.floor((double) this.position.x / Tile.WIDTH);
 		int rowdyY = (int) Math.floor((double) this.position.y / Tile.HEIGHT);
 
+<<<<<<< HEAD
+=======
+		Point[] footlist = { new Point(rowdyX + 1, rowdyY - 1), new Point(rowdyX, rowdyY - 1),
+				new Point(rowdyX + 1, rowdyY - 2), new Point(rowdyX, rowdyY - 2) };
+
+		for (int i = 0; i < footlist.length; i++) {
+			if (footlist[i].y < 0 || footlist[i].y > level.HEIGHT)
+				return 1;
+			curr = level.access(footlist[i].x, footlist[i].y);
+			switch (curr.getTileType()) {
+			case 'C':
+				if (this.hitBox.intersects(curr.getHitBox()))
+					level.collectCoin(footlist[i].x, footlist[i].y);
+				break;
+			case 'A':
+				break;                    
+			case 'P':
+				if (this.footBox.intersects(curr.getHitBox())) {
+					this.onGround = true;
+					this.canJump = true;
+					if (this.jumpTime == 0)
+						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + (Rowdy.HEIGHT - 4));
+				}
+				break;
+			case 'G':
+				if (this.footBox.intersectsLine(curr.getPosition().getX() + 1, curr.getPosition().getY() + 1, curr.getPosition().getX() - 1 + curr.WIDTH, curr.getPosition().getY() + 1)) {
+					this.onGround = true;
+					this.canJump = true;   //might use this makes the jump work more like a double jump
+					if (this.jumpTime == 0)
+						this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() + Rowdy.HEIGHT);
+				}
+				break;
+			case 'W':
+			case 'F':
+			case 'X':
+				if (this.hitBox.intersects(curr.getHitBox()))
+					return 1;
+				break;
+			case '?':
+			default:
+				return 1;
+			}
+		}
+
+		Point[] headlist = { new Point(rowdyX + 1, rowdyY), new Point(rowdyX, rowdyY),
+				new Point(rowdyX + 1, rowdyY + 1), new Point(rowdyX, rowdyY + 1) };
+
+		for (int i = 0; i < headlist.length; i++) {
+			if (headlist[i].y < 0 || headlist[i].y > level.HEIGHT)
+				return 1;
+			curr = level.access(headlist[i].x, headlist[i].y);
+			switch (curr.getTileType()) {
+			case 'C':
+				if (this.hitBox.intersects(curr.getHitBox()))
+					level.collectCoin(headlist[i].x, headlist[i].y);
+				break;
+			case 'P':
+			case 'A':
+				break;
+			case 'G':
+				if (this.headBox.intersects(curr.getHitBox())) {
+					this.jumpTime = 0;
+					this.yVelocity = 0;
+					//this.land();
+					this.adjustRowdy(this.position.x, (int) curr.getPosition().getY() - (Tile.HEIGHT+1));
+				}
+				break;
+			case 'W':
+			case 'F':
+			case 'X':
+				if (this.hitBox.intersects(curr.getHitBox()))
+					return 1;
+				break;
+			case '?':
+			default:
+				return 1;
+			}
+		}
+
+>>>>>>> refs/remotes/origin/master
 		Point[] leftlist = { new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
 
 		if (rowdyX <= 0) {
