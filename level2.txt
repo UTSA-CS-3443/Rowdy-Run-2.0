@@ -16,23 +16,23 @@ GGGG           C
 GGGG
 G
 G
-G C            G
-G C            G
-G C            G
-G C            G
+G C     G
+G C     G
+G       G
+G C     G
 G C
 G C
 G C
 G
 G        P
-G        P
+G R      P
 G        P
 G
 GX
 G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 G
-G R
+G 
 G
 G
 G

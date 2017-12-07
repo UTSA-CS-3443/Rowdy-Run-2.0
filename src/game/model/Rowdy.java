@@ -227,6 +227,77 @@ public class Rowdy {
 		int rowdyX = (int) Math.floor((double) this.position.x / Tile.WIDTH);
 		int rowdyY = (int) Math.floor((double) this.position.y / Tile.HEIGHT);
 
+		Point[] leftlist = { new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
+
+		if (rowdyX <= 0) {
+			canMoveLeft = false;
+			this.adjustRowdy(10, this.position.y);
+		} else {
+			for (int i = 0; i < leftlist.length; i++) {
+				curr = level.access(leftlist[i].x, leftlist[i].y);
+				switch (curr.getTileType()) {
+				case 'C':
+					if (this.hitBox.intersects(curr.getHitBox()))
+						level.collectCoin(leftlist[i].x, leftlist[i].y);
+					break;
+				case 'P':
+				case 'A':
+					break;
+				case 'G':
+					if (this.leftBox.intersects(curr.getHitBox())) {
+						this.canMoveLeft = false;
+						//this.xVelocity = 0;
+						this.adjustRowdy(this.position.x + 1, this.position.y);
+					}
+					break;
+				case 'W':
+				case 'F':
+				case 'X':
+					if (this.hitBox.intersects(curr.getHitBox()))
+						return 1;
+					break;
+				case '?':
+				default:
+					return 1;
+				}
+			}
+		}
+		Point[] rightlist = { new Point(rowdyX + 1, rowdyY), new Point(rowdyX + 1, rowdyY - 1),
+				new Point(rowdyX + 1, rowdyY - 2), new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
+		if (rowdyX >= level.WIDTH - 2) {
+			canMoveRight = false;
+			this.adjustRowdy(((level.WIDTH - 3) * Tile.WIDTH) + 9, this.position.y);
+		} else {
+			for (int i = 0; i < rightlist.length; i++) {
+				curr = level.access(rightlist[i].x, rightlist[i].y);
+				switch (curr.getTileType()) {
+				case 'C':
+					if (this.hitBox.intersects(curr.getHitBox()))
+						level.collectCoin(rightlist[i].x, rightlist[i].y);
+					break;
+				case 'P':
+				case 'A':
+					break;
+				case 'G':
+					if (this.rightBox.intersects(curr.getHitBox())) {
+						this.canMoveRight = false;
+						//this.xVelocity = 0;
+						this.adjustRowdy(this.position.x - 1, this.position.y);
+					}
+					break;
+				case 'W':
+				case 'F':
+				case 'X':
+					if (this.hitBox.intersects(curr.getHitBox()))
+						return 1;
+					break;
+				case '?':
+				default:
+					return 1;
+				}
+			}
+		}
+		
 		Point[] footlist = { new Point(rowdyX + 1, rowdyY - 1), new Point(rowdyX, rowdyY - 1),
 				new Point(rowdyX + 1, rowdyY - 2), new Point(rowdyX, rowdyY - 2) };
 
@@ -304,76 +375,7 @@ public class Rowdy {
 			}
 		}
 
-		Point[] leftlist = { new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
-
-		if (rowdyX <= 0) {
-			canMoveLeft = false;
-			this.adjustRowdy(10, this.position.y);
-		} else {
-			for (int i = 0; i < leftlist.length; i++) {
-				curr = level.access(leftlist[i].x, leftlist[i].y);
-				switch (curr.getTileType()) {
-				case 'C':
-					if (this.hitBox.intersects(curr.getHitBox()))
-						level.collectCoin(leftlist[i].x, leftlist[i].y);
-					break;
-				case 'P':
-				case 'A':
-					break;
-				case 'G':
-					if (this.leftBox.intersects(curr.getHitBox())) {
-						this.canMoveLeft = false;
-						//this.xVelocity = 0;
-						this.adjustRowdy(this.position.x + 1, this.position.y);
-					}
-					break;
-				case 'W':
-				case 'F':
-				case 'X':
-					if (this.hitBox.intersects(curr.getHitBox()))
-						return 1;
-					break;
-				case '?':
-				default:
-					return 1;
-				}
-			}
-		}
-		Point[] rightlist = { new Point(rowdyX + 1, rowdyY), new Point(rowdyX + 1, rowdyY - 1),
-				new Point(rowdyX + 1, rowdyY - 2), new Point(rowdyX, rowdyY), new Point(rowdyX, rowdyY - 1) };
-		if (rowdyX >= level.WIDTH - 2) {
-			canMoveRight = false;
-			this.adjustRowdy(((level.WIDTH - 3) * Tile.WIDTH) + 9, this.position.y);
-		} else {
-			for (int i = 0; i < rightlist.length; i++) {
-				curr = level.access(rightlist[i].x, rightlist[i].y);
-				switch (curr.getTileType()) {
-				case 'C':
-					if (this.hitBox.intersects(curr.getHitBox()))
-						level.collectCoin(rightlist[i].x, rightlist[i].y);
-					break;
-				case 'P':
-				case 'A':
-					break;
-				case 'G':
-					if (this.rightBox.intersects(curr.getHitBox())) {
-						this.canMoveRight = false;
-						//this.xVelocity = 0;
-						this.adjustRowdy(this.position.x - 1, this.position.y);
-					}
-					break;
-				case 'W':
-				case 'F':
-				case 'X':
-					if (this.hitBox.intersects(curr.getHitBox()))
-						return 1;
-					break;
-				case '?':
-				default:
-					return 1;
-				}
-			}
-		}
+		
 		if (level.isLevelBeat())
 			return 2;
 		return 0;
