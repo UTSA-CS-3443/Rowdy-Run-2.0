@@ -4,14 +4,10 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -68,35 +64,25 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 			switch (event.getCode()) {
 			case SPACE:
 			case W:
-				
-//				Model.yOffset +=2;
-
 			case UP: // KeyCode.UP
 				player.jump();
 				break;
 			case A:
-				//		Model.xOffset -=2;
-
 			case LEFT:
 				player.moveLeft();
 				break;
 			case D:
-				//Model.xOffset +=2;
-
 			case RIGHT:
 				player.moveRight();
 				break;
-
 			case P:
 				pause();
 				break;
-
 			default:
 				break;
 			}
 		} else {
 			switch (event.getCode()) {
-
 			case P:
 				resume();
 				break;
@@ -121,6 +107,11 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		}
 	}
 
+	/**
+	 * handles keyReleases
+	 * 
+	 * @param event
+	 */
 	public void handleKeyReleased(KeyEvent event) {
 		switch (event.getCode()) {
 		case A:
@@ -129,9 +120,15 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		case RIGHT:
 			player.setVelocity(0, player.getYVelocity());
 			break;
+		default:
+			break;
 		}
 	}
 	
+	/**
+	 * handles mouse clicks
+	 * @param event
+	 */
 	public void handleMouseClicked(ActionEvent event) {
 		System.out.println("mouse clicked");
 		Button b = (Button) event.getSource();
@@ -185,10 +182,19 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 		this.player = player;
 	}
 
+	/**
+	 * 
+	 * @return the canvas stored in this controller
+	 */
 	public Canvas getCanvas() {
 		return canvas;
 	}
 
+	/**
+	 * sets the canvas for this controller
+	 * 
+	 * @param canvas
+	 */
 	public void setCanvas(Canvas canvas) {
 		this.canvas = canvas;
 	}

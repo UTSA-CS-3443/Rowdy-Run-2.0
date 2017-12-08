@@ -41,8 +41,6 @@ public class Model implements Runnable {
 	protected Level currentLevel;
 	protected Rowdy player = new Rowdy();
 	private int playerState;
-	// private Timer timer;
-	// private TimerListener timerListener;
 
 	private Timeline indefiniteTimeline;
 	private KeyFrame kf;
@@ -81,6 +79,7 @@ public class Model implements Runnable {
 	}
 
 	/**
+	 * Used by the ExecutorService in Main
 	 * Run starts the timeline and thus starts the logic of the game
 	 */
 	@Override
@@ -98,26 +97,23 @@ public class Model implements Runnable {
 	 */
 	public void gameTick() {
 		int playerState;
-		// player.moveRowdy();
 		playerState = player.hitBoxChecker(currentLevel);
 		player.fall();
 		player.moveRowdy();
-		// player.stop();
+
 		if (playerState == 1) {
-			// TODO handle rowdy dying
+			// handle rowdy dying
 			System.err.println("You died");
 			player.adjustRowdy(currentLevel.playerStart.x, currentLevel.playerStart.y);
 		} else if (playerState == 2) {
-			// TODO handle rowdy winning
+			// handle rowdy winning
 			System.err.println("YOU WIN!");
 			playerState = 0;
 			player.setVelocity(0, 0);
 			System.out.println("Ending Game");
 			this.indefiniteTimeline.pause();
-			// Main.setModel(new Model());
 			Main.changeScene(Main.getMainMenu());
 		}
-		// player.fall();
 		try {
 			render(gc);
 			drawCanvas(gc);
